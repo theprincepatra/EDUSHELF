@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduShelf Login</title>
+    <link rel="stylesheet" href="signin.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Left Section -->
+        <div class="left">
+            <div class="l_designation">
+                <img class="logo" src="logo_bgremove.png" alt="logo">
+                <div class="designation">
+                    <h1 class="edushelf">EduShelf</h1>
+                    <p class="tagline">Learn. Build. Grow</p>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">🚀 Smart Learning</div>
+                <div class="feature">💡 Skill Building</div>
+                <div class="feature">📈 Career Growth</div>
+            </div>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card">
+            <div class="top">
+                <span>Sign in to EDUSHELF</span>
+                <p>Welcome back!</p>
+            </div>
+
+            <img class="mailicon" src="mail_logo.png" alt="Mail Logo">
+            <input id="email" type="text" placeholder="Email">
+            <p class="error" id="emailError"></p>
+
+            <img class="passicon" src="pass_logo.png" alt="">
+            <input id="password" class="passinput" type="password" placeholder="Password">
+            <p class="error" id="passwordError"></p>
+
+            <button class="signin-btn" onclick="login()">Sign In</button>
+
+            <a class="forgot" href="#">Forgot password?</a>
+            <div class="divider">OR</div>
+
+            <!-- Signup Section -->
+            <div class="signup-section">
+                <button class="signup">SIGN UP</button>
+                <p class="create">Create new account</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="signin.js"></script>
+
+</body>
+
+</html>

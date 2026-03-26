@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+
+    background:
+        linear-gradient(rgba(2, 6, 23, 0.371), rgba(2, 6, 23, 0.382)),
+        url("bg.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+}
+
+
+.container {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 260px;
+}
+
+
+/* Left Side */
+/* Left Side - Premium Redesign */
+.left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 50%;
+    height: 100%;
+    margin-left: -50px;
+    gap: 25px;
+}
+.l_designation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.logo {
+    width: 200px;
+    height: 170px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+}
+.edushelf {
+    font-size: 55px;
+    font-weight: 1000;
+    text-shadow: 0 0 10px rgba(0, 34, 255, 0.5);
+}
+.tagline {
+    font-size: 19px;
+    color: #cbd5f5;
+        opacity: 0.8;
+    display: flex;
+    justify-self: center;
+    margin-left: -5px;
+}
+.features {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2;
+    align-self: center;
+}
+.feature {
+    width: 260px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s;
+    font-size: 15px;
+    box-shadow: 0 0 15px rgba(78, 70, 229, 0.156);
+}
+.feature:hover {
+    background: rgba(255, 255, 255, 0.074);
+    box-shadow: 0 0 20px rgba(78, 70, 229, 0.27);
+}
+
+
+/* Login Card */
+.login-card {
+    width: 380px;
+    padding: 30px;
+    border-radius: 16px;
+    background: rgba(10, 15, 40, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+
+/* Top */
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.top span {
+    font-size: 24px;
+    font-weight: 600;
+}
+.top p {
+    margin-top: 2px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+.mailicon {
+    position: relative;
+    height: 15px;
+    width: 18px;
+    top: 38px;
+    margin-left: 9px;
+}
+.passicon {
+    position: relative;
+    height: 19px;
+    top: 38.5px;
+    margin-left: 9px;
+}
+
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgb(227, 237, 255);
+    font-family:Arial, Helvetica, sans-serif;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+    outline: none;
+}
+.passinput {
+    margin-bottom: 15px;
+}
+input::placeholder {
+    color: #9ca3af;
+}
+input:focus{
+    box-shadow: 0 0 8px rgba(79, 70, 229, 0.5);
+}
+.login-card input {
+    padding-left: 35px;
+}
+input[type="password"]::-ms-reveal {
+    filter: invert(1);   
+}
+
+
+/* Sign In Button */
+.signin-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #06b6d4, #4f46e5);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.signin-btn:hover {
+    transform: scale(1.03);
+}
+.forgot {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #9ca3af;
+    letter-spacing: 0.2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    width: auto;
+    transition: 0.1s;
+}
+.forgot:hover{
+    color: #7d7d7d;
+}
+
+/* Divider */
+.divider {
+    margin: 20px 0;
+    text-align: center;
+    color: #9ca3af;
+    position: relative;
+}
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+    top: 50%;
+}
+.divider::before {
+    left: 0;
+}
+.divider::after {
+    right: 0;
+}
+
+/* Signup Section */
+.signup-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.signup {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    background: linear-gradient(270deg, #06b6d4, #4f46e5);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.signup:hover {
+    transform: scale(1.03);
+}
+
+.create {
+    font-size: 13px;
+    color: #9ca3af;
+}
