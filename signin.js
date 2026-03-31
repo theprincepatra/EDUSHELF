@@ -9,8 +9,8 @@ function login() {
     emailError.innerText = "";
     passwordError.innerText = "";
 
-    let storedEmail = "jatinkhora1234@gmail.com";
-    let storedPassword = "jatinkhora1234";
+    let storedEmail = "shivamsatpathy03@gmail.com";
+    let storedPassword = "shivamsatpathy03";
 
     // Validation
     if (email === "") {
