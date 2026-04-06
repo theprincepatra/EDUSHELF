@@ -43,8 +43,8 @@ signupbutton.addEventListener("click", function () {
 
     let isValid = true;
 
-    if (name === "") {
-        showError(nameInput, "Name required");
+    if (name.trim() === "" || /\d/.test(name)) {
+        showError(nameInput, "Name should not be empty or contain numbers");
         isValid = false;
     }
 

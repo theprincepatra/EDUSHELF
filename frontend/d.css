@@ -62,7 +62,6 @@ body {
 }
 .small p:hover{
     scale: 1.05;
-    color: rgb(205, 205, 205);
 }
 .small small{
     font-size: 11px;
@@ -70,7 +69,6 @@ body {
     margin-left: 5px;
     letter-spacing: 0.7px;
     color: rgb(117, 117, 117);
-
 }
 .logo{
     height: 40px;
@@ -83,7 +81,6 @@ body {
     font-family: sans-serif;
     letter-spacing: 1px;
 }
-
 .nav_items {
     display: flex;
     flex-direction: row;
