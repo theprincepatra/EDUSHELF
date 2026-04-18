@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <!-- SIGNUP CARD -->
+        
         <div class="login-card">
 
             <div class="top">
@@ -40,38 +40,47 @@
             <form action="/signup" method="POST">
 
                 <div class="input-group">
-                    <img class="user_icon" src="/images/user_logo.png">
+                    <img class="user_icon icon" src="/images/user_logo.png">
                     <input type="text" placeholder="Full Name" name="name" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="input-group">
-                    <img class="mail_icon" src="/images/mail_logo.png">
+                    <img class="mail_icon icon" src="/images/mail_logo.png">
                     <input type="email" placeholder="Email" name="email" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="input-group">
-                    <img class="pass_icon" src="/images/pass_logo.png">
+                    <img class="otp_icon icon" src="/images/otp_logo.png">
+                    <div class="otp">
+                        <input type="text" inputmode="numeric" maxlength="6" placeholder="OTP" name="otp" required>
+                        <input type="button" value="Get OTP" class="otp-btn">
+                    </div>
+                    <small class="error"></small>
+                </div>
+
+                <div class="input-group">
+                    <img class="pass_icon icon" src="/images/pass_logo.png">
                     <input type="password" placeholder="Password" name="password" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="input-group">
-                    <img class="confirmpass_icon" src="/images/confirmpass_logo.png">
+                    <img class="confirmpass_icon icon" src="/images/confirmpass_logo.png">
                     <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
                     <small class="error"></small>
                 </div>
 
-                <button type="submit" class="signup-btn">Create Account</button>
+                <button type="submit" class="create-btn">Create Account</button>
 
             </form>
 
             <div class="divider">OR</div>
 
             <div class="signin-section">
-                <a href="/login" class="signin-btn">SIGN IN</a>
                 <p class="create">Already have an account?</p>
+                <a href="/login" class="signin-btn">Sign in</a>
             </div>
 
         </div>
