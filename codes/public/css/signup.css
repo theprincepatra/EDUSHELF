@@ -131,43 +131,79 @@ body {
     color: #9ca3af;
 }
 
-
 /* ICONS */
 .user_icon {
     position: relative;
-    height: 20px;
-    top: 40px;
+    height: 17px;
+    top: 35px;
     margin-left: 9px;
 }
 .mail_icon {
     position: relative;
-    height: 15px;
-    width: 18px;
-    top: 37px;
-    margin-left: 9px;
+    height: 14px;
+    width: 17px;
+    top: 34px;
+    margin-left: 10.4px;
+}
+.otp_icon {
+    position: relative;
+    height: 18px;
+    width: 19px;
+    top: 34px;
+    margin-left: 11px;
+}
+.otp{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+.otp input[type="text"] {
+    width: 80%;
+}
+.otp-btn {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px !important;
+    margin-top: 4.5px;
+    height: 35px;
+    width: auto;
+    border: none;
+    border-radius: 8px;
+    background-color: #1284d598;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.18s;
+}
+.otp-btn:hover {
+    background-color: #353b46;
+    color: rgba(226, 226, 226, 0.838);
+    
 }
 .pass_icon {
     position: relative;
     height: 19px;
-    top: 38.5px;
-    margin-left: 9px;
+    top: 35px;
+    margin-left: 10px;
 }
 .confirmpass_icon{
     position: relative;
-    height: 21px;
-    top: 43px;
-    margin-left: 8px;
+    height: 17px;
+    width: 21px;
+    top: 37px;
+    margin-left: 9px;
 }
 .confirm {
     top: 38px;
 }
 
 
+
 /* INPUTS */
 input {
-    width: 100%;
-    padding: 12px;
-    margin: 5px 0;
+    width: 100%; 
+    padding: 11px;
+    margin: 2px 0;
     border-radius: 8px;
     background: transparent;
     border: 1px solid rgba(255,255,255,0.2);
@@ -181,9 +217,6 @@ input {
     padding-left: 35px;
     margin-bottom: 10px;
 }
-.passinput {
-    margin-bottom: 15px;
-}
 input::placeholder {
     color: #9ca3af;
 }
@@ -196,7 +229,7 @@ input[type="password"]::-ms-reveal {
 
 
 /* SIGN UP BUTTON */
-.signup-btn {
+.create-btn {
     width: 100%;
     margin-top: 15px;
     padding: 12px;
@@ -208,26 +241,8 @@ input[type="password"]::-ms-reveal {
     cursor: pointer;
     transition: 0.3s;
 }
-.signup-btn:hover {
+.create-btn:hover {
     transform: scale(1.03);
-}
-
-
-/* FORGOT PASSWORD */
-.forgot {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #9ca3af;
-    letter-spacing: 0.2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 100px;
-    width: auto;
-    transition: 0.1s;
-}
-.forgot:hover {
-    color: #7d7d7d;
 }
 
 
@@ -258,28 +273,21 @@ input[type="password"]::-ms-reveal {
 /* SIGNIN SECTION */
 .signin-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.signin-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    background: linear-gradient(270deg, #06b6d4, #4f46e5);
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s;
-    text-decoration: none;
-    display: flex;
+    flex-direction: row;
+    gap: 5px;
     justify-content: center;
-}
-.signin-btn:hover {
-    transform: scale(1.03);
 }
 .create {
     font-size: 13px;
     color: #9ca3af;
+}
+.signin-btn {
+    color: rgb(133, 196, 255);
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 0.8px;
+    transition: 0.1s;
+}
+.signin-btn:hover {
+    opacity: 0.5;
 }
