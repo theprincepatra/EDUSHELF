@@ -1,9 +1,10 @@
-const express = require('express');
+const express = require("express");
+const bcrypt = require("bcrypt");
 const { get } = require('http');
 const app = express();
 const path = require('path');
 
-// const userModel = require('./models/user');
+const userModel = require('./models/user');
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -22,6 +23,28 @@ app.get('/login', function(req,res){
 });
 app.get('/access-notes', function(req,res){
     res.render('login');
+});
+app.get('/count', async (req,res)=>{
+    const count = await userModel.countDocuments();
+    res.send(`
+        <body style="background-color:black; color:#fc3232; font-size:30px; display:flex; justify-content:center; align-items:center;">
+            <h1>Total users: ${count}</h1>
+        </body>
+    `);
+});
+app.post('/signup', async function(req,res){
+    let {name, email, password} = req.body;
+
+    const newuser = await userModel.create({
+        name,
+        email,
+        password: await bcrypt.hash(password, 10)
+    });
+    res.redirect('/login');
+});
+app.get('/prince', async function(req,res){
+    const myname = await userModel.findOne({name: 'Prince Patra'});
+    res.send(myname);
 });
 
 app.listen(3000, function(){

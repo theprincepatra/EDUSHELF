@@ -5,17 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduShelf Sign Up</title>
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="/css/signup.css">
 </head>
 
 <body>
 
     <div class="container">
 
-        <!-- Left Section SAME -->
-        <div class="left">
-            <div class="l_designation">
-                <img class="logo" src="images/logo_bgremove.png" alt="logo">
+        <!-- Right Section -->
+        <div class="right">
+            <div class="r_designation">
+                <img class="logo" src="/images/logo_bgremove.png" alt="logo">
                 <div class="designation">
                     <h1 class="edushelf">EduShelf</h1>
                     <p class="tagline">Learn. Build. Grow</p>
@@ -33,35 +33,39 @@
         <div class="login-card">
 
             <div class="top">
-                <span>Create your account</span>
-                <p>Start your journey with EduShelf</p>
+                <span>Create Your Account</span>
+                <p>Welcome to EduShelf</p>
             </div>
 
-            <div class="input-group">
-                <img class="user_icon" src="images/user_logo.png">
-                <input type="text" placeholder="Full Name">
-                <small class="error"></small>
-            </div>
+            <form action="/signup" method="POST">
 
-            <div class="input-group">
-                <img class="mail_icon" src="images/mail_logo.png">
-                <input type="text" placeholder="Email">
-                <small class="error"></small>
-            </div>
+                <div class="input-group">
+                    <img class="user_icon" src="/images/user_logo.png">
+                    <input type="text" placeholder="Full Name" name="name" required>
+                    <small class="error"></small>
+                </div>
 
-            <div class="input-group">
-                <img class="pass_icon" src="images/pass_logo.png">
-                <input type="password" placeholder="Password">
-                <small class="error"></small>
-            </div>
+                <div class="input-group">
+                    <img class="mail_icon" src="/images/mail_logo.png">
+                    <input type="email" placeholder="Email" name="email" required>
+                    <small class="error"></small>
+                </div>
 
-            <div class="input-group">
-                <img class="confirmpass_icon" src="images/confirmpass_logo.png">
-                <input type="password" placeholder="Confirm Password">
-                <small class="error"></small>
-            </div>
+                <div class="input-group">
+                    <img class="pass_icon" src="/images/pass_logo.png">
+                    <input type="password" placeholder="Password" name="password" required>
+                    <small class="error"></small>
+                </div>
 
-            <button class="signup-btn">Create Account</button>
+                <div class="input-group">
+                    <img class="confirmpass_icon" src="/images/confirmpass_logo.png">
+                    <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
+                    <small class="error"></small>
+                </div>
+
+                <button type="submit" class="signup-btn">Create Account</button>
+
+            </form>
 
             <div class="divider">OR</div>
 
@@ -74,7 +78,7 @@
 
     </div>
 
-    <script src="signup.js"></script>
+    <script src="/js/signup.js"></script>
 </body>
 
 </html>

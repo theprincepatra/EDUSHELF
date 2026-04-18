@@ -19,7 +19,7 @@ body {
     color: white;
 }
 
-/* 🔥 CONTAINER FLIPPED */
+
 .container {
     display: flex;
     position: relative;
@@ -28,12 +28,12 @@ body {
     height: 100%;
     padding: 260px;
 
-    flex-direction: row-reverse; /* ✅ main change */
+    flex-direction: row-reverse;
 }
 
 
-/* LEFT SECTION (NOW RIGHT SIDE VISUALLY) */
-.left {
+
+.right {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -43,11 +43,11 @@ body {
     height: 100%;
 
     margin-left: 0;
-    margin-right: -50px; /* ✅ fixed alignment */
+    margin-right: -50px;
 
     gap: 25px;
 }
-.l_designation {
+.r_designation {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -110,7 +110,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
 
-    margin-right: 100px; /* ✅ spacing fix */
+    margin-right: 100px;
 }
 
 
