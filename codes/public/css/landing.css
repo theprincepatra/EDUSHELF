@@ -176,14 +176,23 @@ body {
 
 /* TAG */
 .tag {
-    /* position: absolute; */
-    bottom: 20px;
-    left: 5%;
-    color: white;
-    font-size: 12px;
+    position: absolute;
+    bottom: 15px;
+    left: 1%;
+    color: #7d7d7c;
+    font-size: 13px;
     z-index: 1;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    line-height: 19px;
 }
-.tag span {
+.tag-ins a{
     color: #7d7d7c;
     font-weight: bold;
+    text-decoration: none
+}
+.tag-ins a:hover{
+    color: #ffffffc0;
+    font-weight: bold;
+    text-decoration: none
 }
