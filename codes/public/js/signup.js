@@ -36,7 +36,7 @@ function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-// OTP Button click
+// OTP Button
 otpButton.addEventListener("click", async () => {
     clearErrors();
 
@@ -45,7 +45,6 @@ otpButton.addEventListener("click", async () => {
         showError(emailInput, "Enter valid email");
         return;
     }
-
     try {
         const res = await fetch("/send-otp", {
             method: "POST",
@@ -54,13 +53,11 @@ otpButton.addEventListener("click", async () => {
             },
             body: JSON.stringify({ email })
         });
-
         const data = await res.text();
         if (!res.ok) {
             showError(emailInput, data || "Failed to send OTP");
             return;
         }
-
         alert(data);
         otpButton.disabled = true;
     } catch (err) {
@@ -72,14 +69,12 @@ const form = document.querySelector('form');
 form.addEventListener('submit', async function (event) {
     event.preventDefault();
     clearErrors();
-
         const name = nameInput.value.trim();
         const email = emailInput.value.trim();
         const username = usernameInput.value.trim();
         const otp = otpInput.value.trim();
         const password = passwordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
-
     let isValid = true;
 
     if (name === "") {
