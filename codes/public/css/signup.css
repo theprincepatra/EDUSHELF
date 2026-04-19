@@ -32,7 +32,6 @@ body {
 }
 
 
-
 .right {
     position: relative;
     display: flex;
@@ -198,12 +197,10 @@ body {
 }
 
 
-
 /* INPUTS */
 input {
-    width: 100%; 
+    width: 100%;
     padding: 11px;
-    margin: 2px 0;
     border-radius: 8px;
     background: transparent;
     border: 1px solid rgba(255,255,255,0.2);
@@ -215,7 +212,7 @@ input {
 }
 .login-card input {
     padding-left: 35px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
 input::placeholder {
     color: #9ca3af;
@@ -242,13 +239,13 @@ input[type="password"]::-ms-reveal {
     transition: 0.3s;
 }
 .create-btn:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 
 /* DIVIDER */
 .divider {
-    margin: 20px 0;
+    margin: 15px 0;
     text-align: center;
     color: #9ca3af;
     position: relative;
