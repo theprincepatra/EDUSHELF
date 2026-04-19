@@ -79,14 +79,12 @@ function generateOTP() {
 }
 let otpStore = {};
 
-
 // SEND OTP
 app.post('/send-otp', async function (req, res) {
     const { email } = req.body;
     if (!email) {
         return res.status(400).send('Email is required');
     }
-
     const otp = generateOTP();
     otpStore[email] = {
         code: otp,
@@ -135,8 +133,8 @@ app.post('/signup', async function (req, res) {
         }
         delete otpStore[email];
 
-        const existingUser = await userModel.findOne({ email });
-        if (existingUser) {
+        const existingEmail = await userModel.findOne({ email });
+        if (existingEmail) {
             return res.status(400).send('Email already registered');
         }
 
