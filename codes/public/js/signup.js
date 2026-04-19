@@ -1,4 +1,5 @@
 const nameInput = document.querySelector('input[name="name"]');
+const usernameInput = document.querySelector('input[name="username"]');
 const emailInput = document.querySelector('input[name="email"]');
 const otpInput = document.querySelector('input[name="otp"]');
 const passwordInput = document.querySelector('input[name="password"]');
@@ -72,11 +73,12 @@ form.addEventListener('submit', async function (event) {
     event.preventDefault();
     clearErrors();
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const otp = otpInput.value.trim();
-    const password = passwordInput.value.trim();
-    const confirmPassword = confirmPasswordInput.value.trim();
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const username = usernameInput.value.trim();
+        const otp = otpInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
 
     let isValid = true;
 
@@ -85,6 +87,13 @@ form.addEventListener('submit', async function (event) {
         isValid = false;
     } else if (/\d/.test(name)) {
         showError(nameInput, "Name should not contain numbers");
+        isValid = false;
+    }
+    if (username === "") {
+        showError(usernameInput, "Username should not be empty");
+        isValid = false;
+    } else if (username.length < 4) {
+        showError(usernameInput, "Username too short");
         isValid = false;
     }
     if (!isValidEmail(email)) {
@@ -108,12 +117,12 @@ form.addEventListener('submit', async function (event) {
 
     try {
         const res = await fetch('/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password, otp })
-        });
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, username, email, password, otp })
+    });
 
         const data = await res.text();
         if (!res.ok) {

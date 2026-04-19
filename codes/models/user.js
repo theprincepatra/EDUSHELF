@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/siginupDB');
 
 const userSchema = new mongoose.Schema({
+    userId: { type: Number, unique: true },
     name: String,
-    email: String,
+    username: { type: String, unique: true },
+    email: { type: String, unique: true },
     password: String,
 });
 
