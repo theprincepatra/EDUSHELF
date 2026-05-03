@@ -12,74 +12,77 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// home page
 app.get('/', function (req, res) {
     res.render('landing');
 });
-app.get('/signup', function (req, res) {
-    res.render('signup');
-});
-app.get('/login', function (req, res) {
-    res.render('login');
-});
-app.get('/access-notes', function (req, res) {
-    res.render('login');
-});
-app.get('/allusers', async function (req, res) {
+
+// all users
+app.get('/users', async function (req, res) {
     const users = await userModel.find().sort({ userId: 1 });
-
-    const formattedUsers = users.map(user => ({
-        userId: user.userId,
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        password: user.password
-    }));
-
-    res.send(formattedUsers);
+    res.render('users', { users });
 });
+// User page- edit user for submit button
+app.post('/edited/:id', async (req, res) => {
+  try {
+    let { changedname, changedusername, changedpassword } = req.body;
+    let updatedUser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        name: changedname,
+        username: changedusername,
+        password: changedpassword
+      },
+      {returnDocument: 'after'}
+    );
+    console.log("Updated user:", updatedUser);
+    if (!updatedUser) {
+      return res.send("User not found");
+    }
+    res.send("User updated successfully");
+  } catch (err) {
+    console.error(err);
+    res.send("Error updating user");
+  }
+});
+// User page- delete user
+app.post('/delete/:id', async (req, res) => {
+  try {
+    const deletedUser = await userModel.findByIdAndDelete(req.params.id);
+    console.log("Deleted user:", deletedUser);
+    if (!deletedUser) {
+      return res.send("User not found");
+    }
+    res.send("User deleted successfully");
+  } catch (err) {
+    console.error(err);
+    res.send("Error deleting user");
+  }
+});
+// Total users count
 app.get('/count', async (req, res) => {
     const count = await userModel.countDocuments();
     res.send(`<body style="background-color:black; color:#fc3232; font-size:30px; display:flex; justify-content:center; align-items:center;">
             <h1>Total users: ${count}</h1>
         </body>`);
 });
-app.get('/edit/:email', async (req, res) => {
-    const oneuser = await userModel.findOne({ email: req.params.email });
-    console.log("Editing user:", oneuser);
-    if (!oneuser) {
-        return res.send("User not found");
-    }
-    res.render('edit', { oneuser });
-});
-app.post('/edited/:email', async (req, res) => {
-    let {name, email, password} = req.body;
-    
-});
-
-// TRANSPORTER
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
-transporter.verify(function (error, success) {
-    if (error) {
-        console.error('Email transporter verification failed:', error.message);
-    } else {
-        console.log('Email transporter is ready to send messages');
-    }
-});
 
 
-// OTP generator
-function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000);
-}
-let otpStore = {};
-
-// SEND OTP
+// LANDING PAGE--------------------------------------------
+// Langing page- SIGN-UP button
+app.get('/landing-signup', function (req, res) {
+    res.render('signup');
+});
+// Langing page- LOG-IN button
+app.get('/landing-login', function (req, res) {
+    res.render('login');
+});
+// Langing page- ACCESS-NOTES button
+app.get('/landing-access-notes', function (req, res) {
+    res.render('login');
+});
+// Sending OTP
 app.post('/send-otp', async function (req, res) {
     const { email } = req.body;
     if (!email) {
@@ -97,7 +100,14 @@ app.post('/send-otp', async function (req, res) {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'EduShelf OTP Code',
-            text: `Your EduShelf OTP is ${otp}. It expires in 5 minutes.`
+            text: `Hi [User Name],
+    Your verification code is: [OTP CODE]
+
+    This code will expire in a few minutes. Please do not share it with anyone.
+    If you did not request this, you can safely ignore this email.
+
+    Regards,
+    Team EduShelf`.replace('[OTP CODE]', otp).replace('[User Name]', email.split('@')[0])
         });
         res.status(200).send('OTP sent to your email');
     } catch (error) {
@@ -106,6 +116,28 @@ app.post('/send-otp', async function (req, res) {
     }
 });
 
+
+// OTP maker-------------------------
+// TRANSPORTER
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }    
+});    
+transporter.verify(function (error, success) {
+    if (error) {
+        console.error('Email transporter verification failed:', error.message);
+    } else {
+        console.log('Email transporter is ready to send messages');
+    }    
+});    
+// Generator
+function generateOTP() {
+    return Math.floor(100000 + Math.random() * 900000);
+}    
+let otpStore = {};
 
 // SIGNUP
 app.post('/signup', async function (req, res) {
@@ -154,6 +186,29 @@ app.post('/signup', async function (req, res) {
     }
 });
 
+
+// LOG IN
+app.post('/login', async function (req, res) {
+    try {
+        const { email, password } = req.body;
+
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(400).send('User not found');
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).send('Invalid password');
+        }
+
+        res.status(200).send('Login successful');
+        res.redirect('/dashboard');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
 
 app.listen(3000, function () {
     console.log('Server is running on http://localhost:3000');
