@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-zinc-900 p-10 text-white">
+        <h1 class="text-4xl mb-10">Users List</h1>
+        <table class="min-w-full bg-white text-black rounded-lg overflow-hidden shadow-lg">
+            <thead class="bg-zinc-900 text-white">
+                <tr>
+                    <th class="p-3 text-left">User ID</th>
+                    <th class="p-3 text-left">Name</th>
+                    <th class="p-3 text-left">Username</th>
+                    <th class="p-3 text-left">Email</th>
+                    <th class="p-3 text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user) { %>
+                    <tr class="border-b even:bg-zinc-100 odd:bg-zinc-50">
+                        <td class="p-3"><%= user.userId %></td>
+                        <td class="p-3"><%= user.name %></td>
+                        <td class="p-3"><%= user.username %></td>
+                        <td class="p-3"><%= user.email %></td>
+                        <td class="p-3">
+                            <a href="/edit/<%= user._id %>" class="text-blue-600 hover:underline">Edit User</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

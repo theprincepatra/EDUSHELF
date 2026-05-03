@@ -185,14 +185,15 @@ body {
     letter-spacing: 0.8px;
     text-decoration: none;
     line-height: 19px;
+    font-style: italic;
 }
-.tag-ins a{
+.tag a{
     color: #7d7d7c;
     font-weight: bold;
-    text-decoration: none
+    font-style: italic;
 }
-.tag-ins a:hover{
+.tag a:hover{
     color: #ffffffc0;
+    font-style: italic;
     font-weight: bold;
-    text-decoration: none
 }

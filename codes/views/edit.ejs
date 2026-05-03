@@ -19,21 +19,29 @@
             <form action="/edited/<%= oneuser._id %>" method="POST" class="flex flex-col gap-6">
         
                 <div class="obj flex flex-row gap-2">
+                    <h4 class="py-4 text-gray-400">Serial Number-</h4>
+                    <input type="text" value="<%= oneuser.userId %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" disabled>
+                </div>
+                <div class="obj flex flex-row gap-2">
                     <h4 class="py-4 text-gray-400">Change Name-</h4>
                     <input type="text" value="<%= oneuser.name %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedname">
                 </div>
                 <div class="obj flex flex-row gap-2">
-                    <h4 class="py-4 text-gray-400">Change Email-</h4>
-                    <input type="text" value="<%= oneuser.email %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedemail">
+                    <h4 class="py-4 text-gray-400">Change User Name-</h4>
+                    <input type="text" value="<%= oneuser.username %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedusername">
                 </div>
                 <div class="obj flex flex-row gap-2">
-                    <h4 class="py-4 text-gray-400">Change Image-</h4>
-                    <input type="text" value="<%= oneuser.password %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedimage">
+                    <h4 class="py-4 text-gray-400">Change Email-</h4>
+                    <input type="text" value="<%= oneuser.email %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedemail" disabled>
+                </div>
+                <div class="obj flex flex-row gap-2">
+                    <h4 class="py-4 text-gray-400">Change Pass-</h4>
+                    <input type="text" value="<%= oneuser.password %>" class="px-3 py-2 w-96 border-2 border-zinc-800 outline-none rounded-lg bg-transparent" name="changedpassword">
                 </div>
 
                 <div class="button flex flex-row gap-4 justify-end">
-                    <input type="submit" value="Submit" class="cursor-pointer m-1 p-2 bg-blue-600 text-white border-blue-600 rounded-lg">
-                    <input type="submit" value="Delete" class="cursor-pointer m-1 p-2 bg-red-600 text-white border-red-600 rounded-lg">
+                    <button type="submit" class="cursor-pointer m-1 p-2 bg-blue-600 text-white border-blue-600 rounded-lg">Submit</button>
+                    <button type="submit" formaction="/delete/<%= oneuser._id %>" class="cursor-pointer m-1 p-2 bg-red-600 text-white border-red-600 rounded-lg">Delete</button>
                 </div>
             </form>
         </div>
