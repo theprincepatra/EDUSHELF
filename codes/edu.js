@@ -23,6 +23,14 @@ app.get('/users', async function (req, res) {
     const users = await userModel.find().sort({ userId: 1 });
     res.render('users', { users });
 });
+// User page- edit user page
+app.get('/edit/:id', async (req, res) => {
+    const oneuser = await userModel.findById(req.params.id);
+    if (!oneuser) {
+        return res.send("User not found");
+    }
+    res.render('edit', { oneuser });
+});
 // User page- edit user for submit button
 app.post('/edited/:id', async (req, res) => {
   try {
@@ -70,17 +78,29 @@ app.get('/count', async (req, res) => {
 
 
 // LANDING PAGE--------------------------------------------
-// Langing page- SIGN-UP button
-app.get('/landing-signup', function (req, res) {
-    res.render('signup');
+// Langing page- DECRIPTION button
+app.get('/landing-description', function (req, res) {
+    res.render('description');
 });
-// Langing page- LOG-IN button
-app.get('/landing-login', function (req, res) {
+// Langing page- FEATURES button
+app.get('/landing-features', function (req, res) {
+    res.render('features');
+});
+// Langing page- HELP button
+app.get('/landing-help', function (req, res) {
     res.render('login');
 });
 // Langing page- ACCESS-NOTES button
 app.get('/landing-access-notes', function (req, res) {
     res.render('login');
+});
+// Langing page- LOG-IN button
+app.get('/landing-login', function (req, res) {
+    res.render('login');
+});
+// Langing page- SIGN-UP button
+app.get('/landing-signup', function (req, res) {
+    res.render('signup');
 });
 // Sending OTP
 app.post('/send-otp', async function (req, res) {
