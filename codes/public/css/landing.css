@@ -66,6 +66,7 @@ body {
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.2s ease;
+    text-decoration: none;
 }
 .nav-item:hover {
     color: #7d7d7c;
