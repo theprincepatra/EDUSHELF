@@ -58,7 +58,7 @@ body {
     transition:all 0.3s ease;
 }
 .small p{
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 }
 .small p:hover{
     scale: 1.05;
@@ -99,10 +99,12 @@ body {
     letter-spacing: 0.3px;
     font-family: monospace;
 }
+.items a{
+    transition: all 0.2s ease;
+}    
 .items a:hover {
     color: rgb(117, 117, 117);
-    border-bottom: 1px solid rgb(117,117, 117);
-    font-size: 17.5px;
+    text-decoration: underline;
 }
 
 .search_box {

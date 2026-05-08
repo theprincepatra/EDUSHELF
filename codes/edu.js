@@ -13,17 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// home page
+// GET home page
 app.get('/', function (req, res) {
     res.render('landing');
 });
 
-// all users
+// GET all users
 app.get('/users', async function (req, res) {
     const users = await userModel.find().sort({ userId: 1 });
     res.render('users', { users });
 });
-// User page- edit user page
+// GET user edit page
 app.get('/edit/:id', async (req, res) => {
     const oneuser = await userModel.findById(req.params.id);
     if (!oneuser) {
@@ -31,7 +31,7 @@ app.get('/edit/:id', async (req, res) => {
     }
     res.render('edit', { oneuser });
 });
-// User page- edit user for submit button
+// POST user edit page
 app.post('/edited/:id', async (req, res) => {
   try {
     let { changedname, changedusername, changedpassword } = req.body;
@@ -40,7 +40,7 @@ app.post('/edited/:id', async (req, res) => {
       {
         name: changedname,
         username: changedusername,
-        password: changedpassword
+        password: await bcrypt.hash(changedpassword, 10),
       },
       {returnDocument: 'after'}
     );
@@ -54,7 +54,7 @@ app.post('/edited/:id', async (req, res) => {
     res.send("Error updating user");
   }
 });
-// User page- delete user
+// POST User page- delete user
 app.post('/delete/:id', async (req, res) => {
   try {
     const deletedUser = await userModel.findByIdAndDelete(req.params.id);
@@ -68,7 +68,7 @@ app.post('/delete/:id', async (req, res) => {
     res.send("Error deleting user");
   }
 });
-// Total users count
+// GET Total users count
 app.get('/count', async (req, res) => {
     const count = await userModel.countDocuments();
     res.send(`<body style="background-color:black; color:#fc3232; font-size:30px; display:flex; justify-content:center; align-items:center;">
@@ -78,31 +78,31 @@ app.get('/count', async (req, res) => {
 
 
 // LANDING PAGE--------------------------------------------
-// Langing page- DECRIPTION button
+// GET Langing page- DECRIPTION button
 app.get('/landing-description', function (req, res) {
     res.render('description');
 });
-// Langing page- FEATURES button
+// GET Langing page- FEATURES button
 app.get('/landing-features', function (req, res) {
     res.render('features');
 });
-// Langing page- HELP button
+// GET Langing page- HELP button
 app.get('/landing-help', function (req, res) {
     res.render('login');
 });
-// Langing page- ACCESS-NOTES button
+// GET Langing page- ACCESS-NOTES button
 app.get('/landing-access-notes', function (req, res) {
     res.render('login');
 });
-// Langing page- LOG-IN button
+// GET Langing page- LOG-IN button
 app.get('/landing-login', function (req, res) {
     res.render('login');
 });
-// Langing page- SIGN-UP button
+// GET Langing page- SIGN-UP button
 app.get('/landing-signup', function (req, res) {
     res.render('signup');
 });
-// Sending OTP
+// POST Sending OTP
 app.post('/send-otp', async function (req, res) {
     const { email } = req.body;
     if (!email) {
@@ -159,7 +159,8 @@ function generateOTP() {
 }    
 let otpStore = {};
 
-// SIGNUP
+
+// POST SIGNUP
 app.post('/signup', async function (req, res) {
     try {
         const name = req.body.name?.trim();
@@ -207,7 +208,7 @@ app.post('/signup', async function (req, res) {
 });
 
 
-// LOG IN
+// POST LOG IN
 app.post('/login', async function (req, res) {
     try {
         const { email, password } = req.body;
@@ -222,12 +223,14 @@ app.post('/login', async function (req, res) {
             return res.status(400).send('Invalid password');
         }
 
-        res.status(200).send('Login successful');
         res.redirect('/dashboard');
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
+});
+app.get('/dashboard', function (req, res) {
+    res.render('dashboard');
 });
 
 app.listen(3000, function () {
