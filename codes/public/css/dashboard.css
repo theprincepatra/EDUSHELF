@@ -5,31 +5,109 @@
     color: white;
     text-decoration: none;
 }
+
 html, body {
     width: 100%;
     height: 100%;
 }
+
 body {
     background: linear-gradient(
-  205deg,
-  #1c1d20 0%,
-  #141517 30%,
-  #0e0f11 55%,
-  #08090a 80%,
-  #040405 100%
-);
+        205deg,
+        #1c1d20 0%,
+        #141517 30%,
+        #0e0f11 55%,
+        #08090a 80%,
+        #040405 100%
+    );
+
     background-attachment: fixed;
 }
 
-/*  */
+
+
+.menu-btn {
+    position: fixed;
+    left: 38px;
+    top: 3px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s ease;
+    border-radius: 50%;
+}
+.menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.164);
+    border-radius: 50%;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100vh;
+    background-color: rgb(12, 12, 13);
+    z-index: 1002;
+    transition: all 0.3s ease;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.close-btn {
+    font-size: 38px;
+    cursor: pointer;
+    margin: 15px 0px 0px 20px;
+    width: fit-content;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.sidebar-items a {
+    padding: 18px 30px;
+    font-size: 18px;
+    font-family: monospace;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-items a:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    padding-left: 40px;
+}
+
+/* OVERLAY */
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.47);
+    z-index: 1000;
+    display: none;
+}
+
+/* NAVBAR */
+
 .nav {
     display: flex;
     flex-direction: row;
     background: rgba(18, 19, 21, 0.589);
     border-bottom: 1px solid rgba(255, 255, 255, 0.105);
-    height:60px;
+    height: 60px;
     position: fixed;
+    width: 100%;
 }
+
 .nav_ins {
     display: flex;
     flex-direction: row;
@@ -40,7 +118,7 @@ body {
     border-radius: 15px 15px 0px 0px;
 }
 
-.name{
+.name {
     height: 100%;
     width: 190px;
     display: flex;
@@ -49,38 +127,45 @@ body {
     justify-content: center;
     margin: 0px 0px 0px 2px;
 }
-.small{
+
+.small {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition:all 0.3s ease;
+    transition: all 0.3s ease;
 }
-.small p{
+
+.small p {
     transition: all 0.1s ease;
 }
-.small p:hover{
+
+.small p:hover {
     scale: 1.05;
 }
-.small small{
+
+.small small {
     font-size: 11px;
     padding-top: 3px;
     margin-left: 5px;
     letter-spacing: 0.7px;
     color: rgb(117, 117, 117);
 }
-.logo{
+
+.logo {
     height: 40px;
     width: 55px;
 }
-.edushelf{
+
+.edushelf {
     font-size: 19px;
     font-weight: 550;
     margin: 4px 0px 0px 6px;
     font-family: sans-serif;
     letter-spacing: 1px;
 }
+
 .nav_items {
     display: flex;
     flex-direction: row;
@@ -91,7 +176,8 @@ body {
     border-radius: 7px;
     background-color: rgba(18, 18, 19, 0.873);
 }
-.items{
+
+.items {
     display: flex;
     justify-content: space-around;
     width: 450px;
@@ -99,9 +185,11 @@ body {
     letter-spacing: 0.3px;
     font-family: monospace;
 }
-.items a{
+
+.items a {
     transition: all 0.2s ease;
-}    
+}
+
 .items a:hover {
     color: rgb(117, 117, 117);
     text-decoration: underline;
@@ -118,10 +206,12 @@ body {
     padding: 0 10px;
     margin: 0px 5px 0px 18px;
 }
+
 .search_icon {
     height: 18px;
     width: 18px;
 }
+
 .search {
     background: transparent;
     border: none;
@@ -135,16 +225,18 @@ body {
     font-weight: 550;
 }
 
-.help{
+.help {
     padding-left: 26px;
 }
-.help a{
+
+.help a {
     font-family: monospace;
     letter-spacing: -0.8px;
     font-size: 19px;
     color: rgb(227, 59, 59);
 }
-.help a:hover{
+
+.help a:hover {
     border-bottom: 1px solid rgb(165, 25, 25);
     color: rgb(165, 25, 25);
     font-size: 20px;

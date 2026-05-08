@@ -7,32 +7,70 @@
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
 <body>
+
+    <!-- MENU BUTTON -->
+    <div class="menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" onclick="closeMenu()">
+            ×
+        </div>
+
+        <div class="sidebar-items">
+            <a href="#">Dashboard</a>
+            <a href="#">All Branch</a>
+            <a href="#">Subscriptions</a>
+            <a href="#">Star</a>
+            <a href="#">Support</a>
+        </div>
+
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+    <!-- NAVBAR -->
     <div class="nav">
+
         <div class="nav_ins">
+
             <div class="name">
                 <img src="images/logo_bgremove.png" class="logo" alt="EDlogo">
+
                 <div class="small">
                     <p class="edushelf">EDUSHELF</p>
                     <small>Click to know about us</small>
                 </div>
             </div>
-            
+
             <div class="nav_items">
+
                 <div class="search_box">
                     <img src="images/search1.png" alt="Search Icon" class="search_icon">
+
                     <input type="search" placeholder="Search" class="search">
                 </div>
+
                 <div class="items">
                     <a href="allbranch.html">All Branch</a>
                     <a href="subscriptioins.html">Subscriptioins</a>
                     <a href="star.html">Star</a>
                 </div>
+
             </div>
-            
+
             <div class="help">
                 <a href="support.html">Edu-Support</a>
             </div>
+
         </div>
+
     </div>
+
+    <script src="/js/dashboard.js"></script>
+
 </body>
 </html>
