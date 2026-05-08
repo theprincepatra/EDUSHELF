@@ -37,15 +37,17 @@
                 <p>Welcome back!</p>
             </div>
 
-            <img class="mailicon" src="/images/mail_logo.png" alt="Mail Logo">
-            <input id="email" type="text" placeholder="Email" name="email">
-            <p class="error" id="emailError"></p>
+            <form action="/login" method="POST">
+                <img class="mailicon" src="/images/mail_logo.png" alt="Mail Logo">
+                <input id="email" type="text" placeholder="Email" name="email">
+                <p class="error" id="emailError"></p>
 
-            <img class="passicon" src="/images/pass_logo.png" alt="">
-            <input id="password" class="passinput" type="password" placeholder="Password" name="password">
-            <p class="error" id="passwordError"></p>
+                <img class="passicon" src="/images/pass_logo.png" alt="">
+                <input id="password" class="passinput" type="password" placeholder="Password" name="password">
+                <p class="error" id="passwordError"></p>
 
-            <button class="signin-btn"  href="/login">Sign In</button>
+                <button class="signin-btn" type="submit">Sign In</button>
+            </form>
 
             <a class="forgot" href="#">Forgot password?</a>
             <div class="divider">OR</div>
