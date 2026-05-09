@@ -65,17 +65,30 @@ body {
     transition: all 0.3s ease;
     z-index: 1002;
 }
+.sidebar h3{
+    display: flex;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    font-size: 23px;
+    font-weight: 550;
+    color: rgb(189, 243, 255);
+    letter-spacing: 1.2px;
+    font-family: cursive;
+    padding-top: 27px;
+    padding-left: 23px;
+}
 .sidebar-items {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 55px;
 }
 .sidebar-items a {
-    padding: 18px 30px;
+    padding: 22px 30px;
     font-size: 18px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     letter-spacing: 1.5px;
     transition: all 0.2s ease;
+    background-color: rgba(66, 66, 66, 0.138);
+    border: 1px solid rgba(255, 255, 255, 0.045);
 }
 .sidebar-items a:hover {
     background-color: rgba(255, 255, 255, 0.07);
@@ -83,16 +96,16 @@ body {
 }
 .logout {
     position: absolute;
-    bottom: 95px;
+    bottom: 32px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.055);
+    background-color: rgb(111, 0, 0);
     text-align: center;
     padding: 17px 0px;
 }
 .logout a {
     border-radius: 10px 10px;
     letter-spacing: 2px;
-    color: rgb(254, 80, 80);
+    color: rgb(255, 211, 211);
     font-size: 22px;
     font-weight: bold;
     font-family: monospace; 
@@ -103,7 +116,6 @@ body {
 }
 
 .main{
-    /* flex: 1;  */
     height: auto;
     width: 82.5%;
     padding: 20px;
@@ -111,7 +123,7 @@ body {
     margin: 20px 0px;
     margin-left: 132px;
     margin-right: 0px;
-    background-color: red;
+    /* background-color: red; */
 }
 
 
