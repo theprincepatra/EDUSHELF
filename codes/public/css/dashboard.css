@@ -47,67 +47,87 @@ body {
 }
 
 
-.sidebar {
+.all{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 60px;
+}
+.sidebar{
     position: fixed;
-    top: 0;
+    top: 60px;
     left: -260px;
-    width: 250px;
-    height: 100vh;
-    background-color: rgb(12, 12, 13);
-    z-index: 1002;
-    transition: all 0.3s ease;
+    width: 200px;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    background-color: rgba(18, 18, 18, 0.204);
     border-right: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    z-index: 1002;
 }
-
-.close-btn {
-    font-size: 38px;
-    cursor: pointer;
-    margin: 15px 0px 0px 20px;
-    width: fit-content;
-}
-
 .sidebar-items {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 20px;
 }
-
 .sidebar-items a {
     padding: 18px 30px;
     font-size: 18px;
-    font-family: monospace;
-    letter-spacing: 1px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 1.5px;
     transition: all 0.2s ease;
 }
-
 .sidebar-items a:hover {
     background-color: rgba(255, 255, 255, 0.07);
     padding-left: 40px;
 }
-
-/* OVERLAY */
-
-.overlay {
-    position: fixed;
+.logout {
+    position: absolute;
+    bottom: 95px;
     width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.47);
-    z-index: 1000;
-    display: none;
+    background-color: rgba(255, 255, 255, 0.055);
+    text-align: center;
+    padding: 17px 0px;
+}
+.logout a {
+    border-radius: 10px 10px;
+    letter-spacing: 2px;
+    color: rgb(254, 80, 80);
+    font-size: 22px;
+    font-weight: bold;
+    font-family: monospace; 
+}
+.logout a:hover {
+    text-decoration: underline;
+
 }
 
-/* NAVBAR */
+.main{
+    /* flex: 1;  */
+    height: auto;
+    width: 82.5%;
+    padding: 20px;
+    transition: all 0.2s ease;
+    margin: 20px 0px;
+    margin-left: 132px;
+    margin-right: 0px;
+    background-color: red;
+}
 
-.nav {
+
+
+.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
     display: flex;
     flex-direction: row;
     background: rgba(18, 19, 21, 0.589);
     border-bottom: 1px solid rgba(255, 255, 255, 0.105);
-    height: 60px;
-    position: fixed;
-    width: 100%;
 }
-
 .nav_ins {
     display: flex;
     flex-direction: row;
@@ -117,7 +137,6 @@ body {
     margin: 0px 0px 0px 130px;
     border-radius: 15px 15px 0px 0px;
 }
-
 .name {
     height: 100%;
     width: 190px;
@@ -125,10 +144,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0px 0px 0px 2px;
+    margin: 0px 0px 0px 4px;
 }
-
 .small {
+    padding-left: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -136,15 +155,12 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
 }
-
 .small p {
     transition: all 0.1s ease;
 }
-
 .small p:hover {
     scale: 1.05;
 }
-
 .small small {
     font-size: 11px;
     padding-top: 3px;
@@ -152,12 +168,11 @@ body {
     letter-spacing: 0.7px;
     color: rgb(117, 117, 117);
 }
-
 .logo {
     height: 40px;
     width: 55px;
+    padding-left: 1px;
 }
-
 .edushelf {
     font-size: 19px;
     font-weight: 550;
@@ -165,7 +180,6 @@ body {
     font-family: sans-serif;
     letter-spacing: 1px;
 }
-
 .nav_items {
     display: flex;
     flex-direction: row;
@@ -176,7 +190,6 @@ body {
     border-radius: 7px;
     background-color: rgba(18, 18, 19, 0.873);
 }
-
 .items {
     display: flex;
     justify-content: space-around;
@@ -185,16 +198,13 @@ body {
     letter-spacing: 0.3px;
     font-family: monospace;
 }
-
 .items a {
     transition: all 0.2s ease;
 }
-
 .items a:hover {
     color: rgb(117, 117, 117);
     text-decoration: underline;
 }
-
 .search_box {
     display: flex;
     flex-direction: row;
@@ -206,12 +216,10 @@ body {
     padding: 0 10px;
     margin: 0px 5px 0px 18px;
 }
-
 .search_icon {
     height: 18px;
     width: 18px;
 }
-
 .search {
     background: transparent;
     border: none;
@@ -224,20 +232,17 @@ body {
     font-size: 15.8px;
     font-weight: 550;
 }
-
 .help {
     padding-left: 26px;
 }
-
 .help a {
     font-family: monospace;
     letter-spacing: -0.8px;
-    font-size: 19px;
-    color: rgb(227, 59, 59);
-}
-
-.help a:hover {
-    border-bottom: 1px solid rgb(165, 25, 25);
-    color: rgb(165, 25, 25);
     font-size: 20px;
+    color: rgba(255, 86, 86, 0.918);
+    transition: all 0.1s ease;
+}
+.help a:hover {
+    text-decoration: underline;
+    color: rgb(199, 37, 37);
 }
