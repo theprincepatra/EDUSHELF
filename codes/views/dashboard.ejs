@@ -9,32 +9,36 @@
 <body>
 
     <!-- MENU BUTTON -->
-    <div class="menu-btn" onclick="openMenu()">
-        ☰
-    </div>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar">
-        <div class="close-btn" onclick="closeMenu()">
-            ×
+    <div class="all">
+
+        <!-- SIDE BAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-items">
+                <a href="#">Profile</a>
+                <a href="#">Dashboard</a>
+                <a href="#">All Branch</a>
+                <a href="#">Subscription</a>
+                <a href="#">Star</a>
+                <a href="#">Support</a>
+            </div>
+            <div class="logout">
+                <a href="#">Log Out</a>
+            </div>
         </div>
-
-        <div class="sidebar-items">
-            <a href="#">Dashboard</a>
-            <a href="#">All Branch</a>
-            <a href="#">Subscriptions</a>
-            <a href="#">Star</a>
-            <a href="#">Support</a>
+        
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <p>THE PRINCE PATRA</p>
+            <p>THE PRINCE PATRA</p>
         </div>
+     </div>
+    
 
-    </div>
-
-    <!-- OVERLAY -->
-    <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
     <!-- NAVBAR -->
     <div class="nav">
-
         <div class="nav_ins">
 
             <div class="name">
@@ -56,7 +60,7 @@
 
                 <div class="items">
                     <a href="allbranch.html">All Branch</a>
-                    <a href="subscriptioins.html">Subscriptioins</a>
+                    <a href="subscription.html">Subscription</a>
                     <a href="star.html">Star</a>
                 </div>
 
@@ -70,6 +74,9 @@
 
     </div>
 
+
+
+    
     <script src="/js/dashboard.js"></script>
 
 </body>
