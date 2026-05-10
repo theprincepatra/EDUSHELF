@@ -223,7 +223,7 @@ app.post('/login', async function (req, res) {
             return res.status(400).send('Invalid password');
         }
 
-        res.redirect('/dashboard/:name'.replace(':name', user.name));
+        res.redirect('/dashboard/name'.replace('name', user.name));
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
@@ -233,6 +233,12 @@ app.get('/dashboard/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('dashboard', { user });
 });
+app.get('/support/:name', async function (req, res) {
+    let user = await userModel.findOne({name: req.params.name});
+    res.render('support', { user });
+});
+
+
 
 app.listen(3000, function () {
     console.log('Server is running on http://localhost:3000');
