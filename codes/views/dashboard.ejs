@@ -15,7 +15,11 @@
 
         <!-- SIDE BAR -->
         <div class="sidebar" id="sidebar">
-            <h3>Hello, User!</h3>
+            <div class="designation">
+                <h3>Hello</h3>
+                <h2><%= user.username %></h2>
+            </div>
+
             <div class="sidebar-items">
                 <a href="#">Profile</a>
                 <a href="#">Dashboard</a>
@@ -24,9 +28,9 @@
                 <a href="#">Star</a>
                 <a href="#">Support</a>
             </div>
-            <div class="logout">
-                <a href="#">Log Out</a>
-            </div>
+        
+            <button class="logout"><a href="/logout/<%= user.username %>">Log Out</a></button>
+
         </div>
         
         <!-- MAIN CONTENT -->
@@ -42,7 +46,7 @@
         <div class="nav_ins">
 
             <div class="name">
-                <img src="images/logo_bgremove.png" class="logo" alt="EDlogo">
+                <img src="/images/logo_bgremove.png" class="logo" alt="EDlogo">
 
                 <div class="small">
                     <p class="edushelf">EDUSHELF</p>
@@ -53,7 +57,7 @@
             <div class="nav_items">
 
                 <div class="search_box">
-                    <img src="images/search1.png" alt="Search Icon" class="search_icon">
+                    <img src="/images/search1.png" alt="Search Icon" class="search_icon">
 
                     <input type="search" placeholder="Search" class="search">
                 </div>

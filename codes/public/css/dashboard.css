@@ -65,21 +65,31 @@ body {
     transition: all 0.3s ease;
     z-index: 1002;
 }
-.sidebar h3{
+.designation{
     display: flex;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
-    font-size: 23px;
-    font-weight: 550;
-    color: rgb(189, 243, 255);
-    letter-spacing: 1.2px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 9px;
     font-family: cursive;
-    padding-top: 27px;
-    padding-left: 23px;
+    font-weight: 550;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+}
+.designation h3{
+    color: rgb(207, 246, 255);  
+    font-size: 20px;
+    letter-spacing: 1.2px;
+}
+.designation h2{
+    padding-top: 2px;
+    color: rgb(207, 246, 255);  
+    font-size: 19px;
+    letter-spacing: 1.2px;
 }
 .sidebar-items {
     display: flex;
     flex-direction: column;
-    margin-top: 55px;
+    margin-top: 64px;
 }
 .sidebar-items a {
     padding: 22px 30px;
@@ -96,23 +106,25 @@ body {
 }
 .logout {
     position: absolute;
-    bottom: 32px;
-    width: 100%;
-    background-color: rgb(111, 0, 0);
+    bottom: 20px;
+    left: 35px;
+    width: 60%;
+    background-color: rgb(211, 0, 0);
     text-align: center;
-    padding: 17px 0px;
+    padding: 10px 0px;
+    border-radius: 10px 10px;
+    transition: all 0.1s ease;
+    border: none;
+    cursor: pointer;
 }
 .logout a {
-    border-radius: 10px 10px;
-    letter-spacing: 2px;
     color: rgb(255, 211, 211);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
-    font-family: monospace; 
+    font-family: monospace;
 }
-.logout a:hover {
-    text-decoration: underline;
-
+.logout:hover {
+    background-color: rgb(140, 4, 4);
 }
 
 .main{
@@ -225,8 +237,7 @@ body {
     height: 30px;
     background-color: rgba(18, 18, 19, 0.873);
     border-radius: 7px;
-    padding: 0 10px;
-    margin: 0px 5px 0px 18px;
+    margin: 0px 5px 0px 26px;
 }
 .search_icon {
     height: 18px;
