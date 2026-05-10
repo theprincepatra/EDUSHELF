@@ -212,8 +212,8 @@ app.post('/signup', async function (req, res) {
 app.post('/login', async function (req, res) {
     try {
         const { email, password } = req.body;
-
         const user = await userModel.findOne({ email });
+        console.log(user);
         if (!user) {
             return res.status(400).send('User not found');
         }
@@ -223,14 +223,15 @@ app.post('/login', async function (req, res) {
             return res.status(400).send('Invalid password');
         }
 
-        res.redirect('/dashboard');
+        res.redirect('/dashboard/:name'.replace(':name', user.name));
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
 });
-app.get('/dashboard', function (req, res) {
-    res.render('dashboard');
+app.get('/dashboard/:name', async function (req, res) {
+    let user = await userModel.findOne({name: req.params.name});
+    res.render('dashboard', { user });
 });
 
 app.listen(3000, function () {
