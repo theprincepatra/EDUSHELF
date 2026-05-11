@@ -65,6 +65,7 @@ body {
     transition: all 0.3s ease;
     z-index: 1002;
 }
+
 .designation{
     display: flex;
     flex-direction: column;
@@ -76,17 +77,18 @@ body {
     border-bottom: 2px solid rgba(255, 255, 255, 0.08);
 }
 .designation h3{
-    color: rgb(207, 246, 255);  
+    color: rgb(255, 250, 207);  
     font-size: 20px;
     letter-spacing: 1.2px;
 }
 .designation h2{
     padding-top: 2px;
-    color: rgb(207, 246, 255);  
+    color: rgb(255, 250, 207);  
     font-size: 19px;
     letter-spacing: 1.2px;
 }
 .sidebar-items {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     margin-top: 64px;
@@ -135,7 +137,12 @@ body {
     margin: 20px 0px;
     margin-left: 132px;
     margin-right: 0px;
-    /* background-color: red; */
+}
+.section{
+    display: none;
+}
+.active{
+    display: block;
 }
 
 
