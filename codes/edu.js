@@ -172,24 +172,31 @@ app.post('/signup', async function (req, res) {
         if (!name || !username || !email || !password || !otp) {
             return res.status(400).send('All fields are required');
         }
-        if (!username) {
-            return res.status(400).send('Username is required');
+        
+        const usernameRegex = /^(?=.*[A-Za-z_])[A-Za-z0-9_.]{4,15}$/;
+        if (!usernameRegex.test(username)) {
+            return res.status(400).send('Invalid username');
         }
+
         const existingUsername = await userModel.findOne({ username });
         if (existingUsername) {
             return res.status(400).send('Username already taken');
         }
 
-        const record = otpStore[email];
-        if (!record || record.code.toString() !== otp.toString() || record.expiresAt < Date.now()) {
-            return res.status(400).send('Invalid or expired OTP');
-        }
-        delete otpStore[email];
-
         const existingEmail = await userModel.findOne({ email });
         if (existingEmail) {
             return res.status(400).send('Email already registered');
         }
+
+        const record = otpStore[email];
+        if (
+            !record ||
+            record.code.toString() !== otp.toString() ||
+            record.expiresAt < Date.now()
+        ) {
+            return res.status(400).send('Invalid or expired OTP');
+        }
+        delete otpStore[email];
 
         let lastUser = await userModel.findOne().sort({ userId: -1 });
         let newUserId = lastUser ? lastUser.userId + 1 : 1;
@@ -233,6 +240,7 @@ app.get('/dashboard/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('dashboard', { user });
 });
+
 app.get('/support/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('support', { user });
