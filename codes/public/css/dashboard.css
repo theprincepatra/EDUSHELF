@@ -199,14 +199,42 @@ body {
     font-family: sans-serif;
     letter-spacing: 1px;
 }
+.cse-bg{
+    background-image: url('../images/cards/cse.png');
+    background-size: cover;
+    background-position: center;
+}
+.aiml-bg{
+    background-image: url('../images/cards/aiml.png');
+    background-size: cover;
+    background-position: center;
+}
+.it-bg{
+    background-image: url('../images/cards/it.png');
+    background-size: cover;
+    background-position: center;
+}
+.cybersecurity-bg{
+    background-image: url('../images/cards/cyber.png');
+    background-size: cover;
+    background-position: center;
+}
+.datascience-bg{
+    background-image: url('../images/cards/ds1.png');
+    background-size: cover;
+    background-position: center;
+}
 .bottom-section{
-    padding: 25px 15px;
+    padding-top: 32px;
+    /* padding-left: 15px;   */
+    padding-bottom: 20px;
+    /* padding-right: 15px; */
     text-align: center;
 }
 .bottom-section h2{
-    color: white;
+    color: rgba(208, 246, 255, 0.814);
     font-size: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 27px;
     letter-spacing: 2px;
     font-family: sans-serif;
 }
@@ -216,14 +244,14 @@ body {
 }
 .item{
     flex: 1;
-    color: #8bb3d9;
     text-align: center;
 }
 .big-text{
     display: block;
     font-size: 20px;
-    font-weight: bold;
-    color: white;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(255, 255, 255, 0.61);
+    letter-spacing: 0.5px;
     margin-bottom: 5px;
 }
 .item small{
