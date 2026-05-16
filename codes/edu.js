@@ -208,6 +208,7 @@ app.post('/signup', async function (req, res) {
             password: await bcrypt.hash(password, 10),
         });
         res.status(200).send('Account created successfully');
+        res.render('/login', { username });
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
