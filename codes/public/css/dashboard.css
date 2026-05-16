@@ -155,28 +155,47 @@ body {
 }
 .card{
     width: 360px;
-    background: #1b2340;
+    background: linear-gradient(45deg, rgb(29, 29, 29), rgb(70, 68, 68));
     border-radius: 20px;
     overflow: hidden;
     transition: 0.3s;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 .card:hover{
     transform: scale(1.02);
 }
 .top-section{
-    margin: 23px 10px 0px 10px;
+    margin: 7px 10px 0px 10px;
     height: 150px;
-    background: linear-gradient(45deg, #303030, #5d5d5d);
+    background-color: rgba(113, 162, 162, 0.789);
     border-radius: 20px 20px 30px 30px;
     padding: 10px;
     position: relative;
+    background-image: url();
 }
-.icons img{
-    height: 23px;
-    width: 33px;
+.card-logo{
+    display: flex;
+    padding: 4px 0px 0px 8px;
+
+}
+.card-logo img{
+    height: 25px;
+    width: 39px;
+}
+.card-logo small{
+    font-size: 20px;
+    /* font-weight: bold; */
+    margin: 2px 4px 0px 3px;
+}
+.card-logo p{
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 550;
+    margin: 5px 0px 0px 0px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
 }
 .bottom-section{
     padding: 25px 15px;
@@ -227,7 +246,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.055);
+    background-color: #222224;
     width: 1270px;
     margin: 0px 0px 0px 130px;
     border-radius: 15px 15px 0px 0px;
@@ -344,14 +363,14 @@ body {
 
 /* PROFILE IMAGE */
 .image {
-    position: absolute;
+    position: fixed;
     top: 7px;
     right: 36px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
     border: 1px solid rgb(201, 201, 201);
-    overflow: hidden;
+    /* overflow: hidden; */
     cursor: pointer;
     z-index: 1003;
     transition: all 0.1s ease;
