@@ -1,44 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DASHBOARD</title>
     <link rel="stylesheet" href="/css/dashboard.css">
 </head>
+
 <body>
 
     <!-- MENU BUTTON -->
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
+    <!-- SIDE BAR -->
     <div class="all">
-        <!-- SIDE BAR -->
         <div class="sidebar" id="sidebar">
             <div class="designation">
                 <h3>Hello</h3>
-                <h2><%= user.username %></h2>
+                <h2>
+                    <%= user.username %>
+                </h2>
             </div>
 
             <div class="sidebar-items">
-                <a onclick="showSection('profile')">Profile</a>
                 <a onclick="showSection('dashboard')">Dashboard</a>
+                <a onclick="showSection('profile')">Profile</a>
                 <a onclick="showSection('all-branch')">All Branch</a>
                 <a onclick="showSection('subscription')">Subscription</a>
                 <a onclick="showSection('star')">Star</a>
                 <a href="/support/<%= user.username %>">Support</a>
             </div>
-        
+
             <button class="logout"><a href="/logout/<%= user.username %>">Log Out</a></button>
 
         </div>
-        
+
         <!-- MAIN CONTENT -->
         <div class="main">
 
             <div id="dashboard" class="section active">
-                <h1>Dashboard Page</h1>
+                <div class="card-container">
+
+                    <!-- 1 -->
+                    <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>CSE</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2 -->
+                    <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>CSE AIML</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>CYBER SECURITY</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>DATA SCIENCE</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>SOFTWARE ENGINEERING</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- 6 -->
+                     <div class="card">
+                        <div class="top-section">
+                            <div class="icons">
+                                <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
+                            </div>
+                        </div>
+
+                        <div class="bottom-section">
+                            <h2>COMPUTER NETWORKS</h2>
+                            <div class="row">
+                                <div class="item">
+                                    <span class="big-text">Notes</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">Assignments</span>
+                                </div>
+
+                                <div class="item">
+                                    <span class="big-text">PYQ's</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+
+            <!-- PROFILE SECTION -->
             <div id="profile" class="section">
                 <h1>Profile Page</h1>
             </div>
@@ -55,8 +218,8 @@
                 <h1>Star Page</h1>
             </div>
         </div>
-     </div>
-    
+    </div>
+
 
     <!-- NAVBAR -->
     <div class="nav">
@@ -96,12 +259,14 @@
 
     <!-- PROFILE IMAGE -->
     <div class="image">
-        <a href="/profile/<%= user.username %>"><img src="/images/profile_logo.png" alt="User Icon" class="user_icon"></a>
+        <a href="/profile/<%= user.username %>"><img src="/images/profile_logo.png" alt="User Icon"
+                class="user_icon"></a>
     </div>
 
 
-    
+
     <script src="/js/dashboard.js"></script>
 
 </body>
+
 </html>
