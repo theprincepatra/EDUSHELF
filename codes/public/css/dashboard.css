@@ -132,8 +132,10 @@ body {
 /* MAIN CONTENT */
 .main{
     height: auto;
-    /* width: 82.5%; */
-    padding: 20px;
+    padding-top: 45px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
     transition: all 0.2s ease;
     margin: 20px 0px;
     margin-left: 132px;
@@ -145,18 +147,16 @@ body {
 .active{
     display: block;
 }
-
 /* CARD CONTAINER */
 .card-container{
     display: flex;
     flex-wrap: wrap;
-    column-gap: 50px;
-    row-gap: 70px;
-    padding: 20px;
+    column-gap: 70px;
+    row-gap: 90px;
 }
 .card{
     width: 360px;
-    background: linear-gradient(45deg, rgba(98, 97, 97, 0.312), rgba(70, 68, 68, 0));
+    background: linear-gradient(45deg, rgba(95, 94, 94, 0.373), rgba(70, 68, 68, 0));
     border-right: rgba(45, 45, 45, 0.897) 1px solid;
     border-radius: 20px;
     overflow: hidden;
@@ -178,7 +178,6 @@ body {
 }
 .card-logo small{
     font-size: 20px;
-    /* font-weight: bold; */
     margin: 2px 4px 0px 3px;
 }
 .card-logo p{
@@ -191,9 +190,8 @@ body {
     letter-spacing: 1px;
 }
 .top-section{
-    margin: 7px 10px 0px 10px;
-    height: 150px;
-    background-color: rgba(113, 162, 162, 0.789);
+    margin: 8px 10px 0px 10px;
+    height: 170px;
     border-radius: 20px;
     position: relative;
     overflow: hidden;
@@ -209,11 +207,19 @@ body {
     text-align: center;
 }
 .bottom-section h2{
-    color: rgba(208, 246, 255, 0.814);
+    /* color: rgba(208, 246, 255, 0.814); */
     font-size: 25px;
     margin-bottom: 27px;
     letter-spacing: 2px;
     font-family: sans-serif;
+
+    background-image: url("/images/back1.png");
+    background-size: cover;
+    background-position: center;
+
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 .row{
     display: flex;
@@ -227,7 +233,7 @@ body {
     display: block;
     font-size: 20px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color: rgba(255, 255, 255, 0.61);
+    color: rgba(255, 255, 255, 0.384);
     letter-spacing: 0.5px;
     margin-bottom: 5px;
 }
