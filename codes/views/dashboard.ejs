@@ -27,7 +27,6 @@
             <div class="sidebar-items">
                 <a onclick="showSection('dashboard')">Dashboard</a>
                 <a onclick="showSection('profile')">Profile</a>
-                <a onclick="showSection('all-branch')">All Branch</a>
                 <a onclick="showSection('subscription')">Subscription</a>
                 <a onclick="showSection('star')">Star</a>
                 <a href="/support/<%= user.username %>">Support</a>
@@ -320,14 +319,9 @@
                 </div>
             </div>
 
-
             <!-- PROFILE SECTION -->
             <div id="profile" class="section">
                 <h1>Profile Page</h1>
-            </div>
-
-            <div id="all-branch" class="section">
-                <h1>All Branch Page</h1>
             </div>
 
             <div id="subscription" class="section">
@@ -356,7 +350,7 @@
             <div class="nav_items">
 
                 <div class="search_box">
-                    <img src="/images/search1.png" alt="Search Icon" class="search_icon">
+                    <img src="/images/search.png" alt="Search Icon" class="search_icon">
 
                     <input type="search" placeholder="Search" class="search">
                 </div>
@@ -378,7 +372,7 @@
 
     <!-- PROFILE IMAGE -->
     <div class="image">
-        <a href="/profile/<%= user.username %>"><img src="/images/profile_logo.png" alt="User Icon"
+        <a href="/profile/<%= user.username %>"><img src="/images/default-profile.png" alt="User Icon"
                 class="user_icon"></a>
     </div>
 

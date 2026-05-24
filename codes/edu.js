@@ -160,6 +160,7 @@ function generateOTP() {
 let otpStore = {};
 
 
+// SIGNUP PAGE--------------------------------------------------
 // POST SIGNUP
 app.post('/signup', async function (req, res) {
     try {
@@ -177,17 +178,14 @@ app.post('/signup', async function (req, res) {
         if (!usernameRegex.test(username)) {
             return res.status(400).send('Invalid username');
         }
-
         const existingUsername = await userModel.findOne({ username });
         if (existingUsername) {
             return res.status(400).send('Username already taken');
         }
-
         const existingEmail = await userModel.findOne({ email });
         if (existingEmail) {
             return res.status(400).send('Email already registered');
         }
-
         const record = otpStore[email];
         if (
             !record ||
@@ -215,8 +213,14 @@ app.post('/signup', async function (req, res) {
     }
 });
 
+// GET login page
+app.get('/login', function (req, res) {
+    res.render('login');
+});
 
-// POST LOG IN
+
+// LOGIN PAGE-------------------------------------------------
+// POST login
 app.post('/login', async function (req, res) {
     try {
         const { email, password } = req.body;
@@ -237,11 +241,21 @@ app.post('/login', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
+
+// GET signup 
+app.get('/signup', function (req, res) {
+    res.render('signup');
+});
+
+
+// DASGBOARD PAGE--------------------------------------------------
 app.get('/dashboard/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('dashboard', { user });
 });
 
+
+// SUPPORT PAGE----------------------------------------------------
 app.get('/support/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('support', { user });
