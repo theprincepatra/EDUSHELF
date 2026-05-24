@@ -251,17 +251,19 @@ body {
     height: 60px;
     z-index: 1000;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background: rgba(18, 19, 21, 0.589);
     border-bottom: 1px solid rgba(255, 255, 255, 0.105);
 }
-.nav_ins {
+.nav_ins{
     display: flex;
     flex-direction: row;
     align-items: center;
     background-color: #222224;
-    width: 1270px;
-    margin: 0px 0px 0px 130px;
+    width: auto;
+    margin: 0;
+    height: 60px;
     border-radius: 15px 15px 0px 0px;
 }
 .name {
@@ -311,26 +313,11 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 900px;
+    width: auto;
     height: 49px;
     margin: 1px 0px 0px 18px;
     border-radius: 7px;
     background-color: rgba(18, 18, 19, 0.873);
-}
-.items {
-    display: flex;
-    justify-content: space-around;
-    width: 450px;
-    font-size: 17px;
-    letter-spacing: 0.3px;
-    font-family: monospace;
-}
-.items a {
-    transition: all 0.2s ease;
-}
-.items a:hover {
-    color: rgb(117, 117, 117);
-    text-decoration: underline;
 }
 .search_box {
     display: flex;
@@ -358,8 +345,26 @@ body {
     font-size: 15.8px;
     font-weight: 550;
 }
+.items {
+    display: flex;
+    justify-content: end;
+    font-size: 17px;
+    letter-spacing: 0.3px;
+    font-family: monospace;
+    margin-right: 40px;
+    gap: 70px;
+}
+.items a {
+    transition: all 0.2s ease;
+}
+.items a:hover {
+    color: rgb(117, 117, 117);
+    text-decoration: underline;
+}
 .help {
-    padding-left: 26px;
+    margin-left: auto;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 .help a {
     font-family: monospace;
