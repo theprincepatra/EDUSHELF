@@ -212,7 +212,6 @@ app.post('/signup', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
-
 // GET login page
 app.get('/login', function (req, res) {
     res.render('login');
@@ -241,17 +240,22 @@ app.post('/login', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
-
 // GET signup 
 app.get('/signup', function (req, res) {
     res.render('signup');
 });
 
 
-// DASGBOARD PAGE--------------------------------------------------
+// DASGBOARD PAGE----------------------------------------------------
+// GET dashboard
 app.get('/dashboard/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('dashboard', { user });
+});
+// GET profile
+app.get('/profile/:username', async function (req, res) {
+    let user = await userModel.findOne({username: req.params.username});
+    res.render('profile', { user });
 });
 
 

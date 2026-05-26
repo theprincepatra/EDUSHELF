@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%= user.name %>'s Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+<body>
+    <div class="all">
+
+        <div class="left">
+            <div class="photo-section">
+                <img src="<%= user.profilepicture %>" class="profilepic" alt="Profile Photo">
+                <img src="/images/dashboard/pencil.png" class="pencilpic" alt="Pencil Photo">
+                <h2><%= user.name %></h2>
+                <div class="username">
+                    <p><%= user.username %></p>
+                    <p><%= user.userId %></p>
+                </div>
+            </div>
+
+            <div class="details">
+                <div class="full-width">
+                    <div class="logo-part">
+                        <img src="/images/email.png" alt="Email Logo">
+                        <p>Email:</p>
+                    </div>
+                    <p><%= user.email %></p>
+                </div>
+
+                <div class="full-width">
+                    <div class="logo-part">
+                        <img src="/images/phone.png" alt="Phone Logo">
+                        <p>Phone:</p>
+                    </div>
+                    <p><%= user.phone %></p>
+                </div>
+
+                <div class="full-width">
+                    <div class="logo-part">
+                        <img src="/images/phone.png" alt="Phone Logo">
+                        <p>College:</p>
+                    </div>
+                    <p><%= user.college %></p>
+                </div>
+
+                <div class="full-width">
+                    <div class="logo-part">
+                        <img src="/images/phone.png" alt="Phone Logo">
+                        <p>Branch:</p>
+                    </div>
+                    <p><%= user.branch %></p>
+                </div>
+
+                <div class="full-width">
+                    <div class="logo-part">
+                        <img src="/images/phone.png" alt="Phone Logo">
+                        <p>Semester:</p>
+                    </div>
+                    <p><%= user.semester %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            
+            <div class="right-top">
+                <h2>Account & Security</h2>
+
+                <div class="account-container">
+                    <div class="section">
+                        <div class="account-logo">
+                            <img src="/images/dashboard/number-verified.png" alt="Number Verified Logo">
+                        </div>
+                        <div class="account-info">
+                            <p>Phone Number Verified</p>
+                            <p><%= user.phoneVerified ? 'Verified' : 'Not Verified' %></p>
+                            <small>Verify your phone number to enhance account security.</small>
+                        </div>
+                    </div>
+    
+                    <div class="section">
+                        <div class="account-logo">
+                            <img src="/images/dashboard/email-verified.png" alt="Email Verified Logo">
+                        </div>
+                        <div class="account-info">
+                            <p>Email Verified</p>
+                            <p><%= user.emailVerified ? 'Verified' : 'Not Verified' %></p>
+                            <small>Verify your email address to enhance account security.</small>
+                        </div>
+                    </div>
+                    
+                    <div class="joinedon">
+                        <div class="section">
+                            <div class="account-logo">
+                                <img src="/images/dashboard/joined-on.png" alt="Joined On Logo">
+                            </div>
+                            <div class="account-info">
+                                <p>Joined On</p>
+                                <p1><%= user.joinedOn %></p1>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <div class="account-logo">
+                                <img src="/images/dashboard/last-login.png" alt="Last Login Logo">
+                            </div>
+                            <div class="account-info">
+                                <p>Last Login</p>
+                                <p1><%= user.lastLogin %></p1>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="div">
+                    <a href="/changepass/<%= user.username %>"><button class="changepass">Change Password</button></a>
+                    <a href="/verify-number/<%= user.username %>"><button class="changepass">Verify Number</button></a>
+                </div>
+            </div>
+    
+            <div class="right-bottom">
+                <h2>Activity</h2>
+                <div class="activity-container">
+                    <div class="activity-section">
+                        <img src="/images/dashboard/subscription.png" alt="Subscription Logo">
+                        <p>12</p>
+                        <small>Subscriptions Taken</small>
+                    </div>
+                    <div class="activity-section">
+                        <img src="/images/dashboard/star.png" alt="Star Logo">
+                        <p>2</p>
+                        <small>Saved Notes</small>
+                    </div>
+                    <div class="activity-section">
+                        <img src="/images/dashboard/refer.png" alt="Refer Logo">
+                        <p>5</p>
+                        <small>Refer Code: <%= user.refercode %></small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>    
+</body>
+</html>

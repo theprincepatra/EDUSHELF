@@ -25,11 +25,11 @@ body {
 }
 
 
-
+/* SIDEBAR */
 .menu-btn {
     position: fixed;
-    left: 38px;
-    top: 3px;
+    left: 60px;
+    top: 4px;
     font-size: 30px;
     cursor: pointer;
     z-index: 1001;
@@ -147,6 +147,7 @@ body {
 .active{
     display: block;
 }
+
 /* CARD CONTAINER */
 .card-container{
     display: flex;
@@ -207,7 +208,6 @@ body {
     text-align: center;
 }
 .bottom-section h2{
-    /* color: rgba(208, 246, 255, 0.814); */
     font-size: 25px;
     margin-bottom: 27px;
     letter-spacing: 2px;
@@ -266,17 +266,17 @@ body {
     height: 60px;
     border-radius: 15px 15px 0px 0px;
 }
-.name {
+.left-part {
     height: 100%;
     width: 190px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 0px 0px 0px 4px;
+    margin: 0px 0px 0px 6px;
+    gap: 5px;
 }
 .small {
-    padding-left: 3px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -315,7 +315,7 @@ body {
     align-items: center;
     width: auto;
     height: 49px;
-    margin: 1px 0px 0px 18px;
+    margin: 1px 25px 0px 25px;
     border-radius: 7px;
     background-color: rgba(18, 18, 19, 0.873);
 }
@@ -363,7 +363,6 @@ body {
 }
 .help {
     margin-left: auto;
-    padding-left: 25px;
     padding-right: 25px;
 }
 .help a {
@@ -382,13 +381,13 @@ body {
 /* PROFILE IMAGE */
 .image {
     position: fixed;
-    top: 7px;
-    right: 36px;
+    top: 8px;
+    right: 70px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
     border: 1px solid rgb(201, 201, 201);
-    /* overflow: hidden; */
+    overflow: hidden;
     cursor: pointer;
     z-index: 1003;
     transition: all 0.1s ease;
