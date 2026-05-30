@@ -352,7 +352,7 @@ body {
     letter-spacing: 0.3px;
     font-family: monospace;
     margin-right: 40px;
-    gap: 70px;
+    gap: 55px;
 }
 .items a {
     transition: all 0.2s ease;
