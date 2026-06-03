@@ -25,7 +25,7 @@
 
             <div class="sidebar-items">
                 <a onclick="showSection('dashboard')">Dashboard</a>
-                <a onclick="showSection('profile')">Profile</a>
+                <a href="/profile/<%= user.username %>">Profile</a>
                 <a onclick="showSection('subscription')">Subscription</a>
                 <a onclick="showSection('star')">Star</a>
                 <a href="/support/<%= user.username %>">Support</a>
