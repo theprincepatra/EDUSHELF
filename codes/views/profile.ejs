@@ -67,15 +67,23 @@
                     <img src="/images/dashboard/phone.png">
                     <span>Phone</span>
                 </div>
-                <span><%= user.phone %></span>
+                <span><%= user.phone || 'Not Provided' %></span>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-left">
+                    <img src="/images/dashboard/semester.png">
+                    <span>Date of Birth</span>
+                </div>
+                <span><%= user.dob || 'Not Provided' %></span>
             </div>
 
             <div class="detail-row">
                 <div class="detail-left">
                     <img src="/images/dashboard/college.png">
-                    <span>College</span>
+                    <span>Semester</span>
                 </div>
-                <span><%= user.college %></span>
+                <span><%= user.semester || 'Not Provided' %></span>
             </div>
 
             <div class="detail-row">
@@ -83,17 +91,8 @@
                     <img src="/images/dashboard/branch.png">
                     <span>Branch</span>
                 </div>
-                <span><%= user.branch %></span>
+                <span><%= user.branch || 'Not Provided' %></span>
             </div>
-
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/semester.png">
-                    <span>Semester</span>
-                </div>
-                <span><%= user.semester %></span>
-            </div>
-
         </div>
 
         <button class="main-btn editprofile-btn">Edit Profile</button>
