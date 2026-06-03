@@ -173,6 +173,8 @@ input[type="password"]::-ms-clear {
     transform: translateY(-50%);
     width: 20px;
     cursor: pointer;
+    opacity: 0.5;
+    transition: 0.1s;
 }
 
 
