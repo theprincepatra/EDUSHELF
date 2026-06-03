@@ -1,6 +1,6 @@
 *{
     margin:0;
-    padding:0;
+    padding: 0px;
     box-sizing:border-box;
 }
 body{
@@ -18,7 +18,9 @@ body{
     grid-template-columns:1fr 1.6fr;
     gap:20px;
 }
-
+.profile-card{
+    align-self:start;
+}
 
 .profile-card, .card{
     background:#101827;
