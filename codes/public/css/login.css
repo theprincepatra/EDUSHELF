@@ -4,10 +4,8 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
 }
-
 body {
     height: 100vh;
-
     background:
         linear-gradient(rgba(2, 6, 23, 0.371), rgba(2, 6, 23, 0.382)),
         url("/images/bg.png");
@@ -15,7 +13,6 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
     color: white;
 }
 
@@ -31,7 +28,6 @@ body {
 
 
 /* Left Side */
-/* Left Side - Premium Redesign */
 .left {
     position: relative;
     display: flex;
@@ -162,8 +158,21 @@ input:focus{
 .login-card input {
     padding-left: 35px;
 }
-input[type="password"]::-ms-reveal {
-    filter: invert(1);   
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+.password-wrapper{
+    position: relative;
+}
+.eye-icon{
+    position: absolute;
+    right: 12px;
+    top: 58%;
+    transform: translateY(-50%);
+    width: 20px;
+    cursor: pointer;
 }
 
 

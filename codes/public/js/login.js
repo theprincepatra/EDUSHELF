@@ -1,31 +1,14 @@
-// function login() {
-//     let email = document.getElementById("email").value;
-//     let password = document.getElementById("password").value;
+function togglePassword() {
 
-//     let emailError = document.getElementById("emailError");
-//     let passwordError = document.getElementById("passwordError");
+    const password = document.getElementById("password");
+    const eye = document.querySelector(".eye-icon");
 
-//     // Reset errors
-//     emailError.innerText = "";
-//     passwordError.innerText = "";
+    if (password.type === "password") {
+        password.type = "text";
+        eye.src = "/images/eye-open.png";
+    } else {
+        password.type = "password";
+        eye.src = "/images/eye-closed.png";
+    }
 
-
-//     // Validation
-//     if (email === "") {
-//         emailError.innerText = "Email is required";
-//         return;
-//     }
-
-//     if (password === "") {
-//         passwordError.innerText = "Password is required";
-//         return;
-//     }
-
-//     // alert("Login Successful ✅");
-
-// }
-
-// const signupbutton = document.querySelector(".signup");
-// signupbutton.addEventListener("click", function () {
-//         window.location.href = "signup.html";
-// });
+}
