@@ -233,7 +233,11 @@ app.post('/login', async function (req, res) {
         if (!isMatch) {
             return res.status(400).send('Invalid password');
         }
-
+        
+        // Update login timestamps
+        user.lastLogin = user.currentLogin;
+        user.currentLogin = Date.now();
+        await user.save();
         res.redirect('/dashboard/name'.replace('name', user.name));
     } catch (err) {
         console.error(err);

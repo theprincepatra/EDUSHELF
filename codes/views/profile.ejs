@@ -134,7 +134,7 @@
                     </div>
                     <div class="security-content">
                         <h4>Joined On</h4>
-                        <p>14 Jan 2025</p>
+                        <p><%= user.joinedon ? user.joinedon.toLocaleString() : 'Not Provided' %></p>
                     </div>
                 </div>
                 <div class="security-item bothbox">
@@ -143,7 +143,7 @@
                     </div>
                     <div class="security-content">
                         <h4>Last Login</h4>
-                        <p>Today</p>
+                        <p><%= user.lastLogin ? user.lastLogin.toLocaleString('en-IN') : 'First Login' %></p>
                     </div>
                 </div>
             </div>
