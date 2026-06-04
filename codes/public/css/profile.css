@@ -122,6 +122,10 @@ body{
     color:white;
     cursor:pointer;
     font-size:16px;
+    transition: all 0.1s ease;
+}
+.main-btn:hover{
+    opacity:0.7;
 }
 .editprofile-btn{
     margin-top:20px;
@@ -196,6 +200,10 @@ body{
     padding:14px;
     cursor:pointer;
     font-size:16px;
+    transition: all 0.1s ease;
+}
+.changepassword-btn:hover{
+    background:rgba(138, 92, 246, 0.121);
 }
 .overview-grid{
     display:grid;
