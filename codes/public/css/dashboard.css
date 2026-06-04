@@ -57,7 +57,7 @@ body {
     width: 200px;
     height: calc(100vh - 60px);
     overflow: hidden;
-    background-color: rgba(18, 18, 18, 0.204);
+    background-color: #101011;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.3s ease;
     z-index: 1002;
@@ -88,6 +88,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 57px;
+    transition: all 0.2s ease;
 }
 .sidebar-items a {
     padding: 22px 30px;
@@ -135,9 +136,11 @@ body {
     padding-bottom: 20px;
     padding-right: 20px;
     transition: all 0.2s ease;
-    margin: 20px 0px;
-    margin-left: 132px;
-    margin-right: 0px;
+    width: 100%;
+    margin-left: 0;
+}
+.main.shift{
+    margin-left: 200px;
 }
 .section{
     display: none;
@@ -150,11 +153,11 @@ body {
 .card-container{
     display: flex;
     flex-wrap: wrap;
-    column-gap: 70px;
-    row-gap: 90px;
+    justify-content: center;
+    gap: 50px;
 }
 .card{
-    width: 360px;
+    width: min(360px, 100%);
     background: linear-gradient(45deg, rgba(95, 94, 94, 0.373), rgba(70, 68, 68, 0));
     border-right: rgba(45, 45, 45, 0.897) 1px solid;
     border-radius: 20px;
@@ -401,3 +404,97 @@ body {
 }
 
 
+/* LARGE LAPTOPS */
+@media (min-width:1400px){
+    .card-container{
+        justify-content:center;
+        gap:50px;
+    }
+    .card{
+        width:380px;
+    }
+}
+
+/* LAPTOPS */
+@media (max-width:1399px){
+    .card-container{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(320px,1fr));
+        gap:30px;
+    }
+    .card{
+        width:100%;
+    }
+    .search_box{
+        width:300px;
+    }
+    .items{
+        gap:30px;
+    }
+}
+
+/* TABLETS */
+@media (max-width:1024px){
+    .main.shift{
+        margin-left:0;
+    }
+    .card-container{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:20px;
+    }
+    .card{
+        width:100%;
+    }
+    .search_box{
+        width:220px;
+    }
+    .items{
+        gap:20px;
+        font-size:15px;
+    }
+    .help{
+        display:none;
+    }
+}
+
+/* MOBILE */
+@media (max-width:768px){
+    .main.shift{
+        margin-left:0;
+    }
+    .sidebar{
+        width:220px;
+        left:-220px;
+    }
+    .card-container{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        padding:0;
+    }
+    .card{
+        width:100%;
+    }
+    .top-section{
+        height:110px;
+    }
+    .bottom-section{
+        padding-top:15px;
+        padding-bottom:15px;
+    }
+    .bottom-section h2{
+        font-size:16px;
+        margin-bottom:15px;
+    }
+    .big-text{
+        font-size:12px;
+    }
+    .item small{
+        font-size:10px;
+    }
+    .nav_items,
+    .help{
+        display:none;
+    }
+}
