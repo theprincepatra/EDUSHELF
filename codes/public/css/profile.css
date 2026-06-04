@@ -267,12 +267,4 @@ body{
     .overview-grid{
         grid-template-columns:1fr;
     }
-    .button-group{
-        flex-direction:column;
-    }
-    .detail-row{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
 }
