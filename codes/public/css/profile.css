@@ -118,7 +118,7 @@ body{
     padding:14px;
     border:none;
     border-radius:12px;
-    background:linear-gradient(90deg,#8b5cf6,#ec4899);
+    background:linear-gradient(90deg,#5d2cce,#c22473);
     color:white;
     cursor:pointer;
     font-size:16px;
@@ -126,6 +126,10 @@ body{
 .editprofile-btn{
     margin-top:20px;
     width:100%;
+    transition: all 0.1s ease;
+}
+.editprofile-btn:hover{
+    opacity:0.7;
 }
 
 .card h2{
