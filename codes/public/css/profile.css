@@ -136,7 +136,7 @@ body{
     display:flex;
     align-items:center;
     gap:15px;
-    padding:13px 0;
+    padding:15px 0;
     border-bottom:1px solid #2d3748;
 }
 .security-icon{
@@ -195,20 +195,34 @@ body{
 }
 .overview-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    margin-top:30px;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin-top:21px;
+    padding:0 17px;
 }
 .overview-box{
     text-align:center;
-    padding:20px;
+    padding:20px 5px;
     border-radius:15px;
 }
 .overview-box img{
     width:40px;
     margin-bottom:10px;
 }
-
+.overview-box h3{
+    margin:8px 0;
+}
+.overview-box p{
+    font-size:18px;
+}
+.overview-box small{
+    color:#9ca3af;
+    margin-top:2px;
+    letter-spacing:0.5px;
+    display:block;
+    font-size:12px;
+    font-style:italic;
+}
 .subscription{
     background:rgba(230, 237, 92, 0.15);
 }
@@ -221,9 +235,7 @@ body{
 .refer{
     background:rgba(34, 197, 94, 0.15);
 }
-.overview-box h3{
-    margin:10px 0;
-}
+
 
 
 /* FOR RESPONSIVE DESIGN-------------------------------*/

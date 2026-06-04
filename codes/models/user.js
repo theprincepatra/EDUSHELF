@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     semester: {type: Number,default: null },
     currentLogin: {type: Date,default: Date.now() },
     lastLogin: {type: Date,default: null },
+    phoneVerified: {type: String,default: "Not Verified" },
 
     // Profile status
     isProfileComplete: {
