@@ -71,7 +71,20 @@
 
                     <div class="input-group">
                         <label>Branch</label>
-                        <input type="text" name="branch" value="<%= user.branch || '' %>">
+
+                        <select name="branch" required>
+                            <option value="">Select Branch</option>
+
+                            <option value="CSE" <%= user.branch === 'CSE' ? 'selected' : '' %>>CSE</option>
+                            <option value="CSE AIML" <%= user.branch === 'CSE AIML' ? 'selected' : '' %>>CSE AIML</option>
+                            <option value="CSE IT" <%= user.branch === 'CSE IT' ? 'selected' : '' %>>CSE IT</option>
+                            <option value="Data Science" <%= user.branch === 'Data Science' ? 'selected' : '' %>>Data Science</option>
+                            <option value="Cyber Security" <%= user.branch === 'Cyber Security' ? 'selected' : '' %>>Cyber Security</option>
+                            <option value="Civil" <%= user.branch === 'Civil' ? 'selected' : '' %>>Civil</option>
+                            <option value="ECE" <%= user.branch === 'ECE' ? 'selected' : '' %>>ECE</option>
+                            <option value="EE" <%=user.branch === 'EE' ? 'selected' : '' %>>EE</option>
+                            <option value="Mechanical" <%= user.branch === 'Mechanical' ? 'selected' : '' %>>Mechanical</option>
+                        </select>
                     </div>
                 </div>
 
