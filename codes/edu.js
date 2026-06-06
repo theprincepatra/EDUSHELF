@@ -12,6 +12,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// MULTER CONFIGURATION
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/uploads/profile");
+    },
+    filename: (req, file, cb) => {
+        const uniqueName =
+            Date.now() + path.extname(file.originalname);
+
+        cb(null, uniqueName);
+    }
+});
+const upload = multer({
+    storage: storage
+});
+
+
 
 // GET home page
 app.get('/', function (req, res) {
@@ -260,6 +279,38 @@ app.get('/dashboard/:name', async function (req, res) {
 app.get('/profile/:username', async function (req, res) {
     let user = await userModel.findOne({username: req.params.username});
     res.render('profile', { user });
+});
+// GET profile edit page
+app.get('/profile-edit/:name', async function (req, res) {
+    let user = await userModel.findOne({name: req.params.name});
+    res.render('profile-edit', { user });
+});
+// POST profile edit page
+app.post("/profile/edit", upload.single("profileImage"), async (req, res) => {
+    try {
+        const { name, username, dob, phone, semester, branch } = req.body;
+        console.log("Received profile edit data:", req.body);
+        const user = await userModel.findOne({ username });
+
+        if (!user) return res.redirect("/login");
+
+        Object.assign(user, {
+            name,
+            username,
+            dob: dob || null,
+            phone: phone || null,
+            semester: semester || null,
+            branch: branch || null
+        });
+
+        if (req.file) user.profilepicture = "/uploads/profile/" + req.file.filename;
+
+        await user.save();
+        res.render("profile", { user });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error");
+    }
 });
 
 
