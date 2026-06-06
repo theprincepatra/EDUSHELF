@@ -15,7 +15,7 @@
                 <p>Update your personal information</p>
             </div>
 
-            <form action="/profile/edit" method="POST" enctype="multipart/form-data">
+            <form action="/profile/edit" method="POST">
                 <div class="profile-section">
                     <div class="image-wrapper">
                         <img
@@ -38,8 +38,8 @@
                     </div>
 
                     <div class="input-group">
-                        <label>Phone Number</label>
-                        <input type="text" name="phone" value="<%= user.phone || '' %>">
+                        <label>UserName</label>
+                        <input type="text" name="username" value="<%= user.username %>" required>
                     </div>
 
                     <div class="input-group">
@@ -48,11 +48,28 @@
                     </div>
 
                     <div class="input-group">
-                        <label>Semester</label>
-                        <input type="text" name="semester" value="<%= user.semester || '' %>">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="<%= user.phone || '' %>">
                     </div>
 
-                    <div class="input-group full-width">
+                    <div class="input-group">
+                        <label>Semester</label>
+
+                        <select name="semester" required>
+                            <option value="">Select Semester</option>
+
+                            <option value="1" <%= user.semester == 1 ? 'selected' : '' %>>1st Semester</option>
+                            <option value="2" <%= user.semester == 2 ? 'selected' : '' %>>2nd Semester</option>
+                            <option value="3" <%= user.semester == 3 ? 'selected' : '' %>>3rd Semester</option>
+                            <option value="4" <%= user.semester == 4 ? 'selected' : '' %>>4th Semester</option>
+                            <option value="5" <%= user.semester == 5 ? 'selected' : '' %>>5th Semester</option>
+                            <option value="6" <%= user.semester == 6 ? 'selected' : '' %>>6th Semester</option>
+                            <option value="7" <%= user.semester == 7 ? 'selected' : '' %>>7th Semester</option>
+                            <option value="8" <%= user.semester == 8 ? 'selected' : '' %>>8th Semester</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
                         <label>Branch</label>
                         <input type="text" name="branch" value="<%= user.branch || '' %>">
                     </div>
