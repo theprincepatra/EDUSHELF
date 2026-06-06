@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="/css/profile-edit.css">
+</head>
+<body>
+    <div class="container">
+        <div class="edit-card">
+
+            <div class="header">
+                <h1>Edit Profile</h1>
+                <p>Update your personal information</p>
+            </div>
+
+            <form action="/profile/edit" method="POST" enctype="multipart/form-data">
+                <div class="profile-section">
+                    <div class="image-wrapper">
+                        <img
+                            src="/images/dashboard/default-profile.png"
+                            class="profile-image">
+
+                        <label for="profileImage" class="upload-btn">
+                            Change Photo
+                        </label>
+
+                        <input type="file" id="profileImage" name="profileImage" hidden>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input type="text" name="name" value="<%= user.name %>" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="<%= user.phone || '' %>">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Date of Birth</label>
+                        <input type="date" name="dob" value="<%= user.dob || '' %>">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Semester</label>
+                        <input type="text" name="semester" value="<%= user.semester || '' %>">
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>Branch</label>
+                        <input type="text" name="branch" value="<%= user.branch || '' %>">
+                    </div>
+                </div>
+
+                <div class="readonly-box">
+                    <h3>Account Information</h3>
+
+                    <div class="readonly-row">
+                        <span>Username</span>
+                        <p><%= user.username %></p>
+                    </div>
+
+                    <div class="readonly-row">
+                        <span>User ID</span>
+                        <p><%= user.userId %></p>
+                    </div>
+
+                    <div class="readonly-row">
+                        <span>Email</span>
+                        <p><%= user.email %></p>
+                    </div>
+
+                    <div class="readonly-row">
+                        <span>Referral Code</span>
+                        <p><%= user.referralCode %></p>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <a href="/profile" class="cancel-btn">
+                        Cancel
+                    </a>
+                    <button type="submit" class="save-btn">
+                        Save Changes
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
