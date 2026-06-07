@@ -256,6 +256,7 @@ app.post('/login', async function (req, res) {
         // Update login timestamps
         user.lastLogin = user.currentLogin;
         user.currentLogin = Date.now();
+        
         await user.save();
         res.redirect('/dashboard/name'.replace('name', user.name));
     } catch (err) {
@@ -269,7 +270,7 @@ app.get('/signup', function (req, res) {
 });
 
 
-// DASGBOARD PAGE----------------------------------------------------
+// DASGBOARD PAGE---------------------------------------------------------
 // GET dashboard
 app.get('/dashboard/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
@@ -280,6 +281,8 @@ app.get('/profile/:username', async function (req, res) {
     let user = await userModel.findOne({username: req.params.username});
     res.render('profile', { user });
 });
+
+// PROFILE PAGE---------------------------------------------------------
 // GET profile edit page
 app.get('/profile-edit/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
@@ -289,7 +292,6 @@ app.get('/profile-edit/:name', async function (req, res) {
 app.post("/profile/edit", upload.single("profileImage"), async (req, res) => {
     try {
         const { name, username, dob, phone, semester, branch } = req.body;
-        console.log("Received profile edit data:", req.body);
         const user = await userModel.findOne({ username });
 
         if (!user) return res.redirect("/login");
@@ -304,7 +306,6 @@ app.post("/profile/edit", upload.single("profileImage"), async (req, res) => {
         });
 
         if (req.file) user.profilepicture = "/uploads/profile/" + req.file.filename;
-
         await user.save();
         res.render("profile", { user });
     } catch (err) {
