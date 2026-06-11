@@ -313,6 +313,33 @@ app.post("/profile/edit", upload.single("profileImage"), async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+// GET back to dashboard
+app.get('/back-to-dashboard/:name', async function (req, res) {
+    user = await userModel.findOne({name: req.params.name});
+    res.render('dashboard', { user });
+});
+app.post('/profile/edit', upload.single('profileImage'), async function (req, res) {
+    try {
+        const { name, username, dob, phone, semester, branch } = req.body;
+        const user = await userModel.findOne({ username });
+        if (!user) {
+            return res.redirect('/login');
+        }
+        user.name = name;
+        user.dob = dob || null;
+        user.phone = phone || null;
+        user.semester = semester || null;
+        user.branch = branch || null;
+        if (req.file) {
+            user.profilepicture = '/uploads/profile/' + req.file.filename;
+        }
+        await user.save();
+        res.render('profile', { user });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
 
 
 // SUPPORT PAGE----------------------------------------------------
