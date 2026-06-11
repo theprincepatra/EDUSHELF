@@ -7,27 +7,24 @@
     <link rel="stylesheet" href="/css/profile-edit.css">
 </head>
 <body>
-
     <div class="container">
         <div class="edit-card">
-
             <div class="header">
                 <h1>Edit Profile</h1>
                 <p>Update your personal information</p>
             </div>
 
-            <form action="/profile/edit" method="POST">
+            <form action="/profile/edit" method="POST" enctype="multipart/form-data">
                 <div class="profile-section">
                     <div class="image-wrapper">
                         <img
+                            id="profilePreview"
                             src="<%= user.profilepicture %>"
                             class="profile-image">
-
-                        <label for="profileImage" class="upload-btn">
+                        <label for="profilepicture" class="upload-btn">
                             Change Photo
                         </label>
-
-                        <input type="file" id="profileImage" name="profileImage" hidden>
+                        <input type="file" id="profilepicture" name="profilepicture" hidden>
                     </div>
                 </div>
 
@@ -37,25 +34,20 @@
                         <label>Full Name</label>
                         <input type="text" name="name" value="<%= user.name %>" required>
                     </div>
-
                     <div class="input-group">
                         <label>UserName</label>
                         <input type="text" name="username" value="<%= user.username %>" required>
                     </div>
-
                     <div class="input-group">
                         <label>Date of Birth</label>
                         <input type="date" name="dob" value="<%= user.dob ? user.dob.toISOString().split('T')[0] : '' %>" required>
                     </div>
-
                     <div class="input-group">
                         <label>Phone Number</label>
                         <input type="text" name="phone" value="<%= user.phone || '' %>">
                     </div>
-
                     <div class="input-group">
                         <label>Semester</label>
-
                         <select name="semester" required>
                             <option value="">Select Semester</option>
 
@@ -72,7 +64,6 @@
 
                     <div class="input-group">
                         <label>Branch</label>
-
                         <select name="branch" required>
                             <option value="">Select Branch</option>
 
@@ -96,17 +87,14 @@
                         <span>Username</span>
                         <p><%= user.username %></p>
                     </div>
-
                     <div class="readonly-row">
                         <span>User ID</span>
                         <p><%= user.userId %></p>
                     </div>
-
                     <div class="readonly-row">
                         <span>Email</span>
                         <p><%= user.email %></p>
                     </div>
-
                     <div class="readonly-row">
                         <span>Referral Code</span>
                         <p><%= user.referralCode %></p>
@@ -126,5 +114,6 @@
         </div>
     </div>
 
+    <script src="/js/profile-edit.js"></script>
 </body>
 </html>
