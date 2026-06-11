@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // MULTER CONFIGURATION
 const multer = require("multer");
+const path = require("path");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,8 +26,24 @@ const storage = multer.diskStorage({
         cb(null, uniqueName);
     }
 });
+
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp"
+    ];
+    if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(new Error("Only JPG, JPEG, PNG and WEBP images are allowed"));
+    }
+};
 const upload = multer({
-    storage: storage
+    storage,
+    fileFilter,
+    limits: {fileSize: 5 * 1024 * 1024 } // 5 MB
 });
 
 
@@ -291,24 +308,25 @@ app.get('/profile-edit/:name', async function (req, res) {
 app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
     try {
         const { name, username, dob, phone, semester, branch } = req.body;
-        const user = await userModel.findOne({ username });
-        if (!user) return res.redirect("/login");
+        const user = await userModel.findById(req.user._id);
+        if (!user) {
+            return res.redirect("/login");
+        }
+        user.name = name;
+        user.username = username;
+        user.dob = dob || null;
+        user.phone = phone || null;
+        user.semester = semester || null;
+        user.branch = branch || null;
 
-        Object.assign(user, {
-            name,
-            username,
-            dob: dob || null,
-            phone: phone || null,
-            semester: semester || null,
-            branch: branch || null
-        });
+        if (req.file) {
+            user.profilepicture = `/uploads/profile/${req.file.filename}`;
+        }
 
-        if (req.file) user.profilepicture = "/uploads/profile/" + req.file.filename;
         await user.save();
-        console.log("Profile Picture", user.profilepicture);
-        res.render("profile", { user });
+        res.redirect("/profile");
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).send("Server Error");
     }
 });
