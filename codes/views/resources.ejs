@@ -1,49 +1,193 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= subject %></title>
-</head>
 <body>
 
-<h1><%= subject %></h1>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<div>
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
 
-    <a href="#">
-        <button>📘 Notes</button>
-    </a>
+    <div class="sidebar-top">
 
-    <br><br>
+        <div class="profile-img">
+            <i class="fa-solid fa-user"></i>
+        </div>
 
-    <a href="#">
-        <button>📑 Assignments</button>
-    </a>
+        <h3>Hello,</h3>
+        <h2><%= user.username %></h2>
 
-    <br><br>
+    </div>
 
-    <a href="#">
-        <button>📚 Assignment Book</button>
-    </a>
+    <nav class="sidebar-menu">
 
-    <br><br>
+        <a href="/back-to-dashboard/<%= user.username %>">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </a>
 
-    <a href="#">
-        <button>📝 Lesson Plan</button>
-    </a>
+        <a href="/profile/<%= user.username %>">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
 
-    <br><br>
+        <a href="#">
+            <i class="fa-solid fa-crown"></i>
+            <span>Subscription</span>
+        </a>
 
-    <a href="#">
-        <button>📂 PYQ</button>
-    </a>
+        <a href="#">
+            <i class="fa-solid fa-star"></i>
+            <span>Star</span>
+        </a>
 
-    <br><br>
+        <a href="/support/<%= user.username %>">
+            <i class="fa-solid fa-headset"></i>
+            <span>Support</span>
+        </a>
 
-    <a href="#">
-        <button>🎯 Quiz</button>
-    </a>
+    </nav>
 
-</div>
+    <div class="sidebar-bottom">
+
+        <a href="/logout/<%= user.username %>" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Log Out</span>
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- Main -->
+<main class="main" id="main">
+
+    <header class="topbar">
+
+        <button class="menu-btn" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+
+    </header>
+
+    <!-- Subject Hero -->
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1><%= subject %></h1>
+
+            <p>Select the resource you want to access.</p>
+
+        </div>
+
+    </section>
+
+    <!-- Resource Cards -->
+    <section class="resource-grid">
+
+        <!-- Notes -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Notes</h2>
+                <p>Lecture notes and study materials.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- Assignments -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Assignments</h2>
+                <p>College assignments and practice work.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- Assignment Book -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-book"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Assignment Book</h2>
+                <p>Complete assignment book PDF.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- Lesson Plan -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Lesson Plan</h2>
+                <p>Weekly class schedule and syllabus.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- PYQ -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Previous Year Questions</h2>
+                <p>Practice with university question papers.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+        <!-- Quiz -->
+        <a href="#" class="resource-card">
+            <div class="card-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+
+            <div class="card-content">
+                <h2>Quiz</h2>
+                <p>Check your preparation with quizzes.</p>
+            </div>
+
+            <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </a>
+
+    </section>
+
+</main>
+
+<script src="/js/semester.js"></script>
 
 </body>
-</html>

@@ -378,7 +378,8 @@ app.get('/edushelf/:username/branch/:branch', async (req, res) => {
 
 
 // GET subjects page
-app.get('/branch/:branch/semester/:sem', (req,res)=>{
+app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req,res)=>{
+    const user = await userModel.findOne({username: req.params.username});
     const { branch, sem } = req.params;
     const subjects = [
         "Data Structures",
@@ -388,7 +389,7 @@ app.get('/branch/:branch/semester/:sem', (req,res)=>{
         "Java",
         "Discrete Mathematics"
     ];
-    res.render('subjects',{branch,sem,subjects});
+    res.render('subjects',{branch,sem,subjects,user});
 });
 
 
@@ -397,7 +398,8 @@ app.get('/branch/:branch/semester/:sem', (req,res)=>{
 
 
 // GET resources page
-app.get('/branch/:branch/semester/:sem/subject/:subject',(req,res)=>{
+app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req,res)=>{
+    const user = await userModel.findOne({username: req.params.username});
     const { branch, sem, subject } = req.params;
     const resources = [
         "Notes",
@@ -408,7 +410,7 @@ app.get('/branch/:branch/semester/:sem/subject/:subject',(req,res)=>{
         "Quiz"
     ];
 
-    res.render('resources',{branch,sem,subject,resources});
+    res.render('resources',{branch,sem,subject,resources,user});
 });
 
 
