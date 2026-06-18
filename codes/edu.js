@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const app = express();
 const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const userModel = require('./models/user');
@@ -14,7 +15,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // MULTER CONFIGURATION
 const multer = require("multer");
-const path = require("path");
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -112,6 +112,8 @@ app.get('/count', async (req, res) => {
 });
 
 
+
+
 // LANDING PAGE--------------------------------------------
 // GET Langing page- DECRIPTION button
 app.get('/landing-description', function (req, res) {
@@ -195,6 +197,9 @@ function generateOTP() {
 let otpStore = {};
 
 
+
+
+
 // SIGNUP PAGE--------------------------------------------------
 // POST SIGNUP
 app.post('/signup', async function (req, res) {
@@ -253,6 +258,8 @@ app.get('/login', function (req, res) {
 });
 
 
+
+
 // LOGIN PAGE-------------------------------------------------
 // POST login
 app.post('/login', async function (req, res) {
@@ -274,7 +281,7 @@ app.post('/login', async function (req, res) {
         user.currentLogin = Date.now();
         
         await user.save();
-        res.redirect('/dashboard/name'.replace('name', user.name));
+        res.redirect('/dashboard/username'.replace('username', user.username));
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
@@ -286,10 +293,12 @@ app.get('/signup', function (req, res) {
 });
 
 
+
+
 // DASGBOARD PAGE---------------------------------------------------------
 // GET dashboard
-app.get('/dashboard/:name', async function (req, res) {
-    let user = await userModel.findOne({name: req.params.name});
+app.get('/dashboard/:username', async function (req, res) {
+    let user = await userModel.findOne({username: req.params.username});
     res.render('dashboard', { user });
 });
 // GET profile
@@ -308,33 +317,42 @@ app.get('/profile-edit/:name', async function (req, res) {
 app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
     try {
         const { name, username, dob, phone, semester, branch } = req.body;
-        const user = await userModel.findById(req.user._id);
-        if (!user) {
-            return res.redirect("/login");
-        }
-        user.name = name;
-        user.username = username;
-        user.dob = dob || null;
-        user.phone = phone || null;
-        user.semester = semester || null;
-        user.branch = branch || null;
+        const user = await userModel.findOne({ username });
 
+        if (!user) return res.redirect("/login");
+        Object.assign(user, {
+            name,
+            username,
+            dob: dob || null,
+            phone: phone || null,
+            semester: semester || null,
+            branch: branch || null
+        });
         if (req.file) {
-            user.profilepicture = `/uploads/profile/${req.file.filename}`;
+            if (
+                user.profilepicture && user.profilepicture !== "/images/default-profile.png"
+            ) {
+                const oldPath = path.join(__dirname,"public",user.profilepicture);
+                if (fs.existsSync(oldPath)) {
+                    fs.unlinkSync(oldPath);
+                }
+            }
+            user.profilepicture = "/uploads/profile/" + req.file.filename;
         }
-
         await user.save();
-        res.redirect("/profile");
+        res.redirect("/profile/" + user.username);
     } catch (err) {
-        console.error(err);
+        console.log(err);
         res.status(500).send("Server Error");
     }
 });
 // GET back to dashboard
-app.get('/back-to-dashboard/:name', async function (req, res) {
-    user = await userModel.findOne({name: req.params.name});
+app.get('/back-to-dashboard/:username', async function (req, res) {
+    user = await userModel.findOne({username: req.params.username});
     res.render('dashboard', { user });
 });
+
+
 
 
 
@@ -343,6 +361,57 @@ app.get('/support/:name', async function (req, res) {
     let user = await userModel.findOne({name: req.params.name});
     res.render('support', { user });
 });
+
+
+
+
+
+// BRANCH PAGES----------------------------------------------------
+app.get('/edushelf/:username/branch/:branch', async (req, res) => {
+    const branch = req.params.branch;
+    const user = await userModel.findOne({username: req.params.username});
+    res.render('semester', {branch, user});
+});
+
+
+
+
+
+// GET subjects page
+app.get('/branch/:branch/semester/:sem', (req,res)=>{
+    const { branch, sem } = req.params;
+    const subjects = [
+        "Data Structures",
+        "DBMS",
+        "Operating System",
+        "Computer Networks",
+        "Java",
+        "Discrete Mathematics"
+    ];
+    res.render('subjects',{branch,sem,subjects});
+});
+
+
+
+
+
+
+// GET resources page
+app.get('/branch/:branch/semester/:sem/subject/:subject',(req,res)=>{
+    const { branch, sem, subject } = req.params;
+    const resources = [
+        "Notes",
+        "Assignments",
+        "Assignment Book",
+        "Lesson Plan",
+        "PYQ",
+        "Quiz"
+    ];
+
+    res.render('resources',{branch,sem,subject,resources});
+});
+
+
 
 
 

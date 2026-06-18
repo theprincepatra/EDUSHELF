@@ -50,6 +50,7 @@ body {
     min-height: 100vh;
     padding-top: 60px;
 }
+/* SIDEBAR */
 .sidebar{
     position: fixed;
     top: 60px;
@@ -62,7 +63,6 @@ body {
     transition: all 0.3s ease;
     z-index: 1002;
 }
-
 .designation{
     display: flex;
     flex-direction: column;
@@ -254,7 +254,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(18, 19, 21, 0.589);
+    background: #121214;
     border-bottom: 1px solid rgba(255, 255, 255, 0.105);
 }
 .nav_ins{

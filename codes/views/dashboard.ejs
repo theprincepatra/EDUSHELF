@@ -41,7 +41,7 @@
                 <div class="card-container">
 
                     <!-- 1 -->
-                    <a href="/cse"><div class="card">
+                    <a href="/edushelf/<%= user.username %>/branch/cse"><div class="card">
                         <div class="card-logo">
                             <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
                             <small>|</small>
@@ -71,7 +71,7 @@
                     </div></a>
 
                     <!-- 2 -->
-                    <a href="/aiml"><div class="card">
+                    <a href="/edushelf/<%= user.username %>/branch/aiml"><div class="card">
                         <div class="card-logo">
                             <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
                             <small>|</small>
@@ -101,7 +101,7 @@
                     </div></a>
 
                     <!-- 3 -->
-                    <a href="/it"><div class="card">
+                    <a href="/edushelf/<%= user.username %>/branch/it"><div class="card">
                         <div class="card-logo">
                             <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
                             <small>|</small>
@@ -131,7 +131,7 @@
                     </div></a>
 
                     <!-- 4 -->
-                    <a href="/civil">
+                    <a href="/edushelf/<%= user.username %>/branch/civil">
                         <div class="card">
                             <div class="card-logo">
                                 <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
@@ -162,7 +162,7 @@
                     </div></a>
 
                     <!-- 5 -->
-                    <a href="/datascience"><div class="card">
+                    <a href="/edushelf/<%= user.username %>/branch/datascience"><div class="card">
                         <div class="card-logo">
                             <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
                             <small>|</small>
@@ -192,7 +192,7 @@
                     </div></a>
 
                     <!-- 6 -->
-                    <a href="/cyber-security"><div class="card">
+                    <a href="/edushelf/<%= user.username %>/branch/cyber-security"><div class="card">
                         <div class="card-logo">
                             <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
                             <small>|</small>
@@ -222,7 +222,7 @@
                     </div></a>
 
                     <!-- 7 -->
-                    <a href="/ece">
+                    <a href="/edushelf/<%= user.username %>/branch/ece">
                         <div class="card">
                             <div class="card-logo">
                                 <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
@@ -253,7 +253,7 @@
                     </div></a>
 
                     <!-- 8 -->
-                    <a href="/ee">
+                    <a href="/edushelf/<%= user.username %>/branch/ee">
                         <div class="card">
                             <div class="card-logo">
                                 <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
@@ -284,7 +284,7 @@
                     </div></a>
 
                     <!-- 9 -->
-                    <a href="/mechanical">
+                    <a href="/edushelf/<%= user.username %>/branch/mechanical">
                         <div class="card">
                             <div class="card-logo">
                                 <img src="/images/logo_bgremove.png" class="card-logo" alt="ED-Card-logo">
@@ -368,7 +368,7 @@
 
     <!-- PROFILE IMAGE -->
     <div class="image">
-        <a href="/profile/<%= user.username %>"><img src="/images/dashboard/default-profile.png" alt="User Icon"
+        <a href="/profile/<%= user.username %>"><img src=<%= user.profilepicture %> alt="User Icon"
                 class="user_icon"></a>
     </div>
 

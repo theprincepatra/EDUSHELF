@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semester <%= sem %></title>
+</head>
+<body>
+
+<h1>
+    <%= branch.toUpperCase() %> -
+    Semester <%= sem %>
+</h1>
+
+<div>
+
+    <% subjects.forEach(subject=>{ %>
+
+        <a href="/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>">
+
+            <button>
+                <%= subject %>
+            </button>
+
+        </a>
+
+        <br><br>
+
+    <% }) %>
+
+</div>
+
+</body>
+</html>
