@@ -1,14 +1,15 @@
-const sidebar = document.getElementById("sidebar");
-const overlay = document.getElementById("overlay");
-const main = document.getElementById("main");
-const menuBtn = document.querySelector(".menu-btn");
+const sidebar=document.getElementById("sidebar");
+const overlay=document.getElementById("overlay");
+const main=document.getElementById("main");
+const menuBtn=document.querySelector(".menu-btn");
+const subjectCards=document.querySelectorAll(".subject-card");
 
 function toggleSidebar(){
 
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
 
-    if(window.innerWidth > 768){
+    if(window.innerWidth>768){
         main.classList.toggle("shift");
     }
 
@@ -22,19 +23,19 @@ function closeSidebar(){
 
 }
 
-overlay.addEventListener("click", closeSidebar);
+overlay.addEventListener("click",closeSidebar);
 
-document.addEventListener("keydown", function(e){
+document.addEventListener("keydown",function(e){
 
-    if(e.key === "Escape"){
+    if(e.key==="Escape"){
         closeSidebar();
     }
 
 });
 
-window.addEventListener("resize", function(){
+window.addEventListener("resize",function(){
 
-    if(window.innerWidth <= 768){
+    if(window.innerWidth<=768){
 
         main.classList.remove("shift");
 
@@ -48,16 +49,33 @@ window.addEventListener("resize", function(){
 
 });
 
-document.addEventListener("click", function(e){
+subjectCards.forEach((card,index)=>{
 
-    if(window.innerWidth > 768) return;
+    card.style.opacity="0";
+    card.style.transform="translateY(35px)";
 
-    if(
-        sidebar.classList.contains("active") &&
-        !sidebar.contains(e.target) &&
-        !menuBtn.contains(e.target)
-    ){
-        closeSidebar();
-    }
+    setTimeout(()=>{
+
+        card.style.transition="all .45s ease";
+        card.style.opacity="1";
+        card.style.transform="translateY(0)";
+
+    },index*100);
+
+});
+
+subjectCards.forEach(card=>{
+
+    card.addEventListener("mouseenter",()=>{
+
+        card.style.boxShadow="0 18px 40px rgba(0,0,0,.35)";
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        card.style.boxShadow="0 10px 25px rgba(0,0,0,.25)";
+
+    });
 
 });
