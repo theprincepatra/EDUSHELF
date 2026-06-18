@@ -1,0 +1,735 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+html{
+    scroll-behavior:smooth;
+}
+body{
+    background:
+        radial-gradient(circle at top left,#262626 0%,transparent 30%),
+        radial-gradient(circle at bottom right,#1c1c1c 0%,transparent 30%),
+        #0f0f10;
+    color:#fff;
+    overflow-x:hidden;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    opacity:0;
+    visibility:hidden;
+    transition:.35s ease;
+    z-index:998;
+}
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:280px;
+    height:100vh;
+    background:#18181b;
+    border-right:1px solid rgba(255,255,255,.06);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.35s ease;
+    z-index:999;
+    box-shadow:10px 0 40px rgba(0,0,0,.45);
+}
+
+.sidebar.active{
+    left:0;
+}
+
+.sidebar-top{
+    padding:38px 28px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.profile-img{
+    width:95px;
+    height:95px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:36px;
+    color:white;
+    background:linear-gradient(145deg,#2c2c2f,#4b4b50);
+    box-shadow:0 12px 25px rgba(0,0,0,.35);
+    margin-bottom:20px;
+}
+
+.sidebar-top h3{
+    color:#9ca3af;
+    font-size:17px;
+    font-weight:400;
+}
+
+.sidebar-top h2{
+    margin-top:8px;
+    font-size:23px;
+    font-weight:600;
+    color:#fff;
+}
+
+/* =========================
+        MENU
+========================= */
+
+.sidebar-menu{
+    display:flex;
+    flex-direction:column;
+    margin-top:18px;
+}
+
+.sidebar-menu a{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:18px 28px;
+    color:#d4d4d8;
+    font-size:17px;
+    transition:.35s;
+    border-left:4px solid transparent;
+}
+
+.sidebar-menu a i{
+    width:22px;
+    text-align:center;
+    font-size:18px;
+    color:#bfbfbf;
+}
+
+.sidebar-menu a:hover{
+    background:#26272b;
+    border-left:4px solid #ffffff;
+    color:#ffffff;
+    padding-left:38px;
+}
+
+.sidebar-menu a:hover i{
+    color:#ffffff;
+    transform:scale(1.12);
+}
+
+.sidebar-bottom{
+    padding:24px;
+}
+
+/* =========================
+        LOGOUT
+========================= */
+
+.logout-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    width:100%;
+    padding:15px;
+    border-radius:14px;
+    background:#2c2c2f;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    transition:.35s;
+}
+
+.logout-btn:hover{
+    background:#3b3b40;
+    transform:translateY(-2px);
+    box-shadow:0 12px 25px rgba(0,0,0,.35);
+}
+
+/* =========================
+        MAIN
+========================= */
+
+.main{
+    width:100%;
+    min-height:100vh;
+    padding:35px 50px;
+    transition:margin-left .35s ease;
+}
+
+.main.shift{
+    margin-left:280px;
+}
+
+/* =========================
+        TOPBAR
+========================= */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:45px;
+}
+
+.menu-btn{
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:14px;
+    background:#2c2c2f;
+    color:#fff;
+    font-size:21px;
+    cursor:pointer;
+    transition:.35s;
+}
+
+.menu-btn:hover{
+    background:#45454a;
+    transform:scale(1.05);
+}
+
+.back-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 22px;
+    border-radius:12px;
+    background:#232326;
+    color:#fff;
+    transition:.35s;
+}
+
+.back-btn:hover{
+    background:#3b3b40;
+}
+
+/* =========================
+        HERO SECTION
+========================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(145deg,#242427,#1a1a1d);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:24px;
+    padding:55px;
+    margin-bottom:45px;
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:rgba(255,255,255,.03);
+    border-radius:50%;
+    top:-180px;
+    right:-120px;
+    filter:blur(20px);
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    background:rgba(255,255,255,.02);
+    border-radius:50%;
+    bottom:-120px;
+    left:-60px;
+    filter:blur(15px);
+}
+
+.hero-text{
+    position:relative;
+    z-index:2;
+}
+
+.hero h1{
+    font-size:48px;
+    font-weight:700;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.hero p{
+    color:#a1a1aa;
+    font-size:17px;
+    line-height:1.8;
+    max-width:550px;
+}
+
+/* =========================
+        GRID
+========================= */
+
+.semester-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+}
+
+/* =========================
+        CARD
+========================= */
+
+.semester-card{
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:28px;
+    border-radius:22px;
+    background:#1d1d20;
+    border:1px solid rgba(255,255,255,.06);
+    color:white;
+    transition:.35s ease;
+    backdrop-filter:blur(12px);
+}
+
+.semester-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.05),
+        transparent
+    );
+    transition:.8s;
+}
+
+.semester-card:hover::before{
+    left:120%;
+}
+
+.semester-card:hover{
+    transform:translateY(-10px);
+    border-color:#565656;
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+/* =========================
+        ICON
+========================= */
+
+.card-icon{
+    width:72px;
+    height:72px;
+    min-width:72px;
+    border-radius:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    color:white;
+    background:linear-gradient(145deg,#35353a,#505055);
+    box-shadow:0 12px 25px rgba(0,0,0,.25);
+    transition:.35s;
+}
+
+.semester-card:hover .card-icon{
+    transform:rotate(-8deg) scale(1.08);
+}
+
+/* =========================
+        CONTENT
+========================= */
+
+.card-content{
+    flex:1;
+}
+
+.card-content h2{
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:8px;
+    transition:.3s;
+}
+
+.card-content p{
+    font-size:14px;
+    color:#9ca3af;
+    line-height:1.7;
+    transition:.3s;
+}
+
+.semester-card:hover .card-content h2{
+    color:#ffffff;
+}
+
+.semester-card:hover .card-content p{
+    color:#d4d4d8;
+}
+
+/* =========================
+        ARROW
+========================= */
+
+.card-arrow{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#2c2c2f;
+    transition:.35s;
+}
+
+.card-arrow i{
+    font-size:16px;
+}
+
+.semester-card:hover .card-arrow{
+    background:#4b4b50;
+    transform:translateX(8px);
+}
+
+/* =========================
+        SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#111112;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#555;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#777;
+}
+
+/* =========================
+        ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeLeft{
+    from{
+        opacity:0;
+        transform:translateX(-35px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+@keyframes scaleUp{
+    from{
+        opacity:0;
+        transform:scale(.9);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.hero{
+    animation:fadeUp .7s ease;
+}
+
+.sidebar{
+    animation:fadeLeft .5s ease;
+}
+
+.semester-card{
+    animation:scaleUp .6s ease both;
+}
+
+.semester-card:nth-child(1){
+    animation-delay:.05s;
+}
+
+.semester-card:nth-child(2){
+    animation-delay:.1s;
+}
+
+.semester-card:nth-child(3){
+    animation-delay:.15s;
+}
+
+.semester-card:nth-child(4){
+    animation-delay:.2s;
+}
+
+.semester-card:nth-child(5){
+    animation-delay:.25s;
+}
+
+.semester-card:nth-child(6){
+    animation-delay:.3s;
+}
+
+.semester-card:nth-child(7){
+    animation-delay:.35s;
+}
+
+.semester-card:nth-child(8){
+    animation-delay:.4s;
+}
+
+/* =========================
+        GLOBAL TRANSITIONS
+========================= */
+
+.sidebar,
+.main,
+.hero,
+.menu-btn,
+.back-btn,
+.logout-btn,
+.semester-card,
+.card-icon,
+.card-arrow{
+    transition:all .35s ease;
+}
+
+/* =========================
+        HOVER EFFECTS
+========================= */
+
+.hero:hover{
+    transform:translateY(-4px);
+    box-shadow:0 28px 55px rgba(0,0,0,.45);
+}
+
+.sidebar-menu a{
+    position:relative;
+    overflow:hidden;
+}
+
+.sidebar-menu a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.06),
+        transparent
+    );
+    transition:.6s;
+}
+
+.sidebar-menu a:hover::before{
+    left:100%;
+}
+
+.logout-btn:hover{
+    transform:translateY(-2px);
+}
+
+.menu-btn:hover{
+    box-shadow:0 12px 25px rgba(255,255,255,.08);
+}
+
+.back-btn:hover{
+    box-shadow:0 12px 25px rgba(255,255,255,.08);
+}
+
+.semester-card:hover{
+    transform:translateY(-10px) scale(1.02);
+}
+
+.semester-card:hover .card-icon{
+    transform:rotate(-10deg) scale(1.1);
+}
+
+/* =========================
+        RESPONSIVE
+========================= */
+
+@media (max-width:1200px){
+
+    .hero{
+        padding:42px;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .semester-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:992px){
+
+    .main{
+        padding:28px;
+    }
+
+    .hero{
+        padding:36px;
+    }
+
+    .semester-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:22px;
+    }
+
+    .semester-card{
+        padding:24px;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .sidebar{
+        width:260px;
+        left:-260px;
+    }
+
+    .sidebar.active{
+        left:0;
+    }
+
+    .main{
+        margin-left:0 !important;
+        padding:20px;
+    }
+
+    .topbar{
+        margin-bottom:28px;
+    }
+
+    .hero{
+        padding:28px;
+        border-radius:18px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .semester-grid{
+        grid-template-columns:1fr;
+    }
+
+    .semester-card{
+        padding:22px;
+    }
+
+}
+
+@media (max-width:500px){
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+    }
+
+    .hero{
+        padding:22px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .semester-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:18px;
+    }
+
+    .card-icon{
+        width:65px;
+        height:65px;
+        min-width:65px;
+        font-size:24px;
+    }
+
+    .card-arrow{
+        align-self:flex-end;
+    }
+
+    .menu-btn{
+        width:48px;
+        height:48px;
+    }
+
+    .back-btn{
+        font-size:14px;
+        padding:10px 18px;
+    }
+
+}
+
+/* =========================
+        TEXT SELECTION
+========================= */
+
+::selection{
+    background:#ffffff;
+    color:#111;
+}
+
+/* =========================
+        REMOVE OUTLINE
+========================= */
+
+button,
+a{
+    outline:none;
+}
+
+/* =========================
+        END
+========================= */
