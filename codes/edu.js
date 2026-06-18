@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
+const subjectsData = require("./subjectsData");
 
 const userModel = require('./models/user');
 
@@ -379,17 +380,10 @@ app.get('/edushelf/:username/branch/:branch', async (req, res) => {
 
 // GET subjects page
 app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req,res)=>{
-    const user = await userModel.findOne({username: req.params.username});
-    const { branch, sem } = req.params;
-    const subjects = [
-        "Data Structures",
-        "DBMS",
-        "Operating System",
-        "Computer Networks",
-        "Java",
-        "Discrete Mathematics"
-    ];
-    res.render('subjects',{branch,sem,subjects,user});
+    const { username, branch, sem } = req.params;
+    const user = await userModel.findOne({ username });
+    const subjects = subjectsData[branch]?.[sem] || [];
+    res.render("subjects",{user,branch,sem,subjects});
 });
 
 

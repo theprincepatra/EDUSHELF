@@ -12,7 +12,6 @@
         <%= branch.toUpperCase() %> | Semester <%= sem %>
     </title>
 
-    <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/subjects.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -54,7 +53,7 @@
 
     <nav class="sidebar-menu">
 
-        <a href="/dashboard/<%= user.username %>">
+        <a href="/back-to-dashboard/<%= user.username %>">
 
             <i class="fa-solid fa-house"></i>
 
@@ -166,7 +165,9 @@
 
     </section>
 
-    <!-- Subject Grid -->
+    <!-- =========================
+            SUBJECT GRID
+    ========================= -->
 
     <section class="subjects-grid">
 
@@ -174,56 +175,91 @@
 
         const icons = {
 
-            "Data Structures":"fa-diagram-project",
+            "Mathematics-I":"fa-square-root-variable",
 
-            "DBMS":"fa-database",
+            "Physics":"fa-atom",
+
+            "Chemistry":"fa-flask",
+
+            "Programming for Problem Solving":"fa-code",
+
+            "Engineering Graphics":"fa-compass-drafting",
+
+            "Basic Electrical Engineering":"fa-bolt",
+
+            "Database Management System":"fa-database",
 
             "Operating System":"fa-desktop",
 
             "Computer Networks":"fa-network-wired",
 
-            "Java":"fa-mug-hot",
+            "Java Programming":"fa-mug-hot",
 
             "Discrete Mathematics":"fa-square-root-variable"
 
         };
 
         %>
+                <% subjects.forEach(subject => { %>
 
-                <% subjects.forEach(subject=>{ %>
+        <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= encodeURIComponent(subject.name) %>"
+           class="subject-card">
 
-            <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= encodeURIComponent(subject) %>"
-               class="subject-card">
+            <!-- Subject Icon -->
 
-                <div class="card-icon">
+            <div class="card-icon">
 
-                    <i class="fa-solid <%= icons[subject] || 'fa-book-open' %>"></i>
+                <i class="fa-solid <%= icons[subject.name] || 'fa-book-open' %>"></i>
+
+            </div>
+
+            <!-- Subject Details -->
+
+            <div class="card-content">
+
+                <h2>
+                    <%= subject.name %>
+                </h2>
+
+                <div class="subject-details">
+
+                    <div class="detail">
+
+                        <span class="label">
+                            Code
+                        </span>
+
+                        <span class="value">
+                            <%= subject.code %>
+                        </span>
+
+                    </div>
+
+                    <div class="detail">
+
+                        <span class="label">
+                            Credits
+                        </span>
+
+                        <span class="value">
+                            <%= subject.credits %>
+                        </span>
+
+                    </div>
 
                 </div>
 
-                <div class="card-content">
+            </div>
 
-                    <h2>
-                        <%= subject %>
-                    </h2>
+            <!-- Arrow -->
 
-                    <p>
+            <div class="card-arrow">
 
-                        Open Notes, Assignments,
-                        PYQs, Lesson Plans and
-                        Quizzes.
+                <i class="fa-solid fa-arrow-right"></i>
 
-                    </p>
+            </div>
 
-                </div>
-
-                <div class="card-arrow">
-
-                    <i class="fa-solid fa-arrow-right"></i>
-
-                </div>
-
-            </a>
+        </a>
 
         <% }) %>
 
