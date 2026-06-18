@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= branch.toUpperCase() %> | Semester <%= sem %>
+    </title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/subjects.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="overlay"
+     id="overlay"
+     onclick="toggleSidebar()"></div>
+
+<!-- =========================
+            SIDEBAR
+========================= -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-top">
+
+        <div class="profile-img">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <h3>Hello,</h3>
+
+        <h2>
+            <%= user.username %>
+        </h2>
+
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="/dashboard/<%= user.username %>">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+        <a href="/profile/<%= user.username %>">
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>Profile</span>
+
+        </a>
+
+        <a href="#">
+
+            <i class="fa-solid fa-crown"></i>
+
+            <span>Subscription</span>
+
+        </a>
+
+        <a href="#">
+
+            <i class="fa-solid fa-star"></i>
+
+            <span>Star</span>
+
+        </a>
+
+        <a href="/support/<%= user.username %>">
+
+            <i class="fa-solid fa-headset"></i>
+
+            <span>Support</span>
+
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <a href="/logout/<%= user.username %>"
+           class="logout-btn">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Log Out</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- =========================
+            MAIN
+========================= -->
+
+<main class="main"
+      id="main">
+
+    <!-- Topbar -->
+
+    <header class="topbar">
+
+        <button class="menu-btn"
+                onclick="toggleSidebar()">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+        <a href="javascript:history.back()"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back
+
+        </a>
+
+    </header>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+                <%= branch.toUpperCase() %>
+            </h1>
+
+            <h3>
+                Semester <%= sem %>
+            </h3>
+
+            <p>
+
+                Choose a subject to access Notes,
+                Assignments, Previous Year Questions,
+                Lesson Plans and Quizzes.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Subject Grid -->
+
+    <section class="subjects-grid">
+
+        <%
+
+        const icons = {
+
+            "Data Structures":"fa-diagram-project",
+
+            "DBMS":"fa-database",
+
+            "Operating System":"fa-desktop",
+
+            "Computer Networks":"fa-network-wired",
+
+            "Java":"fa-mug-hot",
+
+            "Discrete Mathematics":"fa-square-root-variable"
+
+        };
+
+        %>
+
+                <% subjects.forEach(subject=>{ %>
+
+            <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= encodeURIComponent(subject) %>"
+               class="subject-card">
+
+                <div class="card-icon">
+
+                    <i class="fa-solid <%= icons[subject] || 'fa-book-open' %>"></i>
+
+                </div>
+
+                <div class="card-content">
+
+                    <h2>
+                        <%= subject %>
+                    </h2>
+
+                    <p>
+
+                        Open Notes, Assignments,
+                        PYQs, Lesson Plans and
+                        Quizzes.
+
+                    </p>
+
+                </div>
+
+                <div class="card-arrow">
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </div>
+
+            </a>
+
+        <% }) %>
+
+    </section>
+
+</main>
+
+<script src="/js/subjects.js"></script>
+
+</body>
+
+</html>
