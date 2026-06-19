@@ -1,8 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resources</title>
+
+    <link rel="stylesheet" href="/css/resources.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
 <body>
+
+<%
+
+const resources = [
+
+    {
+        title: "Notes",
+        icon: "fa-book-open",
+        description: "Lecture notes, handwritten notes and study material.",
+        url: "#"
+    },
+
+    {
+        title: "Assignments",
+        icon: "fa-file-lines",
+        description: "College assignments and practice questions.",
+        url: "#"
+    },
+
+    {
+        title: "Book",
+        icon: "fa-book",
+        description: "Complete assignment book with solutions.",
+        url: "#"
+    },
+
+    {
+        title: "Lesson Plan",
+        icon: "fa-calendar-days",
+        description: "Weekly lesson plan and syllabus schedule.",
+        url: "#"
+    },
+
+    {
+        title: "Previous Year Questions",
+        icon: "fa-folder-open",
+        description: "University PYQs with solutions.",
+        url: "#"
+    },
+
+    {
+        title: "Quiz",
+        icon: "fa-graduation-cap",
+        description: "Practice quizzes to test your preparation.",
+        url: "#"
+    }
+
+];
+
+%>
 
 <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-<!-- Sidebar -->
+<!-- ================= Sidebar ================= -->
+
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-top">
@@ -12,6 +80,7 @@
         </div>
 
         <h3>Hello,</h3>
+
         <h2><%= user.username %></h2>
 
     </div>
@@ -19,28 +88,43 @@
     <nav class="sidebar-menu">
 
         <a href="/back-to-dashboard/<%= user.username %>">
+
             <i class="fa-solid fa-house"></i>
+
             <span>Dashboard</span>
+
         </a>
 
         <a href="/profile/<%= user.username %>">
+
             <i class="fa-solid fa-user"></i>
+
             <span>Profile</span>
+
         </a>
 
         <a href="#">
+
             <i class="fa-solid fa-crown"></i>
+
             <span>Subscription</span>
+
         </a>
 
         <a href="#">
+
             <i class="fa-solid fa-star"></i>
+
             <span>Star</span>
+
         </a>
 
         <a href="/support/<%= user.username %>">
+
             <i class="fa-solid fa-headset"></i>
+
             <span>Support</span>
+
         </a>
 
     </nav>
@@ -48,31 +132,41 @@
     <div class="sidebar-bottom">
 
         <a href="/logout/<%= user.username %>" class="logout-btn">
+
             <i class="fa-solid fa-right-from-bracket"></i>
+
             <span>Log Out</span>
+
         </a>
 
     </div>
 
 </aside>
 
-<!-- Main -->
+<!-- ================= Main ================= -->
+
 <main class="main" id="main">
 
     <header class="topbar">
 
         <button class="menu-btn" onclick="toggleSidebar()">
+
             <i class="fa-solid fa-bars"></i>
+
         </button>
 
         <a href="javascript:history.back()" class="back-btn">
+
             <i class="fa-solid fa-arrow-left"></i>
+
             Back
+
         </a>
 
     </header>
 
-    <!-- Subject Hero -->
+    <!-- Hero -->
+
     <section class="hero">
 
         <div class="hero-text">
@@ -86,108 +180,43 @@
     </section>
 
     <!-- Resource Cards -->
+
     <section class="resource-grid">
 
-        <!-- Notes -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-book-open"></i>
-            </div>
+        <% resources.forEach(resource => { %>
 
-            <div class="card-content">
-                <h2>Notes</h2>
-                <p>Lecture notes and study materials.</p>
-            </div>
+            <a href="<%= resource.url %>" class="resource-card">
 
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
+                <div class="card-icon">
 
-        <!-- Assignments -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-file-lines"></i>
-            </div>
+                    <i class="fa-solid <%= resource.icon %>"></i>
 
-            <div class="card-content">
-                <h2>Assignments</h2>
-                <p>College assignments and practice work.</p>
-            </div>
+                </div>
 
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
+                <div class="card-content">
 
-        <!-- Assignment Book -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-book"></i>
-            </div>
+                    <h2><%= resource.title %></h2>
 
-            <div class="card-content">
-                <h2>Assignment Book</h2>
-                <p>Complete assignment book PDF.</p>
-            </div>
+                    <p><%= resource.description %></p>
 
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
+                </div>
 
-        <!-- Lesson Plan -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-calendar-days"></i>
-            </div>
+                <div class="card-arrow">
 
-            <div class="card-content">
-                <h2>Lesson Plan</h2>
-                <p>Weekly class schedule and syllabus.</p>
-            </div>
+                    <i class="fa-solid fa-arrow-right"></i>
 
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
+                </div>
 
-        <!-- PYQ -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-folder-open"></i>
-            </div>
+            </a>
 
-            <div class="card-content">
-                <h2>Previous Year Questions</h2>
-                <p>Practice with university question papers.</p>
-            </div>
-
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
-
-        <!-- Quiz -->
-        <a href="#" class="resource-card">
-            <div class="card-icon">
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-
-            <div class="card-content">
-                <h2>Quiz</h2>
-                <p>Check your preparation with quizzes.</p>
-            </div>
-
-            <div class="card-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </div>
-        </a>
+        <% }) %>
 
     </section>
 
 </main>
 
-<script src="/js/semester.js"></script>
+<script src="/js/resources.js"></script>
 
 </body>
+
+</html>
