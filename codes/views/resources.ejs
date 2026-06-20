@@ -25,42 +25,42 @@ const resources = [
         title: "Notes",
         icon: "fa-book-open",
         description: "Lecture notes, handwritten notes and study material.",
-        url: "#"
+        url: `/resources/${subject}/notes`
     },
 
     {
         title: "Assignments",
         icon: "fa-file-lines",
         description: "College assignments and practice questions.",
-        url: "#"
+        url: `/resources/${subject}/assignments`
     },
 
     {
         title: "Book",
         icon: "fa-book",
-        description: "Complete assignment book with solutions.",
-        url: "#"
+        description: "Recommended books and reference materials.",
+        url: `/resources/${subject}/book`
     },
 
     {
         title: "Lesson Plan",
         icon: "fa-calendar-days",
         description: "Weekly lesson plan and syllabus schedule.",
-        url: "#"
+        url: `/resources/${subject}/lesson-plan`
     },
 
     {
         title: "Previous Year Questions",
         icon: "fa-folder-open",
-        description: "University PYQs with solutions.",
-        url: "#"
+        description: "University previous year question papers.",
+        url: `/resources/${subject}/pyq`
     },
 
     {
         title: "Quiz",
         icon: "fa-graduation-cap",
         description: "Practice quizzes to test your preparation.",
-        url: "#"
+        url: `/resources/${subject}/quiz`
     }
 
 ];
@@ -76,7 +76,9 @@ const resources = [
     <div class="sidebar-top">
 
         <div class="profile-img">
+
             <i class="fa-solid fa-user"></i>
+
         </div>
 
         <h3>Hello,</h3>

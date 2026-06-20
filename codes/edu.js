@@ -267,7 +267,6 @@ app.post('/login', async function (req, res) {
     try {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
-        console.log(user);
         if (!user) {
             return res.status(400).send('User not found');
         }
@@ -330,9 +329,7 @@ app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
             branch: branch || null
         });
         if (req.file) {
-            if (
-                user.profilepicture && user.profilepicture !== "/images/default-profile.png"
-            ) {
+            if (user.profilepicture && user.profilepicture !== "/images/default-profile.png") {
                 const oldPath = path.join(__dirname,"public",user.profilepicture);
                 if (fs.existsSync(oldPath)) {
                     fs.unlinkSync(oldPath);
@@ -406,8 +403,11 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', asy
 
     res.render('resources',{branch,sem,subject,resources,user});
 });
-
-
+// GET resource list page
+app.get("/resources/:subject/:type", (req, res) => {
+    const { subject, type } = req.params;
+    res.render("resource-list", {user: req.user,subject,type});
+});
 
 
 
