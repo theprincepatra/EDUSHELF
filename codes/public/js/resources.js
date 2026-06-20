@@ -1,90 +1,129 @@
 const sidebar=document.getElementById("sidebar");
 const overlay=document.getElementById("overlay");
 const main=document.getElementById("main");
-const menuBtn=document.querySelector(".menu-btn");
-
-const resourceCards=document.querySelectorAll(".resource-card");
 
 function toggleSidebar(){
+
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
+
     if(window.innerWidth>768){
         main.classList.toggle("shift");
     }
+
 }
+
 function closeSidebar(){
+
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
     main.classList.remove("shift");
+
 }
 
 overlay.addEventListener("click",closeSidebar);
+
 document.addEventListener("keydown",function(e){
+
     if(e.key==="Escape"){
         closeSidebar();
     }
+
 });
 
 window.addEventListener("resize",function(){
+
     if(window.innerWidth<=768){
+
         main.classList.remove("shift");
+
     }else{
+
         if(sidebar.classList.contains("active")){
             main.classList.add("shift");
         }
+
     }
+
 });
 
-/* Card Animation */
+/*=========================
+      CARD ANIMATION
+=========================*/
+
+const resourceCards=document.querySelectorAll(".resource-card");
+
+const observer=new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:.15
+});
 
 resourceCards.forEach((card,index)=>{
 
     card.style.opacity="0";
-    card.style.transform="translateY(35px)";
+    card.style.transform="translateY(40px)";
+    card.style.transition=`all .6s ease ${index*0.08}s`;
 
-    setTimeout(()=>{
-        card.style.transition="all .45s ease";
-        card.style.opacity="1";
-        card.style.transform="translateY(0)";
-    },index*120);
+    observer.observe(card);
+
 });
 
-/*  Hover Effect */
+/*=========================
+      CARD CLICK EFFECT
+=========================*/
 
 resourceCards.forEach(card=>{
-    card.addEventListener("mouseenter",()=>{
-        card.style.boxShadow="0 22px 45px rgba(0,0,0,.40)";
+
+    card.addEventListener("mousedown",()=>{
+
+        card.style.transform="translateY(-4px) scale(.98)";
+
     });
+
+    card.addEventListener("mouseup",()=>{
+
+        card.style.transform="";
+
+    });
+
     card.addEventListener("mouseleave",()=>{
-        card.style.boxShadow="0 12px 30px rgba(0,0,0,.30)";
+
+        card.style.transform="";
+
     });
+
 });
 
-/* Ripple Effect */
+/*=========================
+      SHOW CLASS
+=========================*/
 
-resourceCards.forEach(card=>{
+document.querySelectorAll(".resource-card").forEach(card=>{
 
-    card.addEventListener("click",function(e){
+    card.addEventListener("transitionend",()=>{
 
-        const ripple=document.createElement("span");
+        card.style.willChange="auto";
 
-        const diameter=Math.max(card.clientWidth,card.clientHeight);
+    });
 
-        ripple.style.width=diameter+"px";
-        ripple.style.height=diameter+"px";
+});
 
-        ripple.style.left=(e.clientX-card.getBoundingClientRect().left-diameter/2)+"px";
-        ripple.style.top=(e.clientY-card.getBoundingClientRect().top-diameter/2)+"px";
+document.addEventListener("DOMContentLoaded",()=>{
 
-        ripple.classList.add("ripple");
+    resourceCards.forEach(card=>{
 
-        const oldRipple=card.querySelector(".ripple");
-
-        if(oldRipple){
-            oldRipple.remove();
-        }
-
-        card.appendChild(ripple);
+        card.classList.add("ready");
 
     });
 

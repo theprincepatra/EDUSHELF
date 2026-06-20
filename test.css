@@ -1,0 +1,8 @@
+.section{
+    display: none;
+    color: red;
+}
+
+.active{
+    display: block;
+}
