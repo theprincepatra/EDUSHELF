@@ -14,15 +14,6 @@ html,body{
 
 /* BODY BACKGROUND */
 body{
-    /* background: linear-gradient(
-        205deg,
-        #1c1d20 0%,
-        #141517 30%,
-        #0e0f11 55%,
-        #08090a 80%,
-        #040405 100%
-    );
-    background-attachment: fixed; */
     background-color: black;
 }
 

@@ -1,7 +1,6 @@
 const subjectsData = {
 
     cse:{
-
         1:[
             {
                 code:"BS101",
@@ -61,33 +60,36 @@ const subjectsData = {
         3:[
             {
                 code:"CS301",
-                name:"Database Management System",
+                name:"AAD-2",
                 credits:4
             },
             {
                 code:"CS302",
-                name:"Operating System",
+                name:"CSW-2",
                 credits:4
             },
             {
                 code:"CS303",
-                name:"Computer Networks",
+                name:"COA",
+                credits:4
+            },
+            {
+                code:"CS303",
+                name:"ALA",
                 credits:4
             },
             {
                 code:"CS304",
-                name:"Java Programming",
+                name:"IDM",
                 credits:3
             },
             {
                 code:"MA301",
-                name:"Discrete Mathematics",
+                name:"IM",
                 credits:4
             }
         ]
-
     }
-
 };
 
 module.exports = subjectsData;

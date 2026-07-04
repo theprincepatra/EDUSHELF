@@ -16,7 +16,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // MULTER CONFIGURATION
 const multer = require("multer");
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "public/uploads/profile");
@@ -270,7 +269,6 @@ app.post('/login', async function (req, res) {
         if (!user) {
             return res.status(400).send('User not found');
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).send('Invalid password');
@@ -287,10 +285,16 @@ app.post('/login', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
+// GET forgot password
+app.get('/password', function (req, res) {
+    res.render('password');
+});
+
 // GET signup 
 app.get('/signup', function (req, res) {
     res.render('signup');
 });
+
 
 
 
@@ -382,7 +386,6 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req,res)=>{
     const subjects = subjectsData[branch]?.[sem] || [];
     res.render("subjects",{user,branch,sem,subjects});
 });
-
 
 
 
