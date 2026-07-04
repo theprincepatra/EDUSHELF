@@ -15,7 +15,7 @@ sendOtpBtn.addEventListener("click",sendOTP);
 verifyOtpBtn.addEventListener("click",verifyOTP);
 resetBtn.addEventListener("click",resetPassword);
 
-
+// Resend OTP functionality
 resendOtp.addEventListener("click",function(e){
     e.preventDefault();
     if(sendOtpBtn.disabled){
@@ -37,15 +37,11 @@ otpInputs.forEach((input,index)=>{
         if(e.key==="Backspace"&&this.value===""&&index>0){
             otpInputs[index-1].focus();
         }
-
     });
-
 });
 
 toggleIcons.forEach(icon=>{
-
     icon.addEventListener("click",function(){
-
         const input=this.previousElementSibling;
 
         if(input.type==="password"){
@@ -58,6 +54,7 @@ toggleIcons.forEach(icon=>{
     });
 });
 
+// Send OTP
 async function sendOTP(){
     const email=document.getElementById("email").value.trim();
     if(email===""){
@@ -84,8 +81,13 @@ async function sendOTP(){
         console.log(err);
         showMessage("Server Error.","error");
     }
+
+    resendOtp.scrollIntoView({
+        behavior:"smooth"
+    });
 }
 
+// Verify OTP
 async function verifyOTP(){
 
     const email=document.getElementById("email").value.trim();
