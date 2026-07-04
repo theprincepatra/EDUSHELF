@@ -302,18 +302,12 @@ app.get("/forgot-password", (req,res) => {
 app.post("/forgot-password/send-otp",async(req,res)=>{
     const{email}=req.body;
     if(!email){
-        return res.json({
-            success:false,
-            message:"Please enter your email."
-        });
+        return res.json({success:false,message:"Please enter your email."});
     }
 
     const user=await userModel.findOne({email});
     if(!user){
-        return res.json({
-            success:false,
-            message:"No account found with this email."
-        });
+        return res.json({success:false,message:"No account found with this email."});
     }
 
     const otp=generateOTP();
@@ -337,10 +331,7 @@ app.post("/forgot-password/send-otp",async(req,res)=>{
             <p>Regards,<br>EduShelf Team</p>
             `
         });
-        res.json({
-            success:true,
-            message:"OTP sent successfully."
-        });
+        res.json({success:true,message:"OTP sent successfully."});
     }catch(err){
         console.log(err);
         res.json({success:false,message:"Failed to send OTP."});
