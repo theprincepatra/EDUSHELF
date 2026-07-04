@@ -192,7 +192,7 @@ transporter.verify(function (error, success) {
 });    
 // Generator
 function generateOTP() {
-    return Math.floor(100000 + Math.random() * 900000);
+    return Math.floor(100000 + Math.random() * 900000).toString();
 }    
 let otpStore = {};
 
@@ -294,7 +294,112 @@ app.get('/password', function (req, res) {
 app.get('/signup', function (req, res) {
     res.render('signup');
 });
+// PASSWORD page---------------------------------------------------------------------------------------------------
+app.get("/forgot-password", (req,res) => {
+    res.render("forgot-password")
+})
+// Send OTP
+app.post("/forgot-password/send-otp",async(req,res)=>{
+    const{email}=req.body;
+    if(!email){
+        return res.json({
+            success:false,
+            message:"Please enter your email."
+        });
+    }
 
+    const user=await userModel.findOne({email});
+    if(!user){
+        return res.json({
+            success:false,
+            message:"No account found with this email."
+        });
+    }
+
+    const otp=generateOTP();
+    otpStore[email]={
+        code:otp,
+        verified:false,
+        expiresAt:Date.now()+5*60*1000
+    };
+
+    try{
+        await transporter.sendMail({
+            from:process.env.EMAIL_USER,
+            to:email,
+            subject:"EduShelf Password Reset OTP",
+            html:`
+            <h2>Password Reset</h2>
+            <p>Hello <b>${user.name}</b>,</p>
+            <p>Your OTP is:</p>
+            <h1>${otp}</h1>
+            <p>This OTP is valid for 5 minutes.</p>
+            <p>Regards,<br>EduShelf Team</p>
+            `
+        });
+        res.json({
+            success:true,
+            message:"OTP sent successfully."
+        });
+    }catch(err){
+        console.log(err);
+        res.json({success:false,message:"Failed to send OTP."});
+    }
+});
+// Verify OTP
+app.post("/forgot-password/verify-otp",(req,res)=>{
+    const{email,otp}=req.body;
+
+    const storedOTP=otpStore[email];
+    if(!storedOTP){
+        return res.json({
+            success:false,
+            message:"Please request OTP first."
+        });
+    }
+
+    if(Date.now()>storedOTP.expiresAt){
+        delete otpStore[email];
+        return res.json({
+            success:false,
+            message:"OTP expired."
+        });
+    }
+
+    if(String(storedOTP.code)!==String(otp)){
+        return res.json({
+            success:false,
+            message:"Invalid OTP."
+        });
+    }
+    storedOTP.verified=true;
+
+    res.json({
+        success:true,
+        message:"OTP verified successfully."
+    });
+});
+// Reset Password
+app.post("/forgot-password/reset-password",async(req,res)=>{
+    const{email,password}=req.body;
+
+    const storedOTP=otpStore[email];
+    if(!storedOTP||!storedOTP.verified){
+        return res.json({success:false,message:"Please verify OTP first."});
+    }
+
+    const user=await userModel.findOne({email});
+    if(!user){
+        return res.json({success:false,message:"User not found."});
+    }
+
+    const hash=await bcrypt.hash(password,10);
+    user.password=hash;
+    await user.save();
+    delete otpStore[email];
+
+    res.json({success:true,message:"Password changed successfully."});
+});
 
 
 
@@ -411,6 +516,9 @@ app.get("/resources/:subject/:type", (req, res) => {
     const { subject, type } = req.params;
     res.render("resource-list", {user: req.user,subject,type});
 });
+
+
+
 
 
 
