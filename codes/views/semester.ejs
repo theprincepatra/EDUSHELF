@@ -11,110 +11,92 @@
 </head>
 
 <body>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()">
 
-<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-<aside class="sidebar" id="sidebar">
-
-    <div class="sidebar-top">
-        <div class="profile-img">
-            <i class="fa-solid fa-user"></i>
-        </div>
-
-        <h3>Hello,</h3>
-        <h2><%= user.username %></h2>
     </div>
 
-    <nav class="sidebar-menu">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top">
+            <div class="profile-img">
+                <i class="fa-solid fa-user"></i>
+            </div>
 
-        <a href="/back-to-dashboard/<%= user.username %>">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-        </a>
-
-        <a href="/profile/<%= user.username %>">
-            <i class="fa-solid fa-user"></i>
-            <span>Profile</span>
-        </a>
-
-        <a href="#">
-            <i class="fa-solid fa-crown"></i>
-            <span>Subscription</span>
-        </a>
-
-        <a href="#">
-            <i class="fa-solid fa-star"></i>
-            <span>Star</span>
-        </a>
-
-        <a href="/support/<%= user.username %>">
-            <i class="fa-solid fa-headset"></i>
-            <span>Support</span>
-        </a>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-        <a href="/logout/<%= user.username %>" class="logout-btn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span>Log Out</span>
-        </a>
-    </div>
-
-</aside>
-
-<main class="main" id="main">
-
-    <header class="topbar">
-
-        <button class="menu-btn" onclick="toggleSidebar()">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <a href="/back-to-dashboard/<%= user.username %>" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back
-        </a>
-
-    </header>
-
-    <section class="hero">
-
-        <div class="hero-text">
-            <h1><%= branch.toUpperCase() %></h1>
-            <p>Select your semester to continue.</p>
+            <h3>Hello,</h3>
+            <h2><%= user.username %></h2>
         </div>
 
-    </section>
-
-    <section class="semester-grid">
-
-        <% for(let i=1;i<=8;i++){ %>
-
-            <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= i %>" class="semester-card">
-
-                <div class="card-icon">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-
-                <div class="card-content">
-                    <h2>Semester <%= i %></h2>
-                    <p>Explore notes, subjects, PYQs and study materials.</p>
-                </div>
-
-                <div class="card-arrow">
-                    <i class="fa-solid fa-arrow-right"></i>
-                </div>
-
+        <nav class="sidebar-menu">
+            <a href="/back-to-dashboard/<%= user.username %>">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
             </a>
+            <a href="/profile/<%= user.username %>">
+                <i class="fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-crown"></i>
+                <span>Subscription</span>
+            </a>
+            <a href="#">
+                <i class="fa-solid fa-star"></i>
+                <span>Star</span>
+            </a>
+            <a href="/support/<%= user.username %>">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
+            </a>
+        </nav>
 
-        <% } %>
+        <div class="sidebar-bottom">
+            <a href="/logout/<%= user.username %>" class="logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Log Out</span>
+            </a>
+        </div>
+    </aside>
 
-    </section>
+    <main class="main" id="main">
 
-</main>
+        <header class="topbar">
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <a href="/back-to-dashboard/<%= user.username %>" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+            </a>
+        </header>
 
-<script src="/js/semester.js"></script>
+        <section class="hero">
+            <div class="hero-text">
+                <h1><%= branch.toUpperCase() %></h1>
+                <p>Select your semester to continue.</p>
+            </div>
+        </section>
+
+        <section class="semester-grid">
+
+            <% for(let i=1;i<=8;i++){ %>
+                <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= i %>" class="semester-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <div class="card-content">
+                        <h2>Semester <%= i %></h2>
+                        <p>Explore notes, subjects, PYQs and study materials.</p>
+                    </div>
+
+                    <div class="card-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </a>
+            <% } %>
+        </section>
+    </main>
+
+    <script src="/js/semester.js"></script>
 
 </body>
 </html>
