@@ -290,8 +290,9 @@ app.get('/signup', function (req, res) {
     res.render('signup');
 });
 // CHANGE-PASSWORD page--------------------------------------------------------------------------------------------\
-app.get("/change-password", (req, res) => {
-    res.render("change-password")
+app.get("/:username/change-password", async function (req, res) {
+    const user = await userModel.findOne({ username: req.params.username });
+    res.render("change-password", { user });
 })
 app.post("/change-password", async (req, res) => {
     const { currentPassword, newPassword } = req.body;
