@@ -1,89 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Help Center</title>
-
-<link rel="stylesheet" href="/css/support.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center</title>
+    <link rel="stylesheet" href="/css/support.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<div class="nav">
-    <div class="navlink">
-        <a href="#">Home</a>
-        <a href="#">Downloads</a>
-        <a href="#">Subscriptions</a>
-    </div>
-</div>
-
-<!-- TOP SECTION -->
-<div class="top">
-
-    <div class="logo">
-        <img src="/images/logo_bgremove.png" alt="logo">
-
-        <div class="logo_text">
-            <h1>EDUSHELF</h1>
-            <p>| Help Center</p>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/logo_bgremove.png">
+            <h2>EDUSHELF <span>Support Center</span></h2>
         </div>
-    </div>
 
-    <div class="doodle">
-        <img src="/images/support/doodle.png" alt="doodle">
-    </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/downloads">Downloads</a>
+            <a href="/subscription">Subscription</a>
+        </div>
+    </nav>
 
-    <div class="caption_text">
-        <h1 class="title">How can we help you?</h1>
-        <p class="subtitle">Tell us what you need or where we can improve.</p>
-        
-        <form action="" class="search_box">
-            <img src="/images/support/search.png" class="search_icon">
-            <textarea name="issue" placeholder="Tell us how we can improve..."></textarea>
-        </form>
-        <button type="button" class="caption_btn">Share</button>
+    <section class="hero">
 
-    </div>
+        <div class="left">
 
-</div>
+            <h1>How can we help you?</h1>
 
-<!-- HELP OPTIONS -->
-<div class="help_options">
+            <p>
+                Need help with your account, payment, subscription or found a bug?
+                Tell us your issue and our team will get back to you soon.
+            </p>
 
-    <div class="option">
-        <img src="/images/support/general.png">
-        <h2>General Inquiries</h2>
-        <p>Tell us what went wrong.</p>
-        <form>
-            <textarea name="issue" placeholder="Submit your issue here..."></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    
-    <div class="option">
-        <img src="/images/support/payment.png">
-        <h2>Account Issues</h2>
-        <p>Having trouble with your account?</p>
-        <form>
-            <textarea name="issue" placeholder="Submit your issue here..."></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+            <form id="supportForm">
 
-    <div class="option">
-        <img src="/images/support/account.png">
-        <h2>Payment Issue</h2>
-        <p>Report payment issues here.</p>
-        <form>
-            <textarea name="issue" placeholder="Submit your issue here..."></textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+                <label>Issue Category</label>
 
-</div>
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option>General Inquiry</option>
+                    <option>Account Issue</option>
+                    <option>Payment Issue</option>
+                    <option>Subscription Issue</option>
+                    <option>Technical Issue</option>
+                    <option>Bug Report</option>
+                    <option>Feature Request</option>
+                    <option>Other</option>
+                </select>
+
+                <label>Subject</label>
+
+                <input type="text" id="subject" placeholder="Enter issue title" required>
+
+                <label>Describe your issue</label>
+
+                <textarea id="message" placeholder="Explain your issue in detail..." required></textarea>
+
+                <label>Attach Screenshot (Optional)</label>
+
+                <input type="file" id="image" accept="image/*">
+
+                <button type="submit">
+                    Submit Support Request
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="right">
+
+            <img src="/images/support/doodle.png" class="doodle">
+
+        </div>
+
+    </section>
+
+    <section class="quick-help">
+
+        <div class="card" data-category="General Inquiry">
+            <i class="fa-regular fa-comments"></i>
+            <h3>General</h3>
+            <p>Questions about EduShelf.</p>
+        </div>
+
+        <div class="card" data-category="Account Issue">
+            <i class="fa-solid fa-user"></i>
+            <h3>Account</h3>
+            <p>Login & profile problems.</p>
+        </div>
+
+        <div class="card" data-category="Payment Issue">
+            <i class="fa-solid fa-credit-card"></i>
+            <h3>Payment</h3>
+            <p>Payment & refund issues.</p>
+        </div>
+
+        <div class="card" data-category="Technical Issue">
+            <i class="fa-solid fa-laptop-code"></i>
+            <h3>Technical</h3>
+            <p>Website bugs & errors.</p>
+        </div>
+
+    </section>
+
+    <script src="/js/support.js"></script>
 
 </body>
+
 </html>
