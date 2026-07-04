@@ -298,18 +298,18 @@ app.post("/change-password", async (req, res) => {
     const { currentPassword, newPassword } = req.body;
     const user = await userModel.findOne({ email: req.session.user.email });
     if (!user) {
-        return res.json({success: false,message: "User not found."});
+        return res.json({ success: false, message: "User not found." });
     }
 
     const match = await bcrypt.compare(currentPassword, user.password);
     if (!match) {
-        return res.json({success: false,message: "Current password is incorrect."});
+        return res.json({ success: false, message: "Current password is incorrect." });
     }
 
     const hash = await bcrypt.hash(newPassword, 10);
     user.password = hash;
     await user.save();
-    res.json({success: true,message: "Password changed successfully."});
+    res.json({ success: true, message: "Password changed successfully." });
 
 });
 // PASSWORD page---------------------------------------------------------------------------------------------------
@@ -526,6 +526,18 @@ app.get("/resources/:subject/:type", (req, res) => {
     res.render("resource-list", { user: req.user, subject, type });
 });
 
+
+app.post("/support", async (req, res) => {
+
+    const { category, message } = req.body;
+    await supportModel.create({
+        user: req.user._id,
+        category,
+        message
+    });
+
+    res.json({success: true,message: "Your issue has been submitted successfully."});
+});
 
 
 
