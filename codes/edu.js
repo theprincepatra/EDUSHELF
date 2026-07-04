@@ -43,7 +43,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage,
     fileFilter,
-    limits: {fileSize: 5 * 1024 * 1024 } // 5 MB
+    limits: { fileSize: 5 * 1024 * 1024 } // 5 MB
 });
 
 
@@ -68,40 +68,40 @@ app.get('/edit/:id', async (req, res) => {
 });
 // POST user edit page
 app.post('/edited/:id', async (req, res) => {
-  try {
-    let { changedname, changedusername, changedpassword } = req.body;
-    let updatedUser = await userModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        name: changedname,
-        username: changedusername,
-        password: await bcrypt.hash(changedpassword, 10),
-      },
-      {returnDocument: 'after'}
-    );
-    console.log("Updated user:", updatedUser);
-    if (!updatedUser) {
-      return res.send("User not found");
+    try {
+        let { changedname, changedusername, changedpassword } = req.body;
+        let updatedUser = await userModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                name: changedname,
+                username: changedusername,
+                password: await bcrypt.hash(changedpassword, 10),
+            },
+            { returnDocument: 'after' }
+        );
+        console.log("Updated user:", updatedUser);
+        if (!updatedUser) {
+            return res.send("User not found");
+        }
+        res.send("User updated successfully");
+    } catch (err) {
+        console.error(err);
+        res.send("Error updating user");
     }
-    res.send("User updated successfully");
-  } catch (err) {
-    console.error(err);
-    res.send("Error updating user");
-  }
 });
 // POST User page- delete user
 app.post('/delete/:id', async (req, res) => {
-  try {
-    const deletedUser = await userModel.findByIdAndDelete(req.params.id);
-    console.log("Deleted user:", deletedUser);
-    if (!deletedUser) {
-      return res.send("User not found");
+    try {
+        const deletedUser = await userModel.findByIdAndDelete(req.params.id);
+        console.log("Deleted user:", deletedUser);
+        if (!deletedUser) {
+            return res.send("User not found");
+        }
+        res.send("User deleted successfully");
+    } catch (err) {
+        console.error(err);
+        res.send("Error deleting user");
     }
-    res.send("User deleted successfully");
-  } catch (err) {
-    console.error(err);
-    res.send("Error deleting user");
-  }
 });
 // GET Total users count
 app.get('/count', async (req, res) => {
@@ -181,19 +181,19 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }    
-});    
+    }
+});
 transporter.verify(function (error, success) {
     if (error) {
         console.error('Email transporter verification failed:', error.message);
     } else {
         console.log('Email transporter is ready to send messages');
-    }    
-});    
+    }
+});
 // Generator
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString();
-}    
+}
 let otpStore = {};
 
 
@@ -213,7 +213,7 @@ app.post('/signup', async function (req, res) {
         if (!name || !username || !email || !password || !otp) {
             return res.status(400).send('All fields are required');
         }
-        
+
         const usernameRegex = /^(?=.*[A-Za-z_])[A-Za-z0-9_.]{4,15}$/;
         if (!usernameRegex.test(username)) {
             return res.status(400).send('Invalid username');
@@ -273,11 +273,10 @@ app.post('/login', async function (req, res) {
         if (!isMatch) {
             return res.status(400).send('Invalid password');
         }
-        
+
         // Update login timestamps
         user.lastLogin = user.currentLogin;
         user.currentLogin = Date.now();
-        
         await user.save();
         res.redirect('/dashboard/username'.replace('username', user.username));
     } catch (err) {
@@ -285,44 +284,62 @@ app.post('/login', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
-// GET forgot password
-app.get('/password', function (req, res) {
-    res.render('password');
-});
 
 // GET signup 
 app.get('/signup', function (req, res) {
     res.render('signup');
 });
+// CHANGE-PASSWORD page--------------------------------------------------------------------------------------------\
+app.get("/change-password", (req, res) => {
+    res.render("change-password")
+})
+app.post("/change-password", async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = await userModel.findOne({ email: req.session.user.email });
+    if (!user) {
+        return res.json({success: false,message: "User not found."});
+    }
+
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) {
+        return res.json({success: false,message: "Current password is incorrect."});
+    }
+
+    const hash = await bcrypt.hash(newPassword, 10);
+    user.password = hash;
+    await user.save();
+    res.json({success: true,message: "Password changed successfully."});
+
+});
 // PASSWORD page---------------------------------------------------------------------------------------------------
-app.get("/forgot-password", (req,res) => {
+app.get("/forgot-password", (req, res) => {
     res.render("forgot-password")
 })
 // Send OTP
-app.post("/forgot-password/send-otp",async(req,res)=>{
-    const{email}=req.body;
-    if(!email){
-        return res.json({success:false,message:"Please enter your email."});
+app.post("/forgot-password/send-otp", async (req, res) => {
+    const { email } = req.body;
+    if (!email) {
+        return res.json({ success: false, message: "Please enter your email." });
     }
 
-    const user=await userModel.findOne({email});
-    if(!user){
-        return res.json({success:false,message:"No account found with this email."});
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ success: false, message: "No account found with this email." });
     }
 
-    const otp=generateOTP();
-    otpStore[email]={
-        code:otp,
-        verified:false,
-        expiresAt:Date.now()+5*60*1000
+    const otp = generateOTP();
+    otpStore[email] = {
+        code: otp,
+        verified: false,
+        expiresAt: Date.now() + 5 * 60 * 1000
     };
 
-    try{
+    try {
         await transporter.sendMail({
-            from:process.env.EMAIL_USER,
-            to:email,
-            subject:"EduShelf Password Reset OTP",
-            html:`
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: "EduShelf Password Reset OTP",
+            html: `
             <h2>Password Reset</h2>
             <p>Hello <b>${user.name}</b>,</p>
             <p>Your OTP is:</p>
@@ -331,65 +348,65 @@ app.post("/forgot-password/send-otp",async(req,res)=>{
             <p>Regards,<br>EduShelf Team</p>
             `
         });
-        res.json({success:true,message:"OTP sent successfully."});
-    }catch(err){
+        res.json({ success: true, message: "OTP sent successfully." });
+    } catch (err) {
         console.log(err);
-        res.json({success:false,message:"Failed to send OTP."});
+        res.json({ success: false, message: "Failed to send OTP." });
     }
 });
 // Verify OTP
-app.post("/forgot-password/verify-otp",(req,res)=>{
-    const{email,otp}=req.body;
+app.post("/forgot-password/verify-otp", (req, res) => {
+    const { email, otp } = req.body;
 
-    const storedOTP=otpStore[email];
-    if(!storedOTP){
+    const storedOTP = otpStore[email];
+    if (!storedOTP) {
         return res.json({
-            success:false,
-            message:"Please request OTP first."
+            success: false,
+            message: "Please request OTP first."
         });
     }
 
-    if(Date.now()>storedOTP.expiresAt){
+    if (Date.now() > storedOTP.expiresAt) {
         delete otpStore[email];
         return res.json({
-            success:false,
-            message:"OTP expired."
+            success: false,
+            message: "OTP expired."
         });
     }
 
-    if(String(storedOTP.code)!==String(otp)){
+    if (String(storedOTP.code) !== String(otp)) {
         return res.json({
-            success:false,
-            message:"Invalid OTP."
+            success: false,
+            message: "Invalid OTP."
         });
     }
-    storedOTP.verified=true;
+    storedOTP.verified = true;
 
     res.json({
-        success:true,
-        message:"OTP verified successfully."
+        success: true,
+        message: "OTP verified successfully."
     });
 });
 // Reset Password
-app.post("/forgot-password/reset-password",async(req,res)=>{
-    const{email,password}=req.body;
+app.post("/forgot-password/reset-password", async (req, res) => {
+    const { email, password } = req.body;
 
-    const storedOTP=otpStore[email];
-    if(!storedOTP||!storedOTP.verified){
-        return res.json({success:false,message:"Please verify OTP first."});
+    const storedOTP = otpStore[email];
+    if (!storedOTP || !storedOTP.verified) {
+        return res.json({ success: false, message: "Please verify OTP first." });
     }
 
-    const user=await userModel.findOne({email});
-    if(!user){
-        return res.json({success:false,message:"User not found."});
+    const user = await userModel.findOne({ email });
+    if (!user) {
+        return res.json({ success: false, message: "User not found." });
     }
 
-    const hash=await bcrypt.hash(password,10);
-    user.password=hash;
+    const hash = await bcrypt.hash(password, 10);
+    user.password = hash;
     await user.save();
     delete otpStore[email];
 
-    res.json({success:true,message:"Password changed successfully."});
+    res.json({ success: true, message: "Password changed successfully." });
 });
 
 
@@ -398,19 +415,19 @@ app.post("/forgot-password/reset-password",async(req,res)=>{
 // DASGBOARD PAGE---------------------------------------------------------
 // GET dashboard
 app.get('/dashboard/:username', async function (req, res) {
-    let user = await userModel.findOne({username: req.params.username});
+    let user = await userModel.findOne({ username: req.params.username });
     res.render('dashboard', { user });
 });
 // GET profile
 app.get('/profile/:username', async function (req, res) {
-    let user = await userModel.findOne({username: req.params.username});
+    let user = await userModel.findOne({ username: req.params.username });
     res.render('profile', { user });
 });
 
 // PROFILE PAGE---------------------------------------------------------
 // GET profile edit page
 app.get('/profile-edit/:name', async function (req, res) {
-    let user = await userModel.findOne({name: req.params.name});
+    let user = await userModel.findOne({ name: req.params.name });
     res.render('profile-edit', { user });
 });
 // POST profile edit page
@@ -430,7 +447,7 @@ app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
         });
         if (req.file) {
             if (user.profilepicture && user.profilepicture !== "/images/default-profile.png") {
-                const oldPath = path.join(__dirname,"public",user.profilepicture);
+                const oldPath = path.join(__dirname, "public", user.profilepicture);
                 if (fs.existsSync(oldPath)) {
                     fs.unlinkSync(oldPath);
                 }
@@ -446,7 +463,7 @@ app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
 });
 // GET back to dashboard
 app.get('/back-to-dashboard/:username', async function (req, res) {
-    user = await userModel.findOne({username: req.params.username});
+    user = await userModel.findOne({ username: req.params.username });
     res.render('dashboard', { user });
 });
 
@@ -456,7 +473,7 @@ app.get('/back-to-dashboard/:username', async function (req, res) {
 
 // SUPPORT PAGE----------------------------------------------------
 app.get('/support/:name', async function (req, res) {
-    let user = await userModel.findOne({name: req.params.name});
+    let user = await userModel.findOne({ name: req.params.name });
     res.render('support', { user });
 });
 
@@ -467,8 +484,8 @@ app.get('/support/:name', async function (req, res) {
 // BRANCH PAGES----------------------------------------------------
 app.get('/edushelf/:username/branch/:branch', async (req, res) => {
     const branch = req.params.branch;
-    const user = await userModel.findOne({username: req.params.username});
-    res.render('semester', {branch, user});
+    const user = await userModel.findOne({ username: req.params.username });
+    res.render('semester', { branch, user });
 });
 
 
@@ -476,11 +493,11 @@ app.get('/edushelf/:username/branch/:branch', async (req, res) => {
 
 
 // GET subjects page
-app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req,res)=>{
+app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => {
     const { username, branch, sem } = req.params;
     const user = await userModel.findOne({ username });
     const subjects = subjectsData[branch]?.[sem] || [];
-    res.render("subjects",{user,branch,sem,subjects});
+    res.render("subjects", { user, branch, sem, subjects });
 });
 
 
@@ -488,8 +505,8 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req,res)=>{
 
 
 // GET resources page
-app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req,res)=>{
-    const user = await userModel.findOne({username: req.params.username});
+app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req, res) => {
+    const user = await userModel.findOne({ username: req.params.username });
     const { branch, sem, subject } = req.params;
     const resources = [
         "Notes",
@@ -500,12 +517,12 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', asy
         "Quiz"
     ];
 
-    res.render('resources',{branch,sem,subject,resources,user});
+    res.render('resources', { branch, sem, subject, resources, user });
 });
 // GET resource list page
 app.get("/resources/:subject/:type", (req, res) => {
     const { subject, type } = req.params;
-    res.render("resource-list", {user: req.user,subject,type});
+    res.render("resource-list", { user: req.user, subject, type });
 });
 
 
