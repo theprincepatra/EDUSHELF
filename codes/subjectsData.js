@@ -36,29 +36,34 @@ const subjectsData = {
 
         2:[
             {
-                code:"BS201",
-                name:"Mathematics-II",
+                code:"CSE1004",
+                name:"Introductory Graph Theory",
                 credits:4
             },
             {
-                code:"BS202",
-                name:"Chemistry",
+                code:"CSE2001",
+                name:"Data Structures and Algorithms",
                 credits:4
             },
             {
-                code:"CS201",
-                name:"Data Structures",
+                code:"CS2101",
+                name:"Calculus B",
                 credits:4
             },
             {
-                code:"CS202",
-                name:"Digital Logic",
+                code:"PHY2001",
+                name:"University Physics: Electricity and Magnetism",
+                credits:4
+            },
+            {
+                code:"GEN1166",
+                name:"Introductory Containerization for Developers",
+                credits:1
+            },
+            {
+                code:"HSS1972",
+                name:"Introductory Technical Writing",
                 credits:3
-            },
-            {
-                code:"HS201",
-                name:"Environmental Science",
-                credits:2
             }
         ],
 
