@@ -8,6 +8,7 @@ require('dotenv').config();
 const subjectsData = require("./subjectsData");
 
 const userModel = require('./models/user');
+const supportModel = require("./models/supportModel");
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -477,7 +478,22 @@ app.get('/support/:name', async function (req, res) {
     let user = await userModel.findOne({ name: req.params.name });
     res.render('support', { user });
 });
+app.post("/support", async (req, res) => {
+    const { name, email, category, subject, message } = req.body;
+    if (!name || !email || !category || !subject || !message) {
+        return res.json({success: false, message: "Please fill all required fields."});
+    }
 
+    await supportModel.create({
+        name,
+        email,
+        category,
+        subject,
+        message
+    });
+
+    res.json({success: true,message: "Support request submitted successfully."});
+});
 
 
 
@@ -527,17 +543,6 @@ app.get("/resources/:subject/:type", (req, res) => {
 });
 
 
-app.post("/support", async (req, res) => {
-
-    const { category, message } = req.body;
-    await supportModel.create({
-        user: req.user._id,
-        category,
-        message
-    });
-
-    res.json({success: true,message: "Your issue has been submitted successfully."});
-});
 
 
 

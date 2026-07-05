@@ -47,29 +47,27 @@ body {
     color: #b8bfd6;
     margin-left: 8px;
 }
-
+/* Navbar links */
 .nav-links {
     display: flex;
     gap: 35px;
 }
-
 .nav-links a {
-    color: #d7ddf2;
+    color: #c4cdf1;
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    transition: .3s;
+    transition: .2s;
 }
-
 .nav-links a:hover {
-    color: #ffffff;
+    color: #f6efef;
 }
 
 .hero {
     max-width: 1400px;
     width: 90%;
     margin: auto;
-    padding: 120px 0 70px;
+    padding: 120px 0 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -159,7 +157,7 @@ input[type="file"] {
     margin-top: 12px;
     color: #d2d7ea;
 }
-
+/* Submit Button */
 button {
     width: 100%;
     margin-top: 28px;
@@ -171,12 +169,10 @@ button {
     font-size: 17px;
     font-weight: 600;
     cursor: pointer;
-    transition: .3s;
+    transition: .2s;
 }
-
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(210, 38, 130, .35);
+    opacity: .65;
 }
 
 .right {
@@ -194,26 +190,24 @@ button:hover {
 }
 
 @keyframes float {
-
     0%,
     100% {
         transform: translateY(0);
     }
-
     50% {
         transform: translateY(-12px);
     }
 }
 
+/* Bottom Quick Help */
 .quick-help {
     max-width: 1250px;
-    margin: -20px auto 70px;
+    margin: -20px auto 80px;
     padding: 0 40px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 25px;
 }
-
 .card {
     background: rgba(18, 26, 44, .88);
     backdrop-filter: blur(15px);
@@ -222,9 +216,8 @@ button:hover {
     padding: 30px 20px;
     text-align: center;
     cursor: pointer;
-    transition: .35s;
+    transition: .3s;
 }
-
 .card:hover {
     transform: translateY(-8px);
     border-color: #8b5cf6;
@@ -344,7 +337,6 @@ button:hover {
         flex-wrap: wrap;
         justify-content: center;
     }
-
     .nav-links a {
         font-size: 14px;
     }

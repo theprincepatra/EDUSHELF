@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 
 const supportSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-    },
+    name: String,
+    email: String,
     category: String,
+    subject: String,
     message: String,
     status: {
         type: String,
