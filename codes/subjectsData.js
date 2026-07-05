@@ -70,7 +70,7 @@ const subjectsData = {
         3:[
             {
                 code:"CSE2141",
-                name:"Computer Science Workshop-1",
+                name:"Computer Science Workshop 1",
                 credits:4
             },
             {
@@ -80,7 +80,7 @@ const subjectsData = {
             },
             {
                 code:"CSE2631",
-                name:"Algorithm Analysis and Design",
+                name:"Algorithm Analysis and Design 1",
                 credits:4
             },
             {
@@ -89,19 +89,47 @@ const subjectsData = {
                 credits:4
             },
             {
-                code:"HSS2323",
-                name:"Introduction to Managerial Economics 1",
-                credits:2
+                code:"HSS2023",
+                name:"Introduction to Macroeconomics Economics",
+                credits:3
             },
             {
                 code:"CHM2041",
                 name:"Introduction to Environmental Studies",
                 credits:2
+            }
+        ],
+
+        4:[
+            {
+                code:"CSE3141",
+                name:"Computer Science Workshop 2",
+                credits:4
             },
             {
-                code:"IKS1401",
-                name:"Concept of Indian Knowledge System",
-                credits:1
+                code:"EET2211",
+                name:"Commputer Organisation and Architecture",
+                credits:4
+            },
+            {
+                code:"CSE2632",
+                name:"Algorithm Analysis and Design 2",
+                credits:4
+            },
+            {
+                code:"MTH3003",
+                name:"Applied Linear Algebra",
+                credits:4
+            },
+            {
+                code:"HSS2024",
+                name:"Introduction to Macroeconomics",
+                credits:2
+            },
+            {
+                code:"CHM2042",
+                name:"Introduction to Disaster Management",
+                credits:2
             }
         ]
     }
