@@ -69,34 +69,39 @@ const subjectsData = {
 
         3:[
             {
-                code:"CS301",
-                name:"AAD-2",
+                code:"CSE2141",
+                name:"Computer Science Workshop-1",
                 credits:4
             },
             {
-                code:"CS302",
-                name:"CSW-2",
+                code:"EET1121",
+                name:"Digital Logic Design",
                 credits:4
             },
             {
-                code:"CS303",
-                name:"COA",
+                code:"CSE2631",
+                name:"Algorithm Analysis and Design",
                 credits:4
             },
             {
-                code:"CS303",
-                name:"ALA",
+                code:"MTH2002",
+                name:"Probability and Statistics",
                 credits:4
             },
             {
-                code:"CS304",
-                name:"IDM",
-                credits:3
+                code:"HSS2323",
+                name:"Introduction to Managerial Economics 1",
+                credits:2
             },
             {
-                code:"MA301",
-                name:"IM",
-                credits:4
+                code:"CHM2041",
+                name:"Introduction to Environmental Studies",
+                credits:2
+            },
+            {
+                code:"IKS1401",
+                name:"Concept of Indian Knowledge System",
+                credits:1
             }
         ]
     }
