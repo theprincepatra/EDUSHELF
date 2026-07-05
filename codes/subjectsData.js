@@ -164,6 +164,39 @@ const subjectsData = {
                 name:"Funamentals of Machine Intelligence 1",
                 credits:3
             }
+        ],
+
+        6:[
+            {
+                code:"CSE3968",
+                name:"Machine Learning Concepts 2",
+                credits:2
+            },
+            {
+                code:"CSE3739",
+                name:"Compilers: Principles, Techniques and Tools",
+                credits:3
+            },
+            {
+                code:"MTH3657",
+                name:"Fundamentals of Machine Intelligence 2",
+                credits:3
+            },
+            {
+                code:"CSE3545",
+                name:"Game Programming with C++",
+                credits:4
+            },
+            {
+                code:"CSE3151",
+                name:"Introduction to Databases",
+                credits:4
+            },
+            {
+                code:"CSE3752",
+                name:"Computer Networking: Security",
+                credits:4
+            }
         ]
     }
 };
