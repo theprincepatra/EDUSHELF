@@ -33,7 +33,6 @@ const subjectsData = {
                 credits:1
             }
         ],
-
         2:[
             {
                 code:"CSE1004",
@@ -66,7 +65,6 @@ const subjectsData = {
                 credits:3
             }
         ],
-
         3:[
             {
                 code:"CSE2141",
@@ -99,7 +97,6 @@ const subjectsData = {
                 credits:2
             }
         ],
-
         4:[
             {
                 code:"CSE3141",
@@ -132,7 +129,6 @@ const subjectsData = {
                 credits:2
             }
         ],
-
         5:[
             {
                 code:"CSE3544",
@@ -165,8 +161,71 @@ const subjectsData = {
                 credits:3
             }
         ],
-
         6:[
+            {
+                code:"CSE3968",
+                name:"Machine Learning Concepts 2",
+                credits:2
+            },
+            {
+                code:"CSE3739",
+                name:"Compilers: Principles, Techniques and Tools",
+                credits:3
+            },
+            {
+                code:"MTH3657",
+                name:"Fundamentals of Machine Intelligence 2",
+                credits:3
+            },
+            {
+                code:"CSE3545",
+                name:"Game Programming with C++",
+                credits:4
+            },
+            {
+                code:"CSE3151",
+                name:"Introduction to Databases",
+                credits:4
+            },
+            {
+                code:"CSE3752",
+                name:"Computer Networking: Security",
+                credits:4
+            }
+        ],
+        7:[
+            {
+                code:"URP4201",
+                name:"Research Methodology",
+                credits:2
+            },
+            {
+                code:"CSE4820",
+                name:"Arduino Micro controller Concepts",
+                credits:4
+            },
+            {
+                code:"CSE4571",
+                name:"Practical Robotics Projects with Arduino",
+                credits:4
+            },
+            {
+                code:"CSE4571",
+                name:"Departmental Elective I",
+                credits:4
+            },
+            {
+                code:"CSE4571",
+                name:"Departmental Elective II",
+                credits:4
+            },
+            {
+                code:"CSE4571",
+                name:"Departmental Elective III",
+                credits:4
+            },
+        ],
+        8:[
             {
                 code:"CSE3968",
                 name:"Machine Learning Concepts 2",
