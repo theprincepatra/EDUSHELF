@@ -227,33 +227,28 @@ const subjectsData = {
         ],
         8:[
             {
-                code:"CSE3968",
-                name:"Machine Learning Concepts 2",
-                credits:2
-            },
-            {
-                code:"CSE3739",
-                name:"Compilers: Principles, Techniques and Tools",
+                code:"",
+                name:"IKS Elective I",
                 credits:3
             },
             {
-                code:"MTH3657",
-                name:"Fundamentals of Machine Intelligence 2",
+                code:"",
+                name:"IKS Elective II",
                 credits:3
             },
             {
-                code:"CSE3545",
-                name:"Game Programming with C++",
-                credits:4
+                code:"",
+                name:"Open Elective I",
+                credits:3
             },
             {
-                code:"CSE3151",
-                name:"Introduction to Databases",
-                credits:4
+                code:"",
+                name:"Open Elective II",
+                credits:3
             },
             {
-                code:"CSE3752",
-                name:"Computer Networking: Security",
+                code:"URP4202",
+                name:"Final year Research Project",
                 credits:4
             }
         ]
