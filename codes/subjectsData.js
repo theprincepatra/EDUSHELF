@@ -3,29 +3,34 @@ const subjectsData = {
     cse:{
         1:[
             {
-                code:"BS101",
-                name:"Mathematics-I",
+                code:"CSE1002",
+                name:"Descrete Mathematics",
                 credits:4
             },
             {
-                code:"BS102",
-                name:"Physics",
+                code:"CSE1001",
+                name:"Introduction to Computer Programming",
                 credits:4
             },
             {
-                code:"ES101",
-                name:"Programming for Problem Solving",
-                credits:3
+                code:"MTH1101",
+                name:"Calculus A",
+                credits:4
             },
             {
-                code:"ES102",
-                name:"Engineering Graphics",
-                credits:3
+                code:"PHY1001",
+                name:"University Physics: Mechanics",
+                credits:4
             },
             {
-                code:"ES103",
-                name:"Basic Electrical Engineering",
-                credits:3
+                code:"GEN1140",
+                name:"Digital Fabrication Techniques",
+                credits:1
+            },
+            {
+                code:"HSS1972",
+                name:"Universal Human Values",
+                credits:1
             }
         ],
 
