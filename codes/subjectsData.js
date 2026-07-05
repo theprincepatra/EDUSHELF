@@ -131,6 +131,39 @@ const subjectsData = {
                 name:"Introduction to Disaster Management",
                 credits:2
             }
+        ],
+
+        5:[
+            {
+                code:"CSE3544",
+                name:"Practical Programing with C",
+                credits:4
+            },
+            {
+                code:"CSE3249",
+                name:"Digital Principal of Operating Systems",
+                credits:4
+            },
+            {
+                code:"CSE3751",
+                name:"Computer Networking: Concepts",
+                credits:4
+            },
+            {
+                code:"CSE3967",
+                name:"Machine Learning Concepts 1",
+                credits:2
+            },
+            {
+                code:"CSE3731",
+                name:"Introduction to Theory of Computation",
+                credits:3
+            },
+            {
+                code:"MTH3647",
+                name:"Funamentals of Machine Intelligence 1",
+                credits:3
+            }
         ]
     }
 };
