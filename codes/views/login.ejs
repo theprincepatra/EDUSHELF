@@ -37,20 +37,20 @@
                 <p>Welcome back!</p>
             </div>
 
-            <form action="/login" method="POST">
+            <!-- Login Form -->
+            <form action="/login" method="POST" id="loginForm">
+
                 <img class="mailicon" src="/images/mail_logo.png" alt="Mail Logo">
                 <input id="email" type="text" placeholder="Email" name="email">
                 <p class="error" id="emailError"></p>
 
                 <div class="password-wrapper">
                     <img class="passicon" src="/images/pass_logo.png" alt="">
-                    <input
-                        id="password" class="passinput" type="password" placeholder="Password" name="password">
-
+                    <input id="password" class="passinput" type="password" placeholder="Password" name="password">
                     <img src="/images/eye-closed.png" class="eye-icon" onclick="togglePassword()">
                 </div>
-                
                 <p class="error" id="passwordError"></p>
+
                 <button class="signin-btn" type="submit">Sign In</button>
             </form>
 

@@ -5,8 +5,8 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
-const subjectsData = require("./subjectsData");
 
+const subjectsData = require("./subjectsData");
 const userModel = require('./models/user');
 const supportModel = require("./models/supportModel");
 
@@ -279,7 +279,7 @@ app.post('/login', async function (req, res) {
         user.lastLogin = user.currentLogin;
         user.currentLogin = Date.now();
         await user.save();
-        res.redirect('/dashboard/username'.replace('username', user.username));
+        res.send(`/dashboard/${user.username}`);
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
@@ -484,14 +484,7 @@ app.post("/support", async (req, res) => {
         return res.json({success: false, message: "Please fill all required fields."});
     }
 
-    await supportModel.create({
-        name,
-        email,
-        category,
-        subject,
-        message
-    });
-
+    await supportModel.create({name, email, category, subject, message})
     res.json({success: true,message: "Support request submitted successfully."});
 });
 
@@ -508,7 +501,6 @@ app.get('/edushelf/:username/branch/:branch', async (req, res) => {
 
 
 
-
 // GET subjects page
 app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => {
     const { username, branch, sem } = req.params;
@@ -516,7 +508,6 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => 
     const subjects = subjectsData[branch]?.[sem] || [];
     res.render("subjects", { user, branch, sem, subjects });
 });
-
 
 
 
