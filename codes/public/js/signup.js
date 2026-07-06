@@ -21,12 +21,10 @@ function clearErrors() {
 function showError(input, message) {
     const parent = input.parentElement;
     const error = parent.querySelector(".error");
-
     if (error) {
         error.innerText = message;
         error.style.color = "#ff362c";
     }
-
     input.style.border = "1px solid #ff362c";
 }
 
@@ -36,18 +34,14 @@ function isValidEmail(email) {
 
 // OTP
 otpButton.addEventListener("click", async () => {
-
     clearErrors();
-
     const email = emailInput.value.trim();
-
     if (!isValidEmail(email)) {
         showError(emailInput, "Enter valid email");
         return;
     }
 
     try {
-
         const res = await fetch("/send-otp", {
             method: "POST",
             headers: {
@@ -57,16 +51,13 @@ otpButton.addEventListener("click", async () => {
         });
 
         const data = await res.text();
-
         if (!res.ok) {
             showError(emailInput, data || "Failed to send OTP");
             return;
         }
 
         alert(data);
-
         otpButton.disabled = true;
-
     } catch (err) {
         showError(emailInput, "Failed to send OTP");
     }
@@ -75,9 +66,7 @@ otpButton.addEventListener("click", async () => {
 const form = document.querySelector('form');
 
 form.addEventListener('submit', async function (event) {
-
     event.preventDefault();
-
     clearErrors();
 
     const name = nameInput.value.trim();
@@ -88,7 +77,6 @@ form.addEventListener('submit', async function (event) {
     const confirmPassword = confirmPasswordInput.value.trim();
 
     let isValid = true;
-
     // Name
     if (name === "") {
         showError(nameInput, "Name should not be empty");

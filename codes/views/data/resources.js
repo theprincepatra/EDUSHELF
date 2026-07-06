@@ -1,6 +1,6 @@
 const resources = {
 
-    "Data Structure": {
+    "Data Structures and Algorithims": {
         notes: [
             {
                 title: "Unit 1 Notes",

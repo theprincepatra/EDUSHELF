@@ -177,11 +177,23 @@ input[type="password"]::-ms-clear {
     transition: 0.1s;
 }
 
+.error{
+    color: #f12828;
+    font-size: 15px;
+    font-weight: bold;
+    height: 0px;
+    margin: 4px 0;
+    font-family: monospace;
+}
+#passwordError{
+    position: relative;
+    top: -8px;
+}
 
 /* Sign In Button */
 .signin-btn {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 18px;
     padding: 12px;
     border: none;
     border-radius: 8px;
