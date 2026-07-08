@@ -7,192 +7,182 @@
     <link rel="stylesheet" href="/css/profile.css">
 </head>
 <body>
-
     <div class="back">
         <a href="/back-to-dashboard/<%= user.username %>">&larr; Back to Dashboard</a>
     </div>
 
-<div class="container">
+    <div class="container">
 
-    <!-- LEFT CARD -->
-    <div class="profile-card">
-        <div class="profile-top">
+        <!-- LEFT CARD -->
+        <div class="profile-card">
+            <div class="profile-top">
 
-            <div class="logo">
-                <img src="/images/logo_bgremove.png" alt="Logo">
-                <div class="edu">
-                    <p>EDUS</p>
-                    <p>HELF</p>
+                <div class="logo">
+                    <img src="/images/logo_bgremove.png" alt="Logo">
+                    <div class="edu">
+                        <p>EDUS</p>
+                        <p>HELF</p>
+                    </div>
+                </div>
+
+                <div class="profile-image-wrapper">
+                    <img src="<%= user.profilepicture %>" alt="Profile Image"   class="profile-image">
+                </div>
+
+                <h2><%= user.name %></h2>
+
+                <div class="user-box">
+                    <div class="user-row">
+                        <div class="detail-left">
+                            <img src="/images/dashboard/username.png">
+                            <p>Username</p>
+                        </div>
+                        <span><%= user.username %></span>
+                    </div>
+                    <div class="user-row">
+                        <div class="detail-left">
+                            <img src="/images/dashboard/userid.png">
+                            <p>User ID</p>
+                        </div>
+                        <span><%= user.userId %></span>
+                    </div>
+                    <div class="user-row">
+                        <div class="detail-left">
+                            <img src="/images/dashboard/referral.png">
+                            <p>Referral Code</p>
+                        </div>
+                        <span><%= user.referralCode %></span>
+                    </div>
                 </div>
             </div>
 
-            <div class="profile-image-wrapper">
-                <img src="<%= user.profilepicture %>" alt="Profile Image"   class="profile-image">
+            <div class="profile-details">
+                <div class="detail-row">
+                    <div class="detail-left">
+                        <img src="/images/dashboard/email.png">
+                        <span>Email</span>
+                    </div>
+                    <span><%= user.email %></span>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-left">
+                        <img src="/images/dashboard/phone.png">
+                        <span>Phone</span>
+                    </div>
+                    <span><%= user.phone || 'Not Provided' %></span>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-left">
+                        <img src="/images/dashboard/semester.png">
+                        <span>Date of Birth</span>
+                    </div>
+                    <span><%= user.dob ? user.dob.toLocaleDateString() : 'Not Provided' %></span>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-left">
+                        <img src="/images/dashboard/college.png">
+                        <span>Semester</span>
+                    </div>
+                    <span><%= user.semester || 'Not Provided' %></span>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-left">
+                        <img src="/images/dashboard/branch.png">
+                        <span>Branch</span>
+                    </div>
+                    <span><%= user.branch || 'Not Provided' %></span>
+                </div>
             </div>
 
-            <h2><%= user.name %></h2>
-
-            <div class="user-box">
-                <div class="user-row">
-                    <div class="detail-left">
-                        <img src="/images/dashboard/username.png">
-                        <p>Username</p>
-                    </div>
-                    <span><%= user.username %></span>
-                </div>
-                <div class="user-row">
-                    <div class="detail-left">
-                        <img src="/images/dashboard/userid.png">
-                        <p>User ID</p>
-                    </div>
-                    <span><%= user.userId %></span>
-                </div>
-                <div class="user-row">
-                    <div class="detail-left">
-                        <img src="/images/dashboard/referral.png">
-                        <p>Referral Code</p>
-                    </div>
-                    <span><%= user.referralCode %></span>
-                </div>
-            </div>
+            <button class="main-btn editprofile-btn" onclick="window.location.href='/profile-edit/<%= user.name %>'">Edit Profile</button>
         </div>
 
-        <div class="profile-details">
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/email.png">
-                    <span>Email</span>
-                </div>
-                <span><%= user.email %></span>
-            </div>
+        <!-- RIGHT SIDE -->
+        <div class="right-section">
 
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/phone.png">
-                    <span>Phone</span>
-                </div>
-                <span><%= user.phone || 'Not Provided' %></span>
-            </div>
+            <!-- ACCOUNT SECURITY -->
+            <div class="card account-security">
+                <h2>Account & Security</h2>
 
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/semester.png">
-                    <span>Date of Birth</span>
-                </div>
-                <span><%= user.dob ? user.dob.toLocaleDateString() : 'Not Provided' %></span>
-            </div>
-
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/college.png">
-                    <span>Semester</span>
-                </div>
-                <span><%= user.semester || 'Not Provided' %></span>
-            </div>
-
-            <div class="detail-row">
-                <div class="detail-left">
-                    <img src="/images/dashboard/branch.png">
-                    <span>Branch</span>
-                </div>
-                <span><%= user.branch || 'Not Provided' %></span>
-            </div>
-        </div>
-
-        <button class="main-btn editprofile-btn" onclick="window.location.href='/profile-edit/<%= user.name %>'">Edit Profile</button>
-
-    </div>
-
-
-    <!-- RIGHT SIDE -->
-    <div class="right-section">
-
-        <!-- ACCOUNT SECURITY -->
-        <div class="card account-security">
-            <h2>Account & Security</h2>
-
-            <div class="security-item">
-                <div class="security-icon purple">
-                    <img src="/images/dashboard/call-verified.png">
-                </div>
-                <div class="security-content">
-                    <h4>Phone Verified</h4>
-                    <p><%= user.phoneVerified %></p>
-                </div>
-            </div>
-
-            <div class="security-item">
-                <div class="security-icon purple">
-                    <img src="/images/dashboard/email-verified.png">
-                </div>
-                <div class="security-content">
-                    <h4>Email Verified</h4>
-                    <p>Verified</p>
-                </div>
-            </div>
-
-            <div class="two-in-one">
-                <div class="security-item bothbox">
-                    <div class="security-icon blue">
-                        <img src="/images/dashboard/joinedon.png">
+                <div class="security-item">
+                    <div class="security-icon purple">
+                        <img src="/images/dashboard/call-verified.png">
                     </div>
                     <div class="security-content">
-                        <h4>Joined On</h4>
-                        <p><%= user.joinedon ? user.joinedon.toLocaleString() : 'Not Provided' %></p>
+                        <h4>Phone Verified</h4>
+                        <p><%= user.phoneVerified %></p>
                     </div>
                 </div>
-                <div class="security-item bothbox">
-                    <div class="security-icon orange">
-                        <img src="/images/dashboard/last-login.png">
+
+                <div class="security-item">
+                    <div class="security-icon purple">
+                        <img src="/images/dashboard/email-verified.png">
                     </div>
                     <div class="security-content">
-                        <h4>Last Login</h4>
-                        <p><%= user.lastLogin ? user.lastLogin.toLocaleString('en-IN') : 'First Login' %></p>
+                        <h4>Email Verified</h4>
+                        <p>Verified</p>
+                    </div>
+                </div>
+
+                <div class="two-in-one">
+                    <div class="security-item bothbox">
+                        <div class="security-icon blue">
+                            <img src="/images/dashboard/joinedon.png">
+                        </div>
+                        <div class="security-content">
+                            <h4>Joined On</h4>
+                            <p><%= user.joinedon ? user.joinedon.toLocaleString() : 'Not Provided' %></p>
+                        </div>
+                    </div>
+                    <div class="security-item bothbox">
+                        <div class="security-icon orange">
+                            <img src="/images/dashboard/last-login.png">
+                        </div>
+                        <div class="security-content">
+                            <h4>Last Login</h4>
+                            <p><%= user.lastLogin ? user.lastLogin.toLocaleString('en-IN') : 'First Login' %></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <a class="changepassword-btn" href="/<%= user.username %>/change-password">Change Password</a>
+                    <button class="main-btn">Verify Number</button>
+                </div>
+            </div>
+
+            <!-- MY OVERVIEW -->
+            <div class="card">
+                <h2>My Overview</h2>
+
+                <div class="overview-grid">
+                    <div class="overview-box subscription">
+                        <img src="/images/dashboard/subscription.png">
+                        <h3>0</h3>
+                        <p>Subscriptions</p>
+                        <small>Premium benifits unlocked</small>
+                    </div>
+
+                    <div class="overview-box save">
+                        <img src="/images/dashboard/star.png">
+                        <h3>0</h3>
+                        <p>Saved Notes</p>
+                        <small>Quick access Notes</small>
+                    </div>
+
+                    <div class="overview-box refer">
+                        <img src="/images/dashboard/refer.png">
+                        <h3>0</h3>
+                        <p>Referrals</p>
+                        <small>Per 10 referrals 1 subject free</small>
                     </div>
                 </div>
             </div>
-
-            <div class="button-group">
-
-                <a class="changepassword-btn" href="/<%= user.username %>/change-password">Change Password</a>
-                <button class="main-btn">Verify Number</button>
-
-            </div>
-
         </div>
-
-        <!-- MY OVERVIEW -->
-        <div class="card">
-            <h2>My Overview</h2>
-
-            <div class="overview-grid">
-                <div class="overview-box subscription">
-                    <img src="/images/dashboard/subscription.png">
-                    <h3>0</h3>
-                    <p>Subscriptions</p>
-                    <small>Premium benifits unlocked</small>
-                </div>
-
-                <div class="overview-box save">
-                    <img src="/images/dashboard/star.png">
-                    <h3>0</h3>
-                    <p>Saved Notes</p>
-                    <small>Quick access Notes</small>
-                </div>
-
-                <div class="overview-box refer">
-                    <img src="/images/dashboard/refer.png">
-                    <h3>0</h3>
-                    <p>Referrals</p>
-                    <small>Per 10 referrals 1 subject free</small>
-                </div>
-
-            </div>
-        </div>
-
     </div>
-
-</div>
-
 </body>
 </html>

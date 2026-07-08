@@ -280,20 +280,14 @@ a{
     line-height:1.8;
 }
 
-/* =======================
-      SUBJECT GRID
-======================= */
-
+/* SUBJECT GRID */
 .subjects-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
     gap:30px;
 }
 
-/* =======================
-      SUBJECT CARD
-======================= */
-
+/* SUBJECT CARD */
 .subject-card{
     position:relative;
     overflow:hidden;
@@ -302,30 +296,20 @@ a{
     gap:22px;
     padding:34px;
     min-height:180px;
-
     background:#1d1d20;
     border:1px solid rgba(255,255,255,.05);
     border-radius:22px;
-
     transition:.35s;
     box-shadow:0 12px 30px rgba(0,0,0,.28);
 }
 
 .subject-card::before{
-
     content:"";
     position:absolute;
     inset:0;
     left:-120%;
-
     background:
-    linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.05),
-        transparent
-    );
-
+    linear-gradient(120deg, transparent, rgba(255,255,255,.05), transparent);
     transition:.8s;
 }
 
@@ -345,67 +329,43 @@ a{
 ======================= */
 
 .card-icon{
-
     width:78px;
     height:78px;
     min-width:78px;
-
     border-radius:20px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     background:linear-gradient(145deg,#3a3a40,#5d5d64);
-
     color:#fff;
     font-size:30px;
-
     transition:.35s;
-
 }
 
 .subject-card:hover .card-icon{
-
     transform:rotate(-8deg) scale(1.08);
-
     box-shadow:0 12px 25px rgba(255,255,255,.08);
-
 }
 
-/* =======================
-        CONTENT
-======================= */
-
+/* CONTENT */
 .card-content{
-
     flex:1;
-
 }
-
 .card-content h2{
-
-    font-size:24px;
+    font-size:20px;
     font-weight:600;
     line-height:1.4;
-
     margin-bottom:16px;
-
     color:#fff;
-
 }
 
-/* =======================
-      SUBJECT DETAILS
-======================= */
-
+/* SUBJECT DETAILS */
 .subject-details{
     display:flex;
     align-items:center;
     gap:12px;
     flex-wrap:wrap;
 }
-
 .detail{
     min-width:100px;
     padding:10px 14px;
@@ -414,23 +374,18 @@ a{
     background:#27272c;
     transition:.35s;
 }
-
 .detail:first-child{
     background:#313136;
 }
-
 .detail:last-child{
     background:#232327;
 }
-
 .subject-card:hover .detail:first-child{
     background:#3b3b42;
 }
-
 .subject-card:hover .detail:last-child{
     background:#2d2d31;
 }
-
 .label{
     display:block;
     font-size:11px;
@@ -439,7 +394,6 @@ a{
     color:#8f949b;
     margin-bottom:5px;
 }
-
 .value{
     display:block;
     font-size:15px;
@@ -447,116 +401,68 @@ a{
     color:#ffffff;
 }
 
-/* =======================
-          ARROW
-======================= */
-
+/* ARROW */
 .card-arrow{
-
     width:52px;
     height:52px;
     min-width:52px;
-
     border-radius:50%;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     background:#2f2f34;
-
     color:#fff;
-
     transition:.35s;
-
 }
-
 .card-arrow i{
-
     font-size:18px;
-
 }
-
 .subject-card:hover .card-arrow{
-
     background:#5a5a61;
-
     transform:translateX(8px);
-
 }
 
-/* =======================
-      CARD EFFECTS
-======================= */
-
-.subject-card:hover .card-content h2{
-
-    letter-spacing:.5px;
-
-}
-
+/* CARD EFFECTS */
 .subject-card:hover{
-
     cursor:pointer;
-
 }
-
 .subject-card:active{
-
     transform:scale(.98);
-
 }
-
-.card-icon,
-.card-arrow,
-.detail,
-.card-content h2,
-.subject-card{
-
+.card-icon, .card-arrow, .detail, .card-content h2, .subject-card{
     transition:all .35s ease;
-
 }
 
-/* =======================
-        ANIMATIONS
-======================= */
+/* ANIMATIONS */
 
 @keyframes fadeUp{
-
     from{
         opacity:0;
         transform:translateY(35px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
-
 }
 
 @keyframes fadeLeft{
-
     from{
         opacity:0;
         transform:translateX(-35px);
     }
-
     to{
         opacity:1;
         transform:translateX(0);
     }
-
 }
 
 .hero{
     animation:fadeUp .7s ease;
 }
-
 .sidebar{
     animation:fadeLeft .5s ease;
 }
-
 .subject-card{
     animation:fadeUp .6s ease both;
 }
@@ -574,159 +480,123 @@ a{
 .subject-card:nth-child(11){animation-delay:.55s;}
 .subject-card:nth-child(12){animation-delay:.60s;}
 
-/* =======================
-      BUTTON EFFECTS
-======================= */
+/* BUTTON EFFECTS */
 
 .menu-btn:hover{
     box-shadow:0 12px 25px rgba(255,255,255,.08);
     transform:scale(1.05);
 }
-
 .back-btn:hover{
     box-shadow:0 12px 25px rgba(255,255,255,.08);
 }
-
 .logout-btn:hover{
     box-shadow:0 12px 25px rgba(255,255,255,.08);
 }
-
 .subject-card:hover .value{
     color:#ffffff;
 }
 
-/* =======================
-      RESPONSIVE
-======================= */
+/* RESPONSIVE */
 
 @media(max-width:1200px){
-
     .subjects-grid{
         grid-template-columns:repeat(2,1fr);
     }
-
 }
 
 @media(max-width:992px){
-
     .main{
         padding:28px;
     }
-
     .hero{
         padding:40px;
     }
-
     .hero h1{
         font-size:40px;
     }
-
     .hero h3{
         font-size:22px;
     }
-
     .subjects-grid{
         gap:24px;
     }
-
 }
 
 @media(max-width:768px){
-
     .sidebar{
         width:260px;
         left:-260px;
     }
-
     .sidebar.active{
         left:0;
     }
-
     .main{
         margin-left:0 !important;
         padding:20px;
     }
-
     .topbar{
         margin-bottom:30px;
     }
-
     .hero{
         padding:28px;
         border-radius:18px;
     }
-
     .hero h1{
         font-size:32px;
     }
-
     .hero h3{
         font-size:20px;
     }
-
     .hero p{
         font-size:15px;
     }
-
     .subjects-grid{
         grid-template-columns:1fr;
         gap:20px;
     }
-
     .subject-card{
         padding:24px;
     }
-
 }
 
 @media(max-width:500px){
-
     .topbar{
         flex-direction:column;
         align-items:flex-start;
         gap:18px;
     }
-
     .hero{
         padding:22px;
     }
-
     .hero h1{
         font-size:28px;
     }
-
     .hero h3{
         font-size:18px;
     }
-
     .hero p{
         font-size:14px;
     }
-
     .subject-card{
         flex-direction:column;
         align-items:flex-start;
         gap:20px;
         text-align:left;
     }
-
     .card-icon{
         width:65px;
         height:65px;
         min-width:65px;
         font-size:24px;
     }
-
     .subject-details{
         width:100%;
         justify-content:space-between;
     }
-
     .detail{
         flex:1;
         min-width:120px;
     }
-
     .card-arrow{
         align-self:flex-end;
         width:45px;
@@ -735,31 +605,22 @@ a{
 
 }
 
-/* =======================
-      SCROLLBAR
-======================= */
-
+/* SCROLLBAR */
 ::-webkit-scrollbar{
     width:8px;
 }
-
 ::-webkit-scrollbar-track{
     background:#18181b;
 }
-
 ::-webkit-scrollbar-thumb{
     background:#5a5a61;
     border-radius:20px;
 }
-
 ::-webkit-scrollbar-thumb:hover{
     background:#777780;
 }
 
-/* =======================
-      TEXT SELECTION
-======================= */
-
+/* TEXT SELECTION */
 ::selection{
     background:#ffffff;
     color:#111114;
