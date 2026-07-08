@@ -43,11 +43,13 @@
                                 <p>PDF Document</p>
                             </div>
                         </div>
-                    <a class="download-btn" target="_blank"
+                    <!-- <a class="download-btn" target="_blank"
                         href="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">
                         Open
                         <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    </a> -->
+
+                    <a href="/view-pdf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">Open</a>
                 </div>
             <% }) %>
         <% } %>
