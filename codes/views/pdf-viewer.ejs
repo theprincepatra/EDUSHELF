@@ -1,13 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title><%= file %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= file.replace(".pdf","") %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/css/pdf-viewer.css">
 </head>
 <body>
-    <iframe
-        src="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type %>/<%= file %>"
-        width="100%"
-        height="1000px">
-    </iframe>
+    <header>
+        <div class="logo">
+            <img src="/images/logo_bgremove.png" alt="EduShelf Logo">
+            <h2>EduShelf</h2>
+        </div>
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+    </header>
+
+    <section class="hero">
+        <h1><%= subject.replace(/-/g," ") %></h1>
+        <h3><%= type.toUpperCase() %></h3>
+        <p><%= file.replace(".pdf","") %></p>
+    </section>
+
+    <div class="viewer">
+        <iframe
+            src="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type %>/<%= file %>">
+        </iframe>
+    </div>
 </body>
 </html>

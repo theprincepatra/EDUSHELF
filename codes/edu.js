@@ -538,7 +538,6 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
             console.log(err);
             return res.send("Resource folder not found.");
         }
-
         // Create pdfFiles
         const pdfFiles = files.filter(file => file.endsWith(".pdf"));
         res.render("resource-list", {user, branch, sem, subject, type, files: pdfFiles});
@@ -546,11 +545,11 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
 });
 // GET PDF viewer page-----------------------------------------------------------------------------
 app.get("/view-pdf/:branch/:sem/:subject/:type/:file", (req, res) => {
+    console.log(req.params.file);
     res.render("pdf-viewer", {branch: req.params.branch, sem: req.params.sem, subject: req.params.subject, type: req.params.type, file: req.params.file});
 });
-
-
-
+// edushelf/theprincepatra/branch/cse/semester/3/subject/Algorithim-Analysis-and-Design-1/resource/edushelf/theprincepatra/cse/3/Algorithim-Analysis-and-Design-1/books/AAD1-book.pdf
+// edushelf/:username/:branch/:semester/:subject/:type/:file
 
 
 

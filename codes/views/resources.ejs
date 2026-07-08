@@ -116,7 +116,7 @@
         <!-- Resource Cards -->
         <section class="resource-grid">
             <% resources.forEach(resource => { %>
-                <a href="<%= resource.url %>" class="resource-card">
+                <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/books" %>" class="resource-card">
                     <div class="card-icon">
                         <i class="fa-solid <%= resource.icon %>"></i>
                     </div>

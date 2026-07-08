@@ -15,7 +15,7 @@
             Back
         </a>
         <div class="logo">
-            <img src="/images/logo.png" alt="logo">
+            <img src="/images/logo_bgremove.png" alt="logo">
             <h2>EduShelf</h2>
         </div>
     </header>
@@ -43,13 +43,8 @@
                                 <p>PDF Document</p>
                             </div>
                         </div>
-                    <!-- <a class="download-btn" target="_blank"
-                        href="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">
-                        Open
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a> -->
 
-                    <a href="/view-pdf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">Open</a>
+                    <a href="edushelf/<%= user.username %>/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">Open</a>
                 </div>
             <% }) %>
         <% } %>
