@@ -532,15 +532,18 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
     const { username, branch, sem, subject, type } = req.params;
     const user = await userModel.findOne({ username });
 
-    // Folder path
     const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type.toLowerCase());
-    // Check if folder exists
-    if (!fs.existsSync(folderPath)) {
-        return res.status(404).send("Resource not found");
-    }
-    res.send(folderPath);
-  }
-);
+    fs.readdir(folderPath, (err, files) => {
+        if (err) {
+            console.log(err);
+            return res.send("Resource folder not found.");
+        }
+
+        // Create pdfFiles
+        const pdfFiles = files.filter(file => file.endsWith(".pdf"));
+        res.render("resource-list", {user, branch, sem, subject, type, files: pdfFiles});
+    });
+});
 
 
 
