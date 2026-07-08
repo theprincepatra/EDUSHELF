@@ -36,7 +36,7 @@ const subjectsData = {
         2:[
             {
                 code:"CSE1004",
-                name:"Introductory Graph Theory",
+                name:"Introduction to Graph Theory",
                 credits:4
             },
             {
@@ -252,8 +252,7 @@ const subjectsData = {
                 credits:4
             }
         ]
-    }
-
+    },
     
 };
 
