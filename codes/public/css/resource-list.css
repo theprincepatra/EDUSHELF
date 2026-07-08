@@ -1,0 +1,157 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo img{
+    width:45px;
+}
+
+.logo h2{
+    color:#4f9dff;
+}
+
+.back-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:white;
+    font-size:16px;
+}
+
+.hero{
+    text-align:center;
+    padding:60px 20px 30px;
+}
+
+.hero h1{
+    font-size:38px;
+    margin-bottom:15px;
+}
+
+.hero h3{
+    color:#4f9dff;
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#bdbdbd;
+}
+
+.resource-container{
+    width:85%;
+    max-width:1100px;
+    margin:auto;
+    padding-bottom:70px;
+}
+
+.resource-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#1e293b;
+    padding:22px;
+    border-radius:16px;
+    margin-bottom:18px;
+    transition:.3s;
+}
+
+.resource-card:hover{
+    transform:translateY(-3px);
+}
+
+.left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.pdf-icon{
+    font-size:40px;
+    color:#ff4b4b;
+}
+
+.left h3{
+    margin-bottom:5px;
+}
+
+.left p{
+    color:#bdbdbd;
+}
+
+.download-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-decoration:none;
+    color:white;
+    background:#4f9dff;
+    padding:12px 22px;
+    border-radius:10px;
+}
+
+.empty{
+    text-align:center;
+    padding:100px 20px;
+}
+
+.empty i{
+    font-size:70px;
+    color:#4f9dff;
+    margin-bottom:20px;
+}
+
+.empty h2{
+    margin-bottom:15px;
+}
+
+.empty p{
+    color:#bdbdbd;
+}
+
+@media(max-width:768px){
+    header{
+        padding:20px;
+    }
+    .logo h2{
+        display:none;
+    }
+    .hero h1{
+        font-size:28px;
+    }
+    .resource-card{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:25px;
+    }
+    .download-btn{
+        width:100%;
+    }
+    .resource-container{
+        width:92%;
+    }
+}
