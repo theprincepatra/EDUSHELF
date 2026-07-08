@@ -1,1 +1,3 @@
-1) in login page, if incorrect data is givne then it going to the another page and showing the error
+1) After clicking on the CSE the photo of the subjects are not visible on the chrome but  visible on the edge
+2) After clicking on the change passwrod the icon photo and the arrow mark of back to profile are not visible on the chrome but  visible on the edge
+3) After clicking on the forgot passwrod the icon photo and the arrow mark of back to profile are not visible on the chrome but  visible on the edge
