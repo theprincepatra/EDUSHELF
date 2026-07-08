@@ -11,16 +11,11 @@
 </head>
 
 <body>
-    <div class="overlay" id="overlay" onclick="toggleSidebar()">
-
-    </div>
-
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-top">
-            <div class="profile-img">
-                <i class="fa-solid fa-user"></i>
-            </div>
-
+            <div class="profile-img"> <i class="fa-solid fa-user"></i> </div>
             <h3>Hello,</h3>
             <h2><%= user.username %></h2>
         </div>
@@ -56,16 +51,13 @@
         </div>
     </aside>
 
+    <!-- MAIN CONTENT -->
     <main class="main" id="main">
 
         <header class="topbar">
             <button class="menu-btn" onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <a href="/back-to-dashboard/<%= user.username %>" class="back-btn">
-                <i class="fa-solid fa-arrow-left"></i>
-                Back
-            </a>
         </header>
 
         <section class="hero">

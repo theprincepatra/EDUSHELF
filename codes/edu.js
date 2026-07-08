@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+// FONT-AWESOME CONFIGURATION
 app.use("/fontawesome",express.static(
     path.join(process.cwd(), "node_modules/@fortawesome/fontawesome-free")
   )
@@ -522,15 +522,7 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => 
 app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req, res) => {
     const user = await userModel.findOne({ username: req.params.username });
     const { branch, sem, subject } = req.params;
-    const resources = [
-        "Notes",
-        "Assignments",
-        "Assignment Book",
-        "Lesson Plan",
-        "PYQ",
-        "Quiz"
-    ];
-
+    const resources = ["Notes", "Assignments", "Assignment Book", "Lesson Plan", "PYQ", "Quiz"];
     res.render('resources', { branch, sem, subject, resources, user });
 });
 // GET resource list page
