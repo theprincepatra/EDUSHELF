@@ -15,6 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use("/fontawesome",express.static(
+    path.join(process.cwd(), "node_modules/@fortawesome/fontawesome-free")
+  )
+);
+
 // MULTER CONFIGURATION
 const multer = require("multer");
 const storage = multer.diskStorage({
