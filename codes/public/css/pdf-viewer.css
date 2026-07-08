@@ -1,0 +1,99 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0f0f11;
+    color:#fff;
+}
+header{
+    height:75px;
+    padding:0 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    background:#141418;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    /* margin-left: -20px; */
+}
+.logo img{
+    width:42px;
+}
+.logo h2{
+    font-size:30px;
+    font-weight:600;
+    margin-top: 3px;
+}
+
+.back-btn{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+    text-decoration:none;
+    font-size:20px;
+    transition:.3s;
+    letter-spacing: 2px;
+}
+.back-btn:hover{
+    color:#4f9dff;
+}
+
+.hero{
+    text-align:center;
+    padding:18px 20px;
+}
+.hero h1{
+    font-size:40px;
+}
+.hero h3{
+    color:#4f9dff;
+    letter-spacing:2px;
+    margin-bottom:30px;
+}
+.hero p{
+    color:#a9a9a9;
+    font-size:15px;
+}
+
+.viewer{
+    width:80%;
+    height:calc(123vh - 220px);
+    margin:auto;
+    border-radius:16px;
+    overflow:hidden;
+    margin-top: -5px;
+}
+.viewer iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
+@media(max-width:768px){
+    header{
+        padding:0 20px;
+    }
+    .logo h2{
+        font-size: 23px;
+        margin-left: -5px;
+    }
+    .hero{
+        padding:25px 15px;
+    }
+    .hero h1{
+        font-size:28px;
+    }
+    .viewer{
+        width:96%;
+        height:82vh;
+    }
+}

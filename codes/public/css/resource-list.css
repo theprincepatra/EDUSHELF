@@ -12,7 +12,7 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:20px 8%;
+    padding:17px 8%;
     border-bottom:1px solid rgba(255,255,255,.08);
 }
 
@@ -22,10 +22,12 @@ header{
     gap:10px;
 }
 .logo img{
-    width:45px;
+    width:57px;
 }
 .logo h2{
     color:#4f9dff;
+    font-size:30px;
+    margin-top:4px;
 }
 
 .back-btn{
