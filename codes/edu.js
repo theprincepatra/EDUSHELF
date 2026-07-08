@@ -518,18 +518,29 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => 
 
 
 
-// GET resources page
+// GET Resources page-----------------------------------------------------------------------------
 app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req, res) => {
     const user = await userModel.findOne({ username: req.params.username });
     const { branch, sem, subject } = req.params;
     const resources = ["Notes", "Assignments", "Assignment Book", "Lesson Plan", "PYQ", "Quiz"];
     res.render('resources', { branch, sem, subject, resources, user });
 });
-// GET resource list page
-app.get("/resources/:subject/:type", (req, res) => {
-    const { subject, type } = req.params;
-    res.render("resource-list", { user: req.user, subject, type });
-});
+
+
+// GET Resource-list page-----------------------------------------------------------------------------
+app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resource/:type", async (req, res) => {
+    const { username, branch, sem, subject, type } = req.params;
+    const user = await userModel.findOne({ username });
+
+    // Folder path
+    const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type.toLowerCase());
+    // Check if folder exists
+    if (!fs.existsSync(folderPath)) {
+        return res.status(404).send("Resource not found");
+    }
+    res.send(folderPath);
+  }
+);
 
 
 
