@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= type %></title>
+    <title><%= subject %> - <%= type %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/css/resource-list.css">
 </head>
-
 <body>
-    <h1><%= subject %></h1>
-    <h2><%= type.toUpperCase() %></h2>
-    <p>This page will contain all <%= type %> for <%= subject %>.</p>
+    <header>
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+        </a>
+        <div class="logo">
+            <img src="/images/logo.png" alt="logo">
+            <h2>EduShelf</h2>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1><%= subject.replace(/-/g," ") %></h1>
+        <h3><%= type.toUpperCase() %></h3>
+        <p>Browse all available <%= type %> for this subject.</p>
+    </section>
+
+    <section class="resource-container">
+        <% if(files.length===0){ %>
+            <div class="empty">
+                <i class="fa-regular fa-folder-open"></i>
+                <h2>No <%= type %> Available</h2>
+                <p>Resources will be uploaded soon.</p>
+            </div>
+        <%} else{ %>
+            <% files.forEach(file=>{ %>
+                <div class="resource-card">
+                        <div class="left">
+                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
+                            <div>
+                                <h3><%= file.replace(".pdf","") %></h3>
+                                <p>PDF Document</p>
+                            </div>
+                        </div>
+                    <a class="download-btn" target="_blank"
+                        href="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">
+                        Open
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            <% }) %>
+        <% } %>
+    </section>
 
 </body>
 </html>
