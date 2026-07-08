@@ -202,20 +202,6 @@ a{
     transform:scale(1.05);
 }
 
-.back-btn{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 22px;
-    border-radius:12px;
-    background:#232326;
-    color:#fff;
-    transition:.35s;
-}
-
-.back-btn:hover{
-    background:#3b3b40;
-}
 
 /* =========================
         HERO SECTION
@@ -330,10 +316,7 @@ a{
     box-shadow:0 20px 45px rgba(0,0,0,.35);
 }
 
-/* =========================
-        ICON
-========================= */
-
+/* ICON */
 .card-icon{
     width:72px;
     height:72px;
@@ -348,15 +331,11 @@ a{
     box-shadow:0 12px 25px rgba(0,0,0,.25);
     transition:.35s;
 }
-
 .semester-card:hover .card-icon{
     transform:rotate(-8deg) scale(1.08);
 }
 
-/* =========================
-        CONTENT
-========================= */
-
+/* CONTENT */
 .card-content{
     flex:1;
 }
@@ -383,9 +362,7 @@ a{
     color:#d4d4d8;
 }
 
-/* =========================
-        ARROW
-========================= */
+/* ARROW */
 
 .card-arrow{
     width:46px;
@@ -513,21 +490,11 @@ a{
         GLOBAL TRANSITIONS
 ========================= */
 
-.sidebar,
-.main,
-.hero,
-.menu-btn,
-.back-btn,
-.logout-btn,
-.semester-card,
-.card-icon,
-.card-arrow{
+.sidebar, .main, .hero, .menu-btn, .logout-btn, .semester-card, .card-icon, .card-arrow{
     transition:all .35s ease;
 }
 
-/* =========================
-        HOVER EFFECTS
-========================= */
+/* HOVER EFFECTS */
 
 .hero:hover{
     transform:translateY(-4px);
@@ -564,10 +531,6 @@ a{
 }
 
 .menu-btn:hover{
-    box-shadow:0 12px 25px rgba(255,255,255,.08);
-}
-
-.back-btn:hover{
     box-shadow:0 12px 25px rgba(255,255,255,.08);
 }
 
@@ -704,12 +667,6 @@ a{
         width:48px;
         height:48px;
     }
-
-    .back-btn{
-        font-size:14px;
-        padding:10px 18px;
-    }
-
 }
 
 /* =========================

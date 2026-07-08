@@ -13,9 +13,7 @@
 </head>
 
 <body>
-    <div class="overlay" id="overlay" onclick="toggleSidebar()">
-
-    </div>
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
@@ -102,9 +100,7 @@
             }; %>
 
             <% subjects.forEach(subject => { %>
-
-            <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= encodeURIComponent(subject.name) %>"
-            class="subject-card">
+                <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= encodeURIComponent(subject.name) %>"class="subject-card">
 
                 <!-- Subject Icon -->
                 <div class="card-icon">
