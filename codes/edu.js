@@ -544,6 +544,10 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
         res.render("resource-list", {user, branch, sem, subject, type, files: pdfFiles});
     });
 });
+// GET PDF viewer page-----------------------------------------------------------------------------
+app.get("/view-pdf/:branch/:sem/:subject/:type/:file", (req, res) => {
+    res.render("pdf-viewer", {branch: req.params.branch, sem: req.params.sem, subject: req.params.subject, type: req.params.type, file: req.params.file});
+});
 
 
 
