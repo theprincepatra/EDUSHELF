@@ -13,7 +13,8 @@ header{
     justify-content:space-between;
     align-items:center;
     padding:17px 8%;
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255, 255, 255, 0.207);
+    background:#0c1323;
 }
 
 .logo{
@@ -37,6 +38,10 @@ header{
     text-decoration:none;
     color:white;
     font-size:21px;
+    transition: .1s;
+}
+.back-btn:hover{
+    color: rgb(101, 101, 101);
 }
 
 .hero{
