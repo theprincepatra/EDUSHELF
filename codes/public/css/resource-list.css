@@ -36,16 +36,16 @@ header{
     gap:10px;
     text-decoration:none;
     color:white;
-    font-size:16px;
+    font-size:21px;
 }
 
 .hero{
     text-align:center;
-    padding:60px 20px 30px;
+    padding:50px 20px 30px;
 }
 .hero h1{
     font-size:38px;
-    margin-bottom:15px;
+    margin-bottom:5px;
 }
 .hero h3{
     color:#4f9dff;
@@ -54,6 +54,7 @@ header{
 }
 .hero p{
     color:#bdbdbd;
+    margin-top: 25px;
 }
 
 .resource-container{
@@ -70,6 +71,7 @@ header{
     padding:22px;
     border-radius:16px;
     margin-bottom:18px;
+    margin-top:-8px;
     transition:.3s;
 }
 .resource-card:hover{
