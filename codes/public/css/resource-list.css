@@ -5,7 +5,7 @@
     font-family:'Poppins',sans-serif;
 }
 body{
-    background:#0f172a;
+    background:#060b15;
     color:white;
 }
 header{
@@ -50,7 +50,7 @@ header{
 }
 .hero h1{
     font-size:38px;
-    margin-bottom:5px;
+    margin-bottom:17px;
 }
 .hero h3{
     color:#4f9dff;
