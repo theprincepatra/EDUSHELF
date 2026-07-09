@@ -154,17 +154,13 @@ a{
     background:#47474d;
 }
 
-/* =======================
-          MAIN
-======================= */
-
+/* MAIN */
 .main{
     width:100%;
     min-height:100vh;
     padding:35px 45px;
     transition:.35s;
 }
-
 .main.shift{
     margin-left:280px;
 }
@@ -210,9 +206,7 @@ a{
     background:#404047;
 }
 
-/* =======================
-          HERO
-======================= */
+/* HERO */
 
 .hero{
     position:relative;
@@ -297,7 +291,6 @@ a{
     transition:.35s;
     box-shadow:0 12px 30px rgba(0,0,0,.28);
 }
-
 .subject-card::before{
     content:"";
     position:absolute;
@@ -307,11 +300,9 @@ a{
     linear-gradient(120deg, transparent, rgba(255,255,255,.05), transparent);
     transition:.8s;
 }
-
 .subject-card:hover::before{
     left:120%;
 }
-
 .subject-card:hover{
     transform:translateY(-12px);
     background:#242428;
@@ -319,10 +310,7 @@ a{
     box-shadow:0 25px 55px rgba(0,0,0,.45);
 }
 
-/* =======================
-        ICON
-======================= */
-
+/* ICON */
 .card-icon{
     width:78px;
     height:78px;
@@ -336,7 +324,6 @@ a{
     font-size:30px;
     transition:.35s;
 }
-
 .subject-card:hover .card-icon{
     transform:rotate(-8deg) scale(1.08);
     box-shadow:0 12px 25px rgba(255,255,255,.08);
