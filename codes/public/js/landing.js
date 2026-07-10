@@ -1,9 +1,6 @@
 // Navbar
-
 const header = document.querySelector("header");
-
 window.addEventListener("scroll", () => {
-
     if (window.scrollY > 80) {
         header.style.background = "rgba(5,5,5,.85)";
         header.style.borderBottom = "1px solid rgba(255,255,255,.08)";
@@ -11,39 +8,27 @@ window.addEventListener("scroll", () => {
         header.style.background = "rgba(5,5,5,.45)";
         header.style.borderBottom = "1px solid rgba(255,255,255,.06)";
     }
-
 });
 
 // Platform Slider
+const platformImages=document.querySelectorAll(".slides img");
+let platformIndex=0;
 
-const platformImages = document.querySelectorAll(".slides img");
+platformImages[0].classList.add("active");
 
-let platformIndex = 0;
-
-setInterval(() => {
-
+setInterval(()=>{
     platformImages[platformIndex].classList.remove("active");
-
-    platformIndex++;
-
-    if (platformIndex >= platformImages.length) {
-        platformIndex = 0;
-    }
-
+    platformIndex=(platformIndex+1)%platformImages.length;
     platformImages[platformIndex].classList.add("active");
-
-}, 3500);
+},3500);
 
 // Feature Slider
-
 const featureTexts = document.querySelectorAll(".feature-text");
 const featureImages = document.querySelectorAll(".feature-image");
 const dots = document.querySelectorAll(".dot");
 
 let featureIndex = 0;
-
 function featureSlider() {
-
     featureTexts[featureIndex].classList.remove("active");
     featureImages[featureIndex].classList.remove("active");
     dots[featureIndex].classList.remove("active");
