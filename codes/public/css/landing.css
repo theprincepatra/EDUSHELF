@@ -95,7 +95,7 @@ nav{
 nav a{
     color:#ddd;
     font-size:15px;
-    transition:.35s;
+    transition:.25s;
 }
 nav a:hover{
     color:#46d576;
@@ -106,7 +106,7 @@ nav a:hover{
     background:linear-gradient(135deg,#67d46d,#40a2ff);
     color:#fff;
     font-weight:700;
-    transition:.35s;
+    transition:.25s;
 }
 .nav-btn:hover{
     transform:translateY(-4px);
