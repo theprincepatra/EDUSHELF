@@ -98,7 +98,7 @@ nav a{
     transition:.35s;
 }
 nav a:hover{
-    color:#fff;
+    color:#46d576;
 }
 .nav-btn{
     padding:14px 24px;
@@ -111,6 +111,7 @@ nav a:hover{
 .nav-btn:hover{
     transform:translateY(-4px);
     box-shadow:0 15px 35px rgba(64,162,255,.35);
+    color: white;
 }
 .hero-container{
     width:86%;
@@ -290,7 +291,7 @@ nav a:hover{
 
 .section-head{
     text-align:center;
-    margin-bottom:75px;
+    margin-bottom:50px;
 }
 .section-head p{
     color:#67d46d;
