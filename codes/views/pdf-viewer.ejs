@@ -28,7 +28,7 @@
 
     <div class="viewer">
         <iframe
-            src="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type %>/<%= file %>">
+            src="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type %>/<%= folder ? folder + '/' : '' %><%= file %>">
         </iframe>
     </div>
 </body>

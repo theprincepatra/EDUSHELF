@@ -1,54 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= subject %> - <%= type %></title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="/css/resource-list.css">
+    <title>
+        <%= subject.replace(/-/g," ") %> | EduShelf</title>
+    <link rel=" preconnect" href="https://fonts.googleapis.com">
+            <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+                rel="stylesheet">
+            <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+            <link rel="stylesheet" href="/css/resource-list.css">
 </head>
+
 <body>
     <header>
-        <a href="javascript:history.back()" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back
-        </a>
-        <div class="logo">
-            <img src="/images/logo_bgremove.png" alt="logo">
-            <h2>EduShelf</h2>
+        <div class="header-left">
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo">
+                <img src="/images/logo_bgremove.png" alt="logo">
+                <div>
+                    <h2>EduShelf</h2>
+                    <p>Resource Explorer</p>
+                </div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="searchInput" type="text" placeholder="Search folders, PDFs, images...">
+            </div>
         </div>
     </header>
 
     <section class="hero">
-        <h1><%= subject.replace(/-/g," ") %></h1>
+        <div class="hero-left">
+            <h1>
+                <%= subject.replace(/-/g," ") %></h1>
         <h3><%= type.toUpperCase() %></h3>
-        <p>Browse all available <%= type %> for this subject.</p>
-    </section>
+        <p>Browse folders, notes, books, PDFs and images in one place.</p>
 
-    <section class="resource-container">
-        <% if(files.length===0){ %>
-            <div class="empty">
-                <i class="fa-regular fa-folder-open"></i>
-                <h2>No <%= type %> Available</h2>
-                <p>Resources will be uploaded soon.</p>
-            </div>
-        <%} else{ %>
-            <% files.forEach(file=>{ %>
-                <div class="resource-card">
-                        <div class="left">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div>
-                                <h3><%= file.replace(".pdf","") %></h3>
-                                <p>PDF Document</p>
-                            </div>
-                        </div>
+        <div class=" breadcrumb">
+                    <a
+                        href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <span>
+                            <%= type.charAt(0).toUpperCase()+type.slice(1) %>
+                        </span>
+                    </a>
 
-                    <a href="/edushelf/<%= user.username %>/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file %>">Open</a>
+                    <% if(currentPath){ %>
+                        <% const paths=currentPath.split("/"); %>
+                            <% let current="" ; %>
+                                <% paths.forEach((folder,index)=>{ %>
+                                    <% current+=(index===0?"":"/")+folder; %>
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                        <a
+                                            href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>?folder=<%= encodeURIComponent(current) %>">
+                                            <%= folder %>
+                                        </a>
+                                        <% }) %>
+                                            <% } %>
+        </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="stats-card">
+                <div>
+                    <h2>
+                        <%= resources.length %>
+                    </h2>
+                    <p>Total Resources</p>
                 </div>
-            <% }) %>
-        <% } %>
+                <i class="fa-solid fa-folder-tree"></i>
+            </div>
+        </div>
     </section>
+
+    <section class="explorer">
+        <div class="explorer-top">
+            <div>
+                <h2>Resource Explorer</h2>
+                <span>Folders are shown first followed by files.</span>
+            </div>
+        </div>
+        <div class="explorer-body">
+            <% const folders=resources.filter(r=>r.type==="folder");
+                const files=resources.filter(r=>r.type!=="folder");
+            %>
+            <% if(resources.length===0){ %>
+                <div class="empty-state">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <h2>Folder is Empty</h2>
+                    <p>No resources found.</p>
+                </div>
+            <% }else{ %>
+                <% if(folders.length>0){ %>
+                    <div class="section-heading">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>Folders</span>
+                    </div>
+                    <% folders.forEach(folder=>{ %>
+                        <div class="explorer-item folder-item" data-name="<%= folder.name.toLowerCase() %>">
+                            <div class="item-left">
+                                <div class="item-icon folder-icon">
+                                    <i class="fa-solid fa-folder"></i>
+                                </div>
+                                <div class="item-details">
+                                    <h3><%= folder.name %></h3>
+                                    <p>Folder</p>
+                                </div>
+                            </div>
+                            <a class="open-btn" href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>?folder=<%= encodeURIComponent(currentPath?currentPath+'/':'') %><%= encodeURIComponent(folder.name) %>">
+                                Open
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    <% }) %>
+                <% } %>
+                <% if(files.length>0){ %>
+                    <div class="section-heading">
+                        <i class="fa-solid fa-file"></i>
+                        <span>Files</span>
+                    </div>
+
+                    <% files.forEach(file=>{ %>
+                        <div class="explorer-item file-item"
+                            data-name="<%= file.name.toLowerCase() %>">
+                            <div class="item-left">
+                                <div class="item-icon
+                                    <%= file.type===" pdf"?"pdf-icon":"" %>
+                                    <%= file.type==="image" ?"image-icon":"" %>
+                                    <%= file.type==="word" ?"word-icon":"" %>
+                                    <%= file.type==="ppt" ?"ppt-icon":"" %>
+                                    <%= file.type==="excel" ?"excel-icon":"" %>
+                                    <%= file.type==="zip" ?"zip-icon":"" %>">
+
+                                    <% if(file.type==="pdf" ){ %>
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                        <% }else if(file.type==="image" ){%>
+                                            <i class="fa-solid fa-image"></i>
+                                        <% }else if(file.type==="word"){ %>
+                                            <i class="fa-solid fa-file-word"></i>
+                                        <% }else if(file.type==="ppt" ){%>
+                                            <i class="fa-solid fa-file-powerpoint"></i>
+                                        <% }else if(file.type==="excel"){ %>
+                                            <i class="fa-solid fa-file-excel"></i>
+                                        <% }else
+                                            if(file.type==="zip"){ %>
+                                                <i class="fa-solid fa-file-zipper"></i>
+                                        <% }else{ %>
+                                            <i class="fa-solid fa-file"></i>
+                                    <% } %>
+                                </div>
+                                <div class="item-details">
+                                    <h3><%= file.name %></h3>
+                                    <p><%= file.type.toUpperCase() %></p>
+                                </div>
+                            </div>
+                            <% if(file.type==="folder" ){ %>
+                                <a class="open-btn" href="#">Open
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            <% }else if(file.type==="pdf" ){ %>
+                                <a class="open-btn" href="/edushelf/<%= user.username %>/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file.name %>?folder=<%= encodeURIComponent(currentPath) %>">
+                                    Open
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            <% }else if(file.type==="image" ){ %>
+                                <a class="open-btn" href="/resources/<%= branch %>/sem<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= currentPath?currentPath+'/':'' %><%= file.name %>"
+                                    target="_blank">
+                                    View
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            <% }else{ %>
+                                <span class="disabled-btn">Unsupported</span>
+                            <% } %>
+                        </div>
+                    <% }) %>
+                <% } %>
+            <% } %>
+        </div>
+    </section>
+
+    <div class="no-results" id="noResults">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <h2>No Resources Found</h2>
+        <p>Try searching with another keyword.</p>
+    </div>
+
+    <script>
+        const searchInput=document.getElementById("searchInput");
+        const explorerItems=document.querySelectorAll(".explorer-item");
+        const noResults=document.getElementById("noResults");
+        const sectionHeadings=document.querySelectorAll(".section-heading");
+
+        searchInput.addEventListener("keyup",()=>{
+            const value=searchInput.value.toLowerCase().trim();
+            let visible=0;
+            explorerItems.forEach(item=>{
+                const name=item.dataset.name;
+                if(name.includes(value)){
+                    item.style.display="flex";
+                    visible++;
+                }else{
+                    item.style.display="none";
+                }
+            });
+            sectionHeadings.forEach(section=>{
+                const nextItems=[];
+                let next=section.nextElementSibling;
+                while(next && !next.classList.contains("section-heading")){
+                    if(next.classList.contains("explorer-item")){
+                        nextItems.push(next);
+                    }
+                    next=next.nextElementSibling;
+                }
+                const hasVisible=nextItems.some(item=>item.style.display!=="none");
+                section.style.display=hasVisible?"flex":"none";
+            });
+            if(visible===0){
+                noResults.style.display="flex";
+            }else{
+                noResults.style.display="none";
+            }
+        });
+    </script>
 
 </body>
 </html>

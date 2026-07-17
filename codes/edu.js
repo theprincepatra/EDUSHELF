@@ -532,23 +532,44 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
     const { username, branch, sem, subject, type } = req.params;
     const user = await userModel.findOne({ username });
 
-    const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type.toLowerCase());
-    fs.readdir(folderPath, (err, files) => {
-        if (err) {
+    const extraPath = req.query.folder ? decodeURIComponent(req.query.folder) : "";
+    console.log("Extra Path:", extraPath);
+    const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type.toLowerCase(), extraPath);
+    console.log("Folder Path:", folderPath);
+    console.log(path.join("assignments","Ass1 answer"));
+    
+
+    fs.readdir(folderPath,{withFileTypes:true},(err,items)=>{
+        if(err){
             console.log(err);
-            return res.send("Resource folder not found.");
+            return res.send("Folder not found.");
         }
-        // Create pdfFiles
-        const pdfFiles = files.filter(file => file.endsWith(".pdf"));
-        res.render("resource-list", {user, branch, sem, subject, type, files: pdfFiles});
+
+        const resources=items.map(item=>{
+            let fileType="file";
+            if(item.isDirectory()){
+                fileType="folder";
+            }else{
+                const ext=path.extname(item.name).toLowerCase();
+                if(ext===".pdf") fileType="pdf";
+                else if([".png",".jpg",".jpeg",".webp",".gif"].includes(ext)) fileType="image";
+                else if([".doc",".docx"].includes(ext)) fileType="word";
+                else if([".ppt",".pptx"].includes(ext)) fileType="ppt";
+                else if([".xls",".xlsx"].includes(ext)) fileType="excel";
+                else if([".zip",".rar"].includes(ext)) fileType="zip";
+            }
+            return{name:item.name, type:fileType};
+        });
+        res.render("resource-list", {user, branch, sem, subject, type, resources, currentPath:extraPath});
     });
 });
 
 
 // GET PDF viewer page-----------------------------------------------------------------------------
-app.get("/edushelf/:username/:branch/:semester/:subject/:type/:file", (req, res) => {
-    console.log(req.params.file);
-    res.render("pdf-viewer", {username: req.params.username, branch: req.params.branch, sem: req.params.semester, subject: req.params.subject, type: req.params.type, file: req.params.file});
+app.get("/edushelf/:username/:branch/:semester/:subject/:type/:file",(req,res)=>{
+    const {username,branch,semester,subject,type,file}=req.params;
+    const folder=req.query.folder||"";
+    res.render("pdf-viewer",{username,branch,sem:semester,subject,type,file,folder});
 });
 
 
@@ -556,8 +577,7 @@ app.get("/edushelf/:username/:branch/:semester/:subject/:type/:file", (req, res)
 
 
 
-
-// local host 3000 port
+// local host 3000 port------------------------------------------------------------------------------
 app.listen(3000, function () {
     console.log('Server is running on http://localhost:3000');
 });

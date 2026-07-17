@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
-
 *{
     margin:0;
     padding:0;
@@ -643,7 +642,6 @@ nav a:hover{
     color:#b8b8b8;
     font-size:18px;
 }
-
 /* FAQ */
 
 .faq{
@@ -653,7 +651,7 @@ nav a:hover{
 
 .faq-container{
     max-width:950px;
-    margin:70px auto 0;
+    margin:55px auto 0;
 }
 
 .faq-item{
@@ -790,7 +788,7 @@ footer{
     color: white;
 }
 .socials > :last-child:hover {
-    background: linear-gradient(220deg, purple,red,yellow);
+    background: linear-gradient(129deg, purple,red,yellow);
     color: white;
 }
 
@@ -815,15 +813,16 @@ footer{
 /* Responsive */
 
 @media(max-width:1200px){
-
-    .hero-container,
-    .platform-wrapper,
-    .about,
-    .feature-showcase{
+    .hero-container, .platform-wrapper, .about, .feature-showcase{
         grid-template-columns:1fr;
-        gap:70px;
+        gap:0px;
     }
-
+    .about-right{
+        margin-top: 38px;
+    }
+    .section-head{
+        margin-bottom: 15px;
+    }
     .hero-left{
         text-align:center;
     }
@@ -905,7 +904,6 @@ footer{
 }
 
 @media(max-width:768px){
-
     header{
         flex-direction:column;
         gap:25px;
@@ -914,7 +912,6 @@ footer{
         flex-wrap:wrap;
         justify-content:center;
     }
-
     .hero{
         padding-top:170px;
         padding-bottom:40px;
@@ -944,7 +941,6 @@ footer{
 
     .browser{
         transform:none;
-        margin-top: -55px;
     }
     .browser-body{
         height: 162px;
