@@ -124,14 +124,14 @@ const subjectsData = {
             },
             {
                 code:"EET2211",
-                name:"Commputer Organisation and Architecture",
-                slug:"Commputer-Organisation-and-Architecture",
+                name:"Computer Organisation and Architecture",
+                slug:"Computer-Organisation-and-Architecture",
                 credits:4
             },
             {
                 code:"CSE2632",
-                name:"Algorithm Analysis and Design 2",
-                slug:"Algorithm-Analysis-and-Design-2",
+                name:"Algorithim Analysis and Design 2",
+                slug:"Algorithim-Analysis-and-Design-2",
                 credits:4
             },
             {

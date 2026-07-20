@@ -1035,14 +1035,15 @@ footer{
     .section-head h2{
         font-size:32px;
     }
-
-    .platform-left h2,
-    .about-left h2{
+    .platform-left h2,.about-left h2{
         font-size:40px;
     }
-
     .feature-text h2{
         font-size:30px;
+        margin: 15px 0;
+    }
+    .feature-text p{
+        line-height: 22px;
     }
 
     .stat h2{

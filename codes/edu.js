@@ -517,13 +517,20 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => 
 
 
 
-
 // GET Resources page-----------------------------------------------------------------------------
 app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req, res) => {
     const user = await userModel.findOne({ username: req.params.username });
     const { branch, sem, subject } = req.params;
-    const resources = ["Notes", "Assignments", "Assignment Book", "Lesson Plan", "PYQ", "Quiz"];
-    res.render('resources', { branch, sem, subject, resources, user });
+    const subjectPath = path.join( __dirname, "public", "resources", branch, `sem${sem}`, subject );
+
+    fs.readdir(subjectPath, { withFileTypes: true }, (err, items) => {
+        if (err) {
+            console.log(err);
+            return res.send("Subject folder not found.");
+        }
+        const resources = items.filter(item => item.isDirectory()).map(item => ({name: item.name}));
+        res.render("resources", { user, branch, sem, subject, resources });
+    });
 });
 
 
@@ -533,10 +540,7 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
     const user = await userModel.findOne({ username });
 
     const extraPath = req.query.folder ? decodeURIComponent(req.query.folder) : "";
-    console.log("Extra Path:", extraPath);
-    const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type.toLowerCase(), extraPath);
-    console.log("Folder Path:", folderPath);
-    console.log(path.join("assignments","Ass1 answer"));
+    const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type, extraPath);
     
 
     fs.readdir(folderPath,{withFileTypes:true},(err,items)=>{

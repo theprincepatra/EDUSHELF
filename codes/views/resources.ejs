@@ -8,46 +8,7 @@
     <link rel="stylesheet" href="/fontawesome/css/all.min.css">
 </head>
 <body>
-    <%
-    const resources = [
-        {
-            title: "Notes",
-            icon: "fa-book-open",
-            description: "Lecture notes, handwritten notes and study material.",
-            url: `/resources/${subject}/notes`
-        },
-        {
-            title: "Assignments",
-            icon: "fa-file-lines",
-            description: "College assignments and practice questions.",
-            url: `/resources/${subject}/assignments`
-        },
-        {
-            title: "Books",
-            icon: "fa-book",
-            description: "Recommended books and reference materials.",
-            url: `/resources/${subject}/book`
-        },
-        {
-            title: "Lesson Plan",
-            icon: "fa-calendar-days",
-            description: "Weekly lesson plan and syllabus schedule.",
-            url: `/resources/${subject}/lesson-plan`
-        },
-        {
-            title: "PYQ's",
-            icon: "fa-folder-open",
-            description: "University previous year question papers.",
-            url: `/resources/${subject}/pyq`
-        },
-        {
-            title: "Quiz",
-            icon: "fa-graduation-cap",
-            description: "Practice quizzes to test your preparation.",
-            url: `/resources/${subject}/quiz`
-        }
-    ];
-    %>
+    
 
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
     <!-- Sidebar -->
@@ -115,15 +76,16 @@
 
         <!-- Resource Cards -->
         <section class="resource-grid">
-            <% resources.forEach(resource => { %>
-                <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= resource.title.toLowerCase().replace(" ","-") %>" %>" class="resource-card">
+            <% resources.forEach(resource=>{ %>
+                <a href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= encodeURIComponent(resource.name) %>" class="resource-card">
+
                     <div class="card-icon">
-                        <i class="fa-solid <%= resource.icon %>"></i>
+                        <i class="fa-solid fa-folder"></i>
                     </div>
 
                     <div class="card-content">
-                        <h2><%= resource.title %></h2>
-                        <p><%= resource.description %></p>
+                        <h2><%= resource.name %></h2>
+                        <p>Open this folder.</p>
                     </div>
 
                     <div class="card-arrow">
