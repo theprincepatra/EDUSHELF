@@ -4,6 +4,10 @@ const nodemailer = require("nodemailer");
 const app = express();
 const path = require('path');
 const fs = require('fs');
+
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+
 require('dotenv').config();
 
 const subjectsData = require("./subjectsData");
@@ -13,6 +17,23 @@ const supportModel = require("./models/supportModel");
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.MONGO_URI
+        }),
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24,
+            httpOnly: true,
+            sameSite: "lax"
+        }
+    })
+);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 // FONT-AWESOME CONFIGURATION
