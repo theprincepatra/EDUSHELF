@@ -87,16 +87,23 @@ a{
 }
 
 .profile-img{
-    width:90px;
-    height:90px;
+    width:95px;
+    height:95px;
     margin:auto;
     border-radius:50%;
+    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(145deg,#3b3b42,#5b5b63);
-    font-size:34px;
-    margin-bottom:18px;
+    background:linear-gradient(145deg,#2c2c2f,#4b4b50);
+    box-shadow:0 12px 25px rgba(0,0,0,.35);
+    margin-bottom:20px;
+}
+.user_icon{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
 .sidebar-top h3{
