@@ -24,7 +24,7 @@
 
             <div class="sidebar-items">
                 <a onclick="showSection('dashboard')">Dashboard</a>
-                <a href="/profile/<%= user.username %>">Profile</a>
+                <a href="/profile">Profile</a>
                 <a onclick="showSection('subscription')">Subscription</a>
                 <a onclick="showSection('star')">Star</a>
                 <a href="/support/<%= user.username %>">Support</a>
@@ -351,8 +351,8 @@
                 </div>
 
                 <div class="items">
-                    <a href="/subscription/<%= user.username %>">Subscription</a>
-                    <a href="/star/<%= user.username %>">Star</a>
+                    <a href="#">Subscription</a>
+                    <a href="#">Star</a>
                 </div>
 
             </div>
@@ -366,7 +366,7 @@
 
     <!-- PROFILE IMAGE -->
     <div class="image">
-        <a href="/profile/<%= user.username %>"><img src=<%= user.profilepicture %> alt="User Icon" class="user_icon"></a>
+        <a href="/profile"><img src=<%= user.profilepicture %> alt="User Icon" class="user_icon"></a>
     </div>
 
 

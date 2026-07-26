@@ -758,6 +758,11 @@ footer{
     display: flex;
     flex-direction: row;
 }
+.name{
+    margin-left: 6px;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+}
 .socials{
     display:flex;
     gap:15px;

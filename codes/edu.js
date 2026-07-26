@@ -4,15 +4,20 @@ const nodemailer = require("nodemailer");
 const app = express();
 const path = require('path');
 const fs = require('fs');
-
+const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 
 require('dotenv').config();
+mongoose.connect("mongodb://127.0.0.1:27017/siginupDB")
+    .then(() => console.log("✅ MongoDB Connected"))
+    .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 const subjectsData = require("./subjectsData");
 const userModel = require('./models/user');
 const supportModel = require("./models/supportModel");
+
+const isLoggedIn = require("./middleware/auth");
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -24,7 +29,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
-            mongoUrl: process.env.MONGO_URI
+            mongoUrl: "mongodb://127.0.0.1:27017/edushelf"
         }),
         cookie: {
             maxAge: 1000 * 60 * 60 * 24,
@@ -301,16 +306,29 @@ app.post('/login', async function (req, res) {
         if (!isMatch) {
             return res.status(400).send('Invalid password');
         }
+        // Session ID
+        req.session.userId = user._id;
+        console.log("Session User ID:", req.session.userId);
 
         // Update login timestamps
         user.lastLogin = user.currentLogin;
-        user.currentLogin = Date.now();
+        user.currentLogin = Date.now(); 
         await user.save();
-        res.send(`/dashboard/${user.username}`);
+
+        res.send("/dashboard");
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
+});
+
+app.get("/session-test", (req, res) => {
+    console.log(req.session);
+
+    res.json({
+        userId: req.session.userId,
+        session: req.session
+    });
 });
 
 // GET signup 
@@ -442,12 +460,23 @@ app.post("/forgot-password/reset-password", async (req, res) => {
 
 
 // DASGBOARD PAGE---------------------------------------------------------
+
+// New session-based route
+app.get("/dashboard", isLoggedIn, (req, res) => {
+    res.render("dashboard", {user: req.user});
+});
+
+
 // GET dashboard
 app.get('/dashboard/:username', async function (req, res) {
     let user = await userModel.findOne({ username: req.params.username });
     res.render('dashboard', { user });
 });
 // GET profile
+app.get("/profile", isLoggedIn, (req, res) => {
+    res.render("profile", {user: req.user});
+});
+
 app.get('/profile/:username', async function (req, res) {
     let user = await userModel.findOne({ username: req.params.username });
     res.render('profile', { user });
