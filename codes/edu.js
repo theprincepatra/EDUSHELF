@@ -513,7 +513,7 @@ app.post("/support", async (req, res) => {
 
 
 // BRANCH PAGES----------------------------------------------------
-app.get('/edushelf/branch/:branch', isLoggedIn, (req, res) => {
+app.get('/edushelf/:branch', isLoggedIn, (req, res) => {
     const branch = req.params.branch;
     res.render('semester', { branch, user:req.user });
 });
