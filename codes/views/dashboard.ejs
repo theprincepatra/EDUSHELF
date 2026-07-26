@@ -17,9 +17,7 @@
         <div class="sidebar" id="sidebar">
             <div class="designation">
                 <h3>Hello</h3>
-                <h2>
-                    <%= user.username %>
-                </h2>
+                <h2><%= user.username %></h2>
             </div>
 
             <div class="sidebar-items">
@@ -30,7 +28,7 @@
                 <a href="/support/<%= user.username %>">Support</a>
             </div>
 
-            <button class="logout"><a href="/logout/<%= user.username %>">Log Out</a></button>
+            <button class="logout"><a href="/logout">Log Out</a></button>
 
         </div>
 

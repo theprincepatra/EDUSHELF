@@ -17,10 +17,7 @@
             <form action="/profile/edit" method="POST" enctype="multipart/form-data">
                 <div class="profile-section">
                     <div class="image-wrapper">
-                        <img
-                            id="profilePreview"
-                            src="<%= user.profilepicture %>"
-                            class="profile-image">
+                        <img id="profilePreview" src="<%= user.profilepicture %>" class="profile-image">
                         <label for="profilepicture" class="upload-btn">
                             Change Photo
                         </label>
@@ -29,7 +26,6 @@
                 </div>
 
                 <div class="form-grid">
-
                     <div class="input-group">
                         <label>Full Name</label>
                         <input type="text" name="name" value="<%= user.name %>" required>
@@ -102,7 +98,7 @@
                 </div>
 
                 <div class="button-group">
-                    <a href="/profile/<%= user.username %>" class="cancel-btn">
+                    <a href="/profile" class="cancel-btn">
                         Cancel
                     </a>
                     <button type="submit" class="save-btn">

@@ -17,7 +17,7 @@ const subjectsData = require("./subjectsData");
 const userModel = require('./models/user');
 const supportModel = require("./models/supportModel");
 
-const isLoggedIn = require("./middleware/auth");
+const isLoggedIn = require("./middleware/isLoggedIn");
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -58,25 +58,6 @@ const storage = multer.diskStorage({
             Date.now() + path.extname(file.originalname);
         cb(null, uniqueName);
     }
-});
-
-const fileFilter = (req, file, cb) => {
-    const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/webp"
-    ];
-    if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true);
-    } else {
-        cb(new Error("Only JPG, JPEG, PNG and WEBP images are allowed"));
-    }
-};
-const upload = multer({
-    storage,
-    fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 } // 5 MB
 });
 
 
@@ -120,20 +101,6 @@ app.post('/edited/:id', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.send("Error updating user");
-    }
-});
-// POST User page- delete user
-app.post('/delete/:id', async (req, res) => {
-    try {
-        const deletedUser = await userModel.findByIdAndDelete(req.params.id);
-        console.log("Deleted user:", deletedUser);
-        if (!deletedUser) {
-            return res.send("User not found");
-        }
-        res.send("User deleted successfully");
-    } catch (err) {
-        console.error(err);
-        res.send("Error deleting user");
     }
 });
 // GET Total users count
@@ -285,15 +252,16 @@ app.post('/signup', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
-// GET login page
-app.get('/login', function (req, res) {
-    res.render('login');
-});
+
 
 
 
 
 // LOGIN PAGE-------------------------------------------------
+// GET login page
+app.get('/login', function (req, res) {
+    res.render('login');
+});
 // POST login
 app.post('/login', async function (req, res) {
     try {
@@ -321,7 +289,12 @@ app.post('/login', async function (req, res) {
         res.status(500).send('Server error');
     }
 });
+// PASSWORD page
+app.get("/forgot-password", (req, res) => {
+    res.render("forgot-password")
+})
 
+// TEST for cookies
 app.get("/session-test", (req, res) => {
     console.log(req.session);
 
@@ -331,37 +304,7 @@ app.get("/session-test", (req, res) => {
     });
 });
 
-// GET signup 
-app.get('/signup', function (req, res) {
-    res.render('signup');
-});
-// CHANGE-PASSWORD page--------------------------------------------------------------------------------------------\
-app.get("/:username/change-password", async function (req, res) {
-    const user = await userModel.findOne({ username: req.params.username });
-    res.render("change-password", { user });
-})
-app.post("/change-password", async (req, res) => {
-    const { currentPassword, newPassword } = req.body;
-    const user = await userModel.findOne({ email: req.session.user.email });
-    if (!user) {
-        return res.json({ success: false, message: "User not found." });
-    }
 
-    const match = await bcrypt.compare(currentPassword, user.password);
-    if (!match) {
-        return res.json({ success: false, message: "Current password is incorrect." });
-    }
-
-    const hash = await bcrypt.hash(newPassword, 10);
-    user.password = hash;
-    await user.save();
-    res.json({ success: true, message: "Password changed successfully." });
-
-});
-// PASSWORD page---------------------------------------------------------------------------------------------------
-app.get("/forgot-password", (req, res) => {
-    res.render("forgot-password")
-})
 // Send OTP
 app.post("/forgot-password/send-otp", async (req, res) => {
     const { email } = req.body;
@@ -459,34 +402,39 @@ app.post("/forgot-password/reset-password", async (req, res) => {
 
 
 
-// DASGBOARD PAGE---------------------------------------------------------
-
-// New session-based route
+// DASGBOARD PAGE-------------------------------------------------------------------------------------
+// GET dashboard page
 app.get("/dashboard", isLoggedIn, (req, res) => {
     res.render("dashboard", {user: req.user});
 });
 
-
-// GET dashboard
-app.get('/dashboard/:username', async function (req, res) {
-    let user = await userModel.findOne({ username: req.params.username });
-    res.render('dashboard', { user });
-});
+// PROFILE PAGE----------------------------------------------------------------------------------------
 // GET profile
 app.get("/profile", isLoggedIn, (req, res) => {
     res.render("profile", {user: req.user});
 });
-
-app.get('/profile/:username', async function (req, res) {
-    let user = await userModel.findOne({ username: req.params.username });
-    res.render('profile', { user });
+// Profile Picture uploading
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp"
+    ];
+    if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(new Error("Only JPG, JPEG, PNG and WEBP images are allowed"));
+    }
+};
+const upload = multer({
+    storage,
+    fileFilter,
+    limits: { fileSize: 5 * 1024 * 1024 } // 5 MB
 });
-
-// PROFILE PAGE---------------------------------------------------------
 // GET profile edit page
-app.get('/profile-edit/:name', async function (req, res) {
-    let user = await userModel.findOne({ name: req.params.name });
-    res.render('profile-edit', { user });
+app.get('/profile-edit', isLoggedIn, function (req, res) {
+    res.render('profile-edit', { user:req.user });
 });
 // POST profile edit page
 app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
@@ -496,8 +444,7 @@ app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
 
         if (!user) return res.redirect("/login");
         Object.assign(user, {
-            name,
-            username,
+            name, username,
             dob: dob || null,
             phone: phone || null,
             semester: semester || null,
@@ -513,16 +460,38 @@ app.post("/profile/edit", upload.single("profilepicture"), async (req, res) => {
             user.profilepicture = "/uploads/profile/" + req.file.filename;
         }
         await user.save();
-        res.redirect("/profile/" + user.username);
+        res.redirect("/profile");
     } catch (err) {
         console.log(err);
         res.status(500).send("Server Error");
     }
 });
+// GET CHANGE-PASSWORD page
+app.get("/change-password", isLoggedIn ,function (req, res) {
+    res.render("change-password", { user: req.user });
+})
+// POST change-password
+app.post("/change-password", async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = await userModel.findOne({ email: req.session.user.email });
+
+    if (!user) {
+        return res.json({ success: false, message: "User not found." });
+    }
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) {
+        return res.json({ success: false, message: "Current password is incorrect." });
+    }
+    const hash = await bcrypt.hash(newPassword, 10);
+    user.password = hash;
+    await user.save();
+
+    res.json({ success: true, message: "Password changed successfully." });
+
+});
 // GET back to dashboard
-app.get('/back-to-dashboard/:username', async function (req, res) {
-    user = await userModel.findOne({ username: req.params.username });
-    res.render('dashboard', { user });
+app.get('/back-to-dashboard', isLoggedIn, function (req, res) {
+    res.render('dashboard', { user: req.user });
 });
 
 
@@ -591,14 +560,12 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
 
     const extraPath = req.query.folder ? decodeURIComponent(req.query.folder) : "";
     const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type, extraPath);
-    
 
     fs.readdir(folderPath,{withFileTypes:true},(err,items)=>{
         if(err){
             console.log(err);
             return res.send("Folder not found.");
         }
-
         const resources=items.map(item=>{
             let fileType="file";
             if(item.isDirectory()){

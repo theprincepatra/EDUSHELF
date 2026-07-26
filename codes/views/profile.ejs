@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="back">
-        <a href="/back-to-dashboard/<%= user.username %>">&larr; Back to Dashboard</a>
+        <a href="/back-to-dashboard">&larr; Back to Dashboard</a>
     </div>
 
     <div class="container">
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="profile-image-wrapper">
-                    <img src="<%= user.profilepicture %>" alt="Profile Image"   class="profile-image">
+                    <img src="<%= user.profilepicture %>" alt="Profile Image" class="profile-image">
                 </div>
 
                 <h2><%= user.name %></h2>
@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <button class="main-btn editprofile-btn" onclick="window.location.href='/profile-edit/<%= user.name %>'">Edit Profile</button>
+            <button class="main-btn editprofile-btn" onclick="window.location.href='/profile-edit'">Edit Profile</button>
         </div>
 
         <!-- RIGHT SIDE -->
@@ -150,7 +150,7 @@
                 </div>
 
                 <div class="button-group">
-                    <a class="changepassword-btn" href="/<%= user.username %>/change-password">Change Password</a>
+                    <a class="changepassword-btn" href="/change-password">Change Password</a>
                     <button class="main-btn">Verify Number</button>
                 </div>
             </div>
