@@ -489,10 +489,6 @@ app.post("/change-password", async (req, res) => {
     res.json({ success: true, message: "Password changed successfully." });
 
 });
-// GET back to dashboard
-app.get('/back-to-dashboard', isLoggedIn, function (req, res) {
-    res.render('dashboard', { user: req.user });
-});
 
 
 
@@ -517,10 +513,9 @@ app.post("/support", async (req, res) => {
 
 
 // BRANCH PAGES----------------------------------------------------
-app.get('/edushelf/:username/branch/:branch', async (req, res) => {
+app.get('/edushelf/branch/:branch', isLoggedIn, (req, res) => {
     const branch = req.params.branch;
-    const user = await userModel.findOne({ username: req.params.username });
-    res.render('semester', { branch, user });
+    res.render('semester', { branch, user:req.user });
 });
 
 
