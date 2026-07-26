@@ -522,11 +522,10 @@ app.get('/edushelf/branch/:branch', isLoggedIn, (req, res) => {
 
 
 // GET subjects page
-app.get('/edushelf/:username/branch/:branch/semester/:sem', async (req, res) => {
+app.get('/edushelf/:branch/sem/:sem', isLoggedIn, (req, res) => {
     const { username, branch, sem } = req.params;
-    const user = await userModel.findOne({ username });
     const subjects = subjectsData[branch]?.[sem] || [];
-    res.render("subjects", { user, branch, sem, subjects });
+    res.render("subjects", { user:req.user, branch, sem, subjects });
 });
 
 
