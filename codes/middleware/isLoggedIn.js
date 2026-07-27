@@ -2,7 +2,7 @@ const userModel = require("../models/user");
 
 async function isLoggedIn(req, res, next) {
     if (!req.session.userId) {
-        return res.redirect("/login");
+        return res.redirect("/");
     }
     try {
         const user = await userModel.findById(req.session.userId);

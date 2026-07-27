@@ -63,8 +63,12 @@ const storage = multer.diskStorage({
 
 
 // GET home page
-app.get('/', function (req, res) {
-    res.render('landing');
+app.get("/", async (req, res) => {
+    if (req.session.userId) {
+        return res.redirect("/dashboard");
+    }
+    res.render("landing");
+
 });
 
 // GET all users
@@ -133,6 +137,9 @@ app.get('/landing-access-notes', function (req, res) {
 });
 // GET Langing page- LOG-IN button
 app.get('/landing-login', function (req, res) {
+    if (req.session.userId) {
+        return res.redirect("/dashboard");
+    }
     res.render('login');
 });
 // GET Langing page- SIGN-UP button
@@ -204,6 +211,9 @@ let otpStore = {};
 
 // GET SIGN UP page
 app.get('/signup', async (req,res) => {
+    if (req.session.userId) {
+        return res.redirect("/dashboard");
+    }
     res.render('signup');
 });
 // POST SIGNUP
@@ -265,6 +275,9 @@ app.post('/signup', async function (req, res) {
 // LOGIN PAGE-------------------------------------------------
 // GET login page
 app.get('/login', function (req, res) {
+    if (req.session.userId) {
+        return res.redirect("/dashboard");
+    }
     res.render('login');
 });
 // POST login
@@ -587,6 +600,17 @@ app.get("/edushelf/:branch/:semester/:subject/:type/:file", isLoggedIn,(req,res)
 });
 
 
+// Logout
+app.get("/logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Unable to logout");
+        }
+        res.clearCookie("connect.sid");
+        res.redirect("/");
+    });
+});
 
 
 
