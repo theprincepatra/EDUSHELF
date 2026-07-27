@@ -26,36 +26,32 @@
         </div>
 
         <nav class="sidebar-menu">
-            <a href="/back-to-dashboard/<%= user.username %>">
+            <a href="/dashboard">
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
             </a>
-
-            <a href="/profile/<%= user.username %>">
+            <a href="/profile">
                 <i class="fa-solid fa-user"></i>
                 <span>Profile</span>
             </a>
-
             <a href="#">
                 <i class="fa-solid fa-crown"></i>
                 <span>Subscription</span>
             </a>
-
             <a href="#">
                 <i class="fa-solid fa-star"></i>
                 <span>Star</span>
             </a>
-
-            <a href="/support/<%= user.username %>">
-                <i class="fa-solid fa-headset"></i>
-                <span>Support</span>
+            <a href="#">
+                <i class="fa-solid fa-download"></i>
+                <span>Download</span>
             </a>
         </nav>
 
         <div class="sidebar-bottom">
-            <a href="/logout/<%= user.username %>" class="logout-btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span>Log Out</span>
+            <a href="/support" class="logout-btn">
+                <i class="fa-solid fa-headset"></i>
+                <span>Support</span>
             </a>
         </div>
     </div>

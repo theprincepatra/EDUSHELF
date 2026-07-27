@@ -500,9 +500,8 @@ app.post("/change-password", async (req, res) => {
 
 
 // SUPPORT PAGE----------------------------------------------------
-app.get('/support/:name', async function (req, res) {
-    let user = await userModel.findOne({ name: req.params.name });
-    res.render('support', { user });
+app.get('/support', isLoggedIn, function (req, res) {
+    res.render('support', { user:req.user });
 });
 app.post("/support", async (req, res) => {
     const { name, email, category, subject, message } = req.body;
