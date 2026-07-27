@@ -516,7 +516,7 @@ app.post("/support", async (req, res) => {
 
 
 
-// BRANCH PAGES----------------------------------------------------
+// BRANCH PAGES-------------------------------------------------------------------------------------
 app.get('/edushelf/:branch', isLoggedIn, (req, res) => {
     const branch = req.params.branch;
     res.render('semester', { branch, user:req.user });
@@ -524,7 +524,7 @@ app.get('/edushelf/:branch', isLoggedIn, (req, res) => {
 
 
 
-// GET subjects page
+// GET subject page-----------------------------------------------------------------------------
 app.get('/edushelf/:branch/sem/:sem', isLoggedIn, (req, res) => {
     const { username, branch, sem } = req.params;
     const subjects = subjectsData[branch]?.[sem] || [];
@@ -534,7 +534,7 @@ app.get('/edushelf/:branch/sem/:sem', isLoggedIn, (req, res) => {
 
 
 // GET Resources page-----------------------------------------------------------------------------
-app.get('/edushelf/:branch/semester/:sem/:subject', isLoggedIn, (req, res) => {
+app.get('/edushelf/:branch/:sem/:subject', isLoggedIn, (req, res) => {
     const { branch, sem, subject } = req.params;
     const subjectPath = path.join( __dirname, "public", "resources", branch, `sem${sem}`, subject );
 
