@@ -47,7 +47,7 @@ app.use("/fontawesome",express.static(
   )
 );
 
-// MULTER CONFIGURATION
+// MULTER CONFIGURATION for profile picture upload
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -512,18 +512,28 @@ app.post("/change-password", async (req, res) => {
 
 
 
-// SUPPORT PAGE----------------------------------------------------
+// SUPPORT PAGE-----------------------------------------------------------------------------------
 app.get('/support', isLoggedIn, function (req, res) {
     res.render('support', { user:req.user });
 });
-app.post("/support", async (req, res) => {
-    const { name, email, category, subject, message } = req.body;
-    if (!name || !email || !category || !subject || !message) {
-        return res.json({success: false, message: "Please fill all required fields."});
+// MULTER for support-page file upload
+const supportStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "public/uploads/support");
+    },
+    filename: (req, file, cb) => {
+        const uniqueName = Date.now() + path.extname(file.originalname);
+        cb(null, uniqueName);
     }
-
-    await supportModel.create({name, email, category, subject, message})
-    res.json({success: true,message: "Support request submitted successfully."});
+});
+const supportUpload = multer({
+    storage: supportStorage
+});
+// POST  support page
+app.post("/support", supportUpload.single("image"), (req, res) => {
+    console.log(req.body);
+    console.log(req.file);
+    res.send("Support request received");
 });
 
 
