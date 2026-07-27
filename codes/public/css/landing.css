@@ -182,7 +182,8 @@ nav a:hover{
     transition:.35s;
 }
 .secondary-btn:hover{
-    background:rgba(255,255,255,.08);
+    background:rgba(255, 255, 255, 0.108);
+
 }
 
 .hero-stats{
@@ -816,7 +817,6 @@ footer{
 }
 
 /* Responsive */
-
 @media(max-width:1200px){
     .hero-container, .platform-wrapper, .about, .feature-showcase{
         grid-template-columns:1fr;
@@ -831,35 +831,32 @@ footer{
     .hero-left{
         text-align:center;
     }
-
     .hero-left p{
         width:100%;
+        font-size: 19px;
     }
-
-    .hero-buttons,
-    .hero-stats{
+    .hero-buttons, .hero-stats{
         justify-content:center;
     }
-
     .hero-right{
         display:flex;
         justify-content:center;
     }
-
-    .platform-left,
-    .about-left,
-    .feature-left{
+    .platform-left, .about-left, .feature-left{
         text-align:center;
     }
-
-    .platform-tags,
-    .about-points{
+    .platform-tags, .about-points{
         justify-content:center;
         align-items:center;
+        margin-bottom: 52px;
     }
 
-    .feature-left{
-        min-height:380px;
+    .faq-question h3{
+        font-size: 24px;
+    }
+    .faq-answer p{
+        font-size: 18px;
+        letter-spacing: 0.5px;
     }
 
     .stats{
@@ -913,9 +910,27 @@ footer{
         flex-direction:column;
         gap:25px;
     }
+    .logo{
+        padding-top: 7px;
+    }
+    .logo img{
+        width: 83px;
+    }
+    .logo h2{
+        font-size: 35px;
+    }
+    .logo p{
+        font-size: 17px;
+    }
+    .edu{
+        text-align: center;
+    }
     nav{
         flex-wrap:wrap;
         justify-content:center;
+    }
+    nav a{
+        font-size: 20px;
     }
     .hero{
         padding-top:170px;
@@ -923,21 +938,24 @@ footer{
     }
     .hero-container{
         width:92%;
-        padding-top: 10px;
+        padding-top: 0px;
     }
     .hero-badge{
-        margin-bottom: 26px;
+        margin-bottom: 30px;
     }
     .hero-left h1{
         font-size:46px;
     }
     .hero-left p{
         font-size:16px;
-        line-height:30px;
+        line-height:26px;
     }
     .hero-buttons{
-        flex-direction:column;
+        font-size: 15px;
+        margin-top: 41px;
         align-items:center;
+        display: flex;
+        flex-direction: column;
     }
     .hero-stats{
         gap:30px;
@@ -951,30 +969,48 @@ footer{
         height: 162px;
     }
 
+    .section-head p, .mini-title{
+        font-size: 17px;
+        margin-bottom: 45px;
+    }
     .section-head h2{
-        font-size:38px;
+        font-size:40px;
+    }
+    .section-head span{
+        font-size:14px;
+        letter-spacing: 0.8px;
+        line-height: 19px;
+        margin-top: 9px;
     }
 
     .platform{
         padding-right: 8%;
     }
-    .platform-left h2,
-    .about-left h2{
+    .platform-left h2, .about-left h2{
         font-size:48px;
+        margin-top: 12px;
+    }
+    .platform-left p, .about-left p{
+        line-height: 24px;
+        font-size: 14px;
+        letter-spacing: 0.5px;
     }
     .platform-right{
         margin-top: 35px;
     }
     .platform-tags span{
         padding: 14px 14px;
+        font-size: 20px;
     }
 
     .feature-text h2{
         font-size:34px;
     }
-
     .feature-text span{
         font-size:56px;
+    }
+    .feature-text li{
+        font-size:22px;
     }
 
     .stats{
@@ -1030,9 +1066,10 @@ footer{
         font-size:14px;
     }
     .nav-btn{
-        padding:12px 3px;
-        font-size:14px;
-        color: black;
+        font-size: 13px;
+        padding: 6px 10px;
+        text-align: center;
+        letter-spacing: 0.8px;
     }
     .section-head h2{
         font-size:32px;
@@ -1055,7 +1092,74 @@ footer{
     .journey-item{
         width:100%;
     }
+}
 
+@media(max-width:380px){
+    header{
+        gap:18px;
+        padding: 17px 5%;
+    }
+    nav{
+        gap: 14px;
+    }
+    .nav-btn{
+        padding: 3px 10px;
+    }
+
+    .hero-left h1{
+        font-size: 34px;
+        margin-bottom: 22px;
+    }
+    .hero-left p{
+        font-size: 13px;
+        line-height: 23px;
+    }
+
+    .hero-stats{
+        gap: 42px;
+    }
+    .hero-stats h3{
+        font-size: 35px;
+    }
+
+    .section-head span{
+        font-size: 13px;
+        margin-top: 8px;
+    }
+
+    .platform-left p, .about-left p, .feature-text p{
+        line-height: 20px;
+        font-size: 12px;
+    }
+    .platform-tags span{
+        font-size: 14px;
+    }
+
+    .feature-text h2{
+        margin: 11px 0;
+    }
+    .feature-text li{
+        font-size: 16px;
+    }
+    .feature-text ul{
+        margin-top: 39px;
+    }
+
+    .faq-question h3{
+        font-size: 20px;
+    }
+    .faq-answer p{
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    .footer-links a{
+        font-size: 15px;
+        margin-bottom: 11px;
+    }
+    .footer-bottom p{
+        font-size: 11px;
+    }
 }
 
 .hidden{

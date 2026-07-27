@@ -200,7 +200,12 @@ let otpStore = {};
 
 
 
-// SIGNUP PAGE--------------------------------------------------
+// SIGNUP PAGE---------------------------------------------------------------------------------------------------
+
+// GET SIGN UP page
+app.get('/signup', async (req,res) => {
+    res.render('signup');
+});
 // POST SIGNUP
 app.post('/signup', async function (req, res) {
     try {
@@ -511,13 +516,11 @@ app.post("/support", async (req, res) => {
 
 
 
-
 // BRANCH PAGES----------------------------------------------------
 app.get('/edushelf/:branch', isLoggedIn, (req, res) => {
     const branch = req.params.branch;
     res.render('semester', { branch, user:req.user });
 });
-
 
 
 
@@ -531,8 +534,7 @@ app.get('/edushelf/:branch/sem/:sem', isLoggedIn, (req, res) => {
 
 
 // GET Resources page-----------------------------------------------------------------------------
-app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', async (req, res) => {
-    const user = await userModel.findOne({ username: req.params.username });
+app.get('/edushelf/:branch/semester/:sem/:subject', isLoggedIn, (req, res) => {
     const { branch, sem, subject } = req.params;
     const subjectPath = path.join( __dirname, "public", "resources", branch, `sem${sem}`, subject );
 
@@ -542,7 +544,7 @@ app.get('/edushelf/:username/branch/:branch/semester/:sem/subject/:subject', asy
             return res.send("Subject folder not found.");
         }
         const resources = items.filter(item => item.isDirectory()).map(item => ({name: item.name}));
-        res.render("resources", { user, branch, sem, subject, resources });
+        res.render("resources", { user:req.user, branch, sem, subject, resources });
     });
 });
 
