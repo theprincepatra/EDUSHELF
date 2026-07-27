@@ -550,10 +550,8 @@ app.get('/edushelf/:branch/:sem/:subject', isLoggedIn, (req, res) => {
 
 
 // GET Resource-list page-----------------------------------------------------------------------------
-app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resource/:type", async (req, res) => {
+app.get("/edushelf/:branch/:sem/:subject/:type", isLoggedIn, (req, res) => {
     const { username, branch, sem, subject, type } = req.params;
-    const user = await userModel.findOne({ username });
-
     const extraPath = req.query.folder ? decodeURIComponent(req.query.folder) : "";
     const folderPath = path.join(__dirname, "public", "resources", branch, `sem${sem}`, subject, type, extraPath);
 
@@ -577,16 +575,16 @@ app.get("/edushelf/:username/branch/:branch/semester/:sem/subject/:subject/resou
             }
             return{name:item.name, type:fileType};
         });
-        res.render("resource-list", {user, branch, sem, subject, type, resources, currentPath:extraPath});
+        res.render("resource-list", {user:req.user, branch, sem, subject, type, resources, currentPath:extraPath});
     });
 });
 
 
 // GET PDF viewer page-----------------------------------------------------------------------------
-app.get("/edushelf/:username/:branch/:semester/:subject/:type/:file",(req,res)=>{
-    const {username,branch,semester,subject,type,file}=req.params;
+app.get("/edushelf/:branch/:semester/:subject/:type/:file", isLoggedIn,(req,res)=>{
+    const {branch,semester,subject,type,file}=req.params;
     const folder=req.query.folder||"";
-    res.render("pdf-viewer",{username,branch,sem:semester,subject,type,file,folder});
+    res.render("pdf-viewer",{username:req.user,branch,sem:semester,subject,type,file,folder});
 });
 
 

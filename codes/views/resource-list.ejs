@@ -36,42 +36,39 @@
     </header>
 
     <section class="hero">
+        <!-- top left part -->
         <div class="hero-left">
-            <h1>
-                <%= subject.replace(/-/g," ") %></h1>
-        <h3><%= type.toUpperCase() %></h3>
-        <p>Browse folders, notes, books, PDFs and images in one place.</p>
+            <h1><%= subject.replace(/-/g," ") %></h1>
+            <h3><%= type.toUpperCase() %></h3>
+            <p>Browse folders, notes, books, PDFs and images in one place.</p>
 
-        <div class=" breadcrumb">
-                    <a
-                        href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>">
-                        <i class="fa-solid fa-folder-open"></i>
-                        <span>
-                            <%= type.charAt(0).toUpperCase()+type.slice(1) %>
-                        </span>
-                    </a>
+            <div class=" breadcrumb">
+                <a href="/edushelf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type %>">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>
+                        <%= type.charAt(0).toUpperCase()+type.slice(1) %>
+                    </span>
+                </a>
 
-                    <% if(currentPath){ %>
-                        <% const paths=currentPath.split("/"); %>
-                            <% let current="" ; %>
-                                <% paths.forEach((folder,index)=>{ %>
-                                    <% current+=(index===0?"":"/")+folder; %>
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                        <a
-                                            href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>?folder=<%= encodeURIComponent(current) %>">
-                                            <%= folder %>
-                                        </a>
-                                        <% }) %>
-                                            <% } %>
+                <% if(currentPath){ %>
+                    <% const paths=currentPath.split("/"); %>
+                        <% let current="" ; %>
+                        <% paths.forEach((folder,index)=>{ %>
+                        <% current+=(index===0?"":"/")+folder; %>
+                            <i class="fa-solid fa-chevron-right"></i>
+                            <a
+                                href="/edushelf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type %>?folder=<%= encodeURIComponent(current) %>">
+                                <%= folder %>
+                            </a>
+                        <% }) %>
+                <% } %>
+            </div>
         </div>
-        </div>
-
+        <!-- top right part -->
         <div class="hero-right">
             <div class="stats-card">
                 <div>
-                    <h2>
-                        <%= resources.length %>
-                    </h2>
+                    <h2> <%= resources.length %> </h2>
                     <p>Total Resources</p>
                 </div>
                 <i class="fa-solid fa-folder-tree"></i>
@@ -79,6 +76,7 @@
         </div>
     </section>
 
+    <!-- Below of TOP part -->
     <section class="explorer">
         <div class="explorer-top">
             <div>
@@ -98,10 +96,12 @@
                 </div>
             <% }else{ %>
                 <% if(folders.length>0){ %>
+                    <!-- FOLDERS section -->
                     <div class="section-heading">
                         <i class="fa-solid fa-folder"></i>
                         <span>Folders</span>
                     </div>
+                    <!-- show all the folder -->
                     <% folders.forEach(folder=>{ %>
                         <div class="explorer-item folder-item" data-name="<%= folder.name.toLowerCase() %>">
                             <div class="item-left">
@@ -113,13 +113,15 @@
                                     <p>Folder</p>
                                 </div>
                             </div>
-                            <a class="open-btn" href="/edushelf/<%= user.username %>/branch/<%= branch %>/semester/<%= sem %>/subject/<%= subject %>/resource/<%= type %>?folder=<%= encodeURIComponent(currentPath?currentPath+'/':'') %><%= encodeURIComponent(folder.name) %>">
+                            <!-- open URL -->
+                            <a class="open-btn" href="/edushelf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type %>?folder=<%= encodeURIComponent(currentPath?currentPath+'/':'') %><%= encodeURIComponent(folder.name) %>">
                                 Open
                                 <i class="fa-solid fa-chevron-right"></i>
                             </a>
                         </div>
                     <% }) %>
                 <% } %>
+                <!-- FILES part -->
                 <% if(files.length>0){ %>
                     <div class="section-heading">
                         <i class="fa-solid fa-file"></i>
@@ -165,7 +167,7 @@
                                     <i class="fa-solid fa-chevron-right"></i>
                                 </a>
                             <% }else if(file.type==="pdf" ){ %>
-                                <a class="open-btn" href="/edushelf/<%= user.username %>/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file.name %>?folder=<%= encodeURIComponent(currentPath) %>">
+                                <a class="open-btn" href="/edushelf/<%= branch %>/<%= sem %>/<%= subject %>/<%= type.toLowerCase() %>/<%= file.name %>?folder=<%= encodeURIComponent(currentPath) %>">
                                     Open
                                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </a>
