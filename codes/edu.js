@@ -15,9 +15,10 @@ mongoose.connect("mongodb://127.0.0.1:27017/siginupDB")
 
 const subjectsData = require("./subjectsData");
 const userModel = require('./models/user');
-const supportModel = require("./models/supportModel");
+const adminModel = require("./models/adminModel");
 
 const isLoggedIn = require("./middleware/isLoggedIn");
+const adminLoggedIn = require("./middleware/adminLoggedIn");
 
 app.set('view engine', 'ejs');
 app.use(express.json());
@@ -60,9 +61,40 @@ const storage = multer.diskStorage({
     }
 });
 
+// ADMIN page----------------------------------------------------------------------------------------
+app.get("/admin/login", (req, res) => {
+    if (req.session.adminId) {
+        return res.redirect("/admin/a-dashboard");
+    }
+    res.render("admin/a-login");
+});
+// POST admin page
+app.post("/admin/login", async (req, res) => {
+    const { email, password } = req.body;
+    admin = await adminModel.findOne({email});
+
+    const isMatch = bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+        return res.send("Invalid Password");
+    }
+    req.session.adminId = admin._id;
+    res.redirect("/admin/a-dashboard");
+});
+app.get("/admin/a-dashboard", adminLoggedIn, (req, res) => {
+    res.render("admin/a-dashboard", {admin:req.admin});
+    // (totalUsers, newRegistrations, totalResources, activeSubscriptions, totalRevenue, supportTickets, premiumUsers, freeUsers, premiumPercentage, freePercentage, recentRegistrations)
+});
+
+// Admin User Page------------------------------------------------------------------------------------
+app.get("/admin/a-users", adminLoggedIn, async (req, res) => {
+    const users = await userModel.find();
+    const totalUsers = await userModel.countDocuments();
+    res.render("admin/a-users", {admin: req.admin, users, totalUsers});
+});
 
 
-// GET home page
+
+// GET home page----------------------------------------------------------------------------------------
 app.get("/", async (req, res) => {
     if (req.session.userId) {
         return res.redirect("/dashboard");
@@ -313,7 +345,7 @@ app.get("/forgot-password", (req, res) => {
 })
 
 // TEST for cookies
-app.get("/session-test", (req, res) => {
+app.get("/cookies", (req, res) => {
     console.log(req.session);
 
     res.json({

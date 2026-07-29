@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users | EduShelf Admin</title>
+    <link rel="stylesheet" href="/css/admin/a-dashboard.css">
+    <link rel="stylesheet" href="/css/admin/a-users.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <div class="sidebar-overlay"></div>
+    <div class="admin-container">
+        <%- include("partials/sidebar") %>
+        <div class="main-content">
+            <%- include("partials/navbar") %>
+            <section class="users-page">
+                <div class="page-header">
+                    <div>
+                        <h1>Users</h1>
+                        <p>Manage <strong><%= totalUsers || users.length %></strong> registered users</p>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="users-stats">
+                    <div class="stat-card">
+
+                        <div class="stat-icon total">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <h2><%= totalUsers || 0 %></h2>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon premium">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div>
+                            <h2><%= premiumUsers || 0 %></h2>
+                            <p>Premium Users</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon verified">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h2><%= verifiedUsers || 0 %></h2>
+                            <p>Verified Users</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon suspended">
+                            <i class="fa-solid fa-user-slash"></i>
+                        </div>
+                        <div>
+                            <h2><%= suspendedUsers || 0 %></h2>
+                            <p>Suspended Users</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar -->
+                <div class="toolbar">
+
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Search users...">
+                    </div>
+                    <div class="filters">
+                        <button class="active">All</button>
+                        <button>Premium</button>
+                        <button>Free</button>
+                        <button>Verified</button>
+                    </div>
+
+                    <button class="add-user-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Add User
+                    </button>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="users-actions">
+                    <div class="left-actions">
+
+                        <button class="bulk-btn delete">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete
+                        </button>
+                        <button class="bulk-btn verify">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Verify
+                        </button>
+                        <button class="bulk-btn suspend">
+                            <i class="fa-solid fa-user-slash"></i>
+                            Suspend
+                        </button>
+                    </div>
+
+                    <div class="right-actions">
+                        <span>Total Selected : <strong>0</strong></span>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="users-table-card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="checkbox-column">
+                                    <input type="checkbox">
+                                </th>
+                                <th>User</th>
+                                <th>Email</th>
+                                <th>Plan</th>
+                                <th>Status</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user=>{ %>
+                            <tr>
+                                <td class="checkbox-column">
+                                    <input type="checkbox">
+                                </td>
+                                <td>
+                                    <div class="user-cell">
+                                        <img src="<%= user.profilepicture %>" alt="Profile">
+                                        <div>
+                                            <h4> <%= user.name %>
+                                                <% if(user.verified){ %>
+                                                    <i class="fa-solid fa-circle-check verified-icon"></i>
+                                                <% } %>
+                                            </h4>
+                                            <span>@<%= user.username %></span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <%= user.email %>
+                                </td>
+
+                                <td>
+                                    <% if(user.premium){ %>
+                                        <span class="badge premium">Premium</span>
+                                    <% }else{ %>
+                                        <span class="badge free">Free</span>
+                                    <% } %>
+                                </td>
+
+                                <td>
+                                    <% if(user.active){ %>
+                                        <span class="badge verified">Active</span>
+                                    <% }else{ %>
+                                        <span class="badge suspended">Suspended</span>
+                                    <% } %>
+                                </td>
+
+                                <td>
+                                    <%= user.createdAt.toLocaleDateString() %>
+                                </td>
+
+                                <td>
+                                    <div class="actions">
+                                        <button class="edit-btn">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button class="delete-btn">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+
+                        </tbody>
+                    </table>
+
+                    <div class="table-footer">
+
+                        <div class="entries-info">
+                            Showing
+                            <strong>1</strong>
+                            to
+                            <strong><%= users.length %></strong>
+                            of
+                            <strong><%= totalUsers %></strong>
+                            users
+                        </div>
+
+                        <div class="pagination">
+                            <button class="page-btn">
+                                <i class="fa-solid fa-angle-left"></i>
+                            </button>
+
+                            <button class="page-btn active">
+                                1
+                            </button>
+
+                            <button class="page-btn">
+                                2
+                            </button>
+
+                            <button class="page-btn">
+                                3
+                            </button>
+
+                            <span>...</span>
+
+                            <button class="page-btn">
+                                18
+                            </button>
+
+                            <button class="page-btn">
+                                <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <%- include("partials/footer") %>
+        </div>
+    </div>
+
+    <script src="/js/admin/sidebar.js"></script>
+</body>
+</html>

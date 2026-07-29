@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduShelf Admin Dashboard</title>
+
+    <link rel="stylesheet" href="/css/admin/a-dashboard.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar-overlay"></div>
+    <div class="admin-container">
+        <%- include("partials/sidebar") %>
+        <div class="main-content">
+            <%- include("partials/navbar") %>
+
+            <section class="dashboard-content">
+
+                <div class="page-title">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Welcome back, <%= admin.name %> 👋</p>
+                    </div>
+                    <div class="dashboard-filter">
+                        <select>
+                            <option>This Month</option>
+                            <option>Last 30 Days</option>
+                            <option>This Year</option>
+                            <option>Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dashboard-wrapper">
+                    <!-- ===================== KPI CARDS ===================== -->
+                    <div class="dashboard-cards">
+
+                        <div class="card">
+                            <div class="card-icon users">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>Total Users</h4>
+                                <h2><%= totalUsers || 0 %></h2>
+                                <span>Total registered users</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon register">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>New Registrations</h4>
+                                <h2><%= newRegistrations || 0 %></h2>
+                                <span>This Month</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon subscription">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>Active Subscriptions</h4>
+                                <h2><%= activeSubscriptions || 0 %></h2>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon revenue">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>Total Revenue</h4>
+                                <h2>₹<%= totalRevenue || 0 %></h2>
+                                <span>Coming Soon</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon resources">
+                                <i class="fa-solid fa-book"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>Total Resources</h4>
+                                <h2><%= totalResources || 0 %></h2>
+                                <span>Available Resources</span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-icon support">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+
+                            <div class="card-info">
+                                <h4>Support Tickets</h4>
+                                <h2><%= suportTickets || 0 %></h2>
+                                <span>Awaiting Response</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ===================== ANALYTICS ===================== -->
+                    <div class="analytics-grid">
+                        <!-- Registration Chart -->
+                        <div class="analytics-card registration-chart">
+
+                            <div class="card-header">
+                                <div>
+                                    <h2>User Registration Analytics</h2>
+                                    <p>Monitor registration growth</p>
+                                </div>
+                                <select>
+                                    <option>Last 7 Days</option>
+                                    <option selected>This Month</option>
+                                    <option>This Year</option>
+                                    <option>Custom Range</option>
+                                </select>
+                            </div>
+                            <div class="chart-placeholder">
+                                <canvas id="registrationChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Subscription Chart -->
+                        <div class="analytics-card subscription-chart">
+                            <div class="card-header">
+                                <div>
+                                    <h2>Subscription Analytics</h2>
+                                    <p>Free vs Premium Users</p>
+                                </div>
+                            </div>
+
+                            <div class="pie-chart-container">
+                                <canvas id="subscriptionChart"></canvas>
+                            </div>
+
+                            <div class="subscription-summary">
+                                <div class="summary-item">
+                                    <span class="dot premium"></span>
+                                    <div>
+                                        <h4>Premium</h4>
+                                        <p><%= premiumUsers || 0 %> Users</p>
+                                    </div>
+                                    <strong><%= premiumPercentage || 0 %>%</strong>
+                                </div>
+
+                                <div class="summary-item">
+                                    <span class="dot free"></span>
+                                    <div>
+                                        <h4>Free</h4>
+                                        <p><%= freeUsers || totalUsers || 0 %> Users</p>
+                                    </div>
+                                    <strong><%= freePercentage || 100 %>%</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ===================== BOTTOM SECTION ===================== -->
+                    <div class="dashboard-bottom">
+                        <!-- RECENT REGISTRATIONS -->
+                        <div class="dashboard-table-card">
+
+                            <div class="table-header">
+                                <div>
+                                    <h2>Recent Registrations</h2>
+                                    <p>Latest users who joined EduShelf</p>
+                                </div>
+                                <a href="/admin/users" class="view-all-btn">View All</a>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Email</th>
+                                            <th>Joined</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <% if(recentRegistrations && recentRegistrations.length){ %>
+                                            <% recentRegistrations.forEach(user => { %>
+                                                <tr>
+                                                    <td>
+                                                        <div class="user-cell">
+                                                            <img src="<%= user.profilepicture || '/images/default-avatar.png' %>" alt="Profile">
+                                                            <div>
+                                                                <h4><%= user.name %></h4>
+                                                                <span>@<%= user.username %></span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td><%= user.email %></td>
+
+                                                    <td>
+                                                        <%= new Date(user.createdAt).toLocaleDateString("en-IN") %>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="status completed">Registered</span>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="4" class="empty-state">
+                                                    No registrations yet.
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- RECENT SUBSCRIPTIONS -->
+                        <div class="dashboard-table-card">
+                            <div class="table-header">
+
+                                <div>
+                                    <h2>Recent Subscriptions</h2>
+                                    <p>Latest subscription purchases</p>
+                                </div>
+                            </div>
+
+                            <div class="subscription-empty">
+                                <i class="fa-solid fa-credit-card"></i>
+                                <h3>No subscriptions yet</h3>
+                                <p>Subscription purchases will appear here after the subscription system is implemented.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <%- include("partials/footer") %>
+        </div>
+    </div>
+
+    <script src="/js/admin/sidebar.js"></script>
+
+</body>
+</html>
