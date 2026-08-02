@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= ticket.ticketId %> | EduShelf
+    </title>
+
+    <link rel="stylesheet"
+        href="/css/ticket-details.css">
+
+    <link rel="stylesheet"
+        href="/fontawesome/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <img src="/images/logo_bgremove.png">
+
+            <h2>EduShelf</h2>
+
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/support">Support</a>
+            <a href="/profile">Profile</a>
+        </div>
+
+    </nav>
+
+    <!-- ================= PAGE ================= -->
+
+    <section class="ticket-container">
+        <!-- ================= HEADER ================= -->
+
+        <div class="ticket-header">
+
+            <div class="header-left">
+
+                <div class="icon">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                </div>
+
+                <div>
+
+                    <h1>
+
+                        Support Ticket
+
+                    </h1>
+
+                    <p>
+
+                        Track your request and view replies from the EduShelf support team.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <span class="status <%= ticket.status.toLowerCase().replace(' ','-') %>">
+
+                <%= ticket.status %>
+
+            </span>
+
+        </div>
+
+        <!-- ================= INFO CARDS ================= -->
+        <div class="info-grid">
+            <div class="info-card">
+
+                <div class="info-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <div class="info-content">
+                    <span>Ticket ID</span>
+                    <h3><%= ticket.ticketId %></h3>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <div class="info-content">
+                    <span>Category</span>
+                    <h3><%= ticket.category %></h3>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div class="info-content">
+                    <span>Submitted</span>
+                    <h3>
+                        <%= new Date(ticket.createdAt).toLocaleDateString("en-IN") %>
+                    </h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <div class="ticket-layout">
+
+            <!-- LEFT SIDE -->
+            <div class="left-column">
+
+                <div class="card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-bookmark"></i>
+                        <h2>Subject</h2>
+                    </div>
+                    <p><%= ticket.subject %></p>
+                </div>
+
+                <div class="card last-card">
+                    <div class="card-title">
+                        <i class="fa-solid fa-align-left"></i>
+                        <h2>Description</h2>
+                    </div>
+                    <p><%= ticket.message %></p>
+                </div>
+
+                <% if(ticket.attachments.length){ %>
+                    <div class="card last-card">
+
+                        <div class="card-title">
+                            <i class="fa-solid fa-paperclip"></i>
+                            <h2>Attachments</h2>
+                        </div>
+
+                        <div class="attachments">
+                            <% ticket.attachments.forEach(file=>{ %>
+                                <a href="<%= file %>" target="_blank">
+                                    <img src="<%= file %>" alt="Attachment">
+                                </a>
+                            <% }) %>
+                        </div>
+                    </div>
+                <% } %>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="right-column">
+                <div class="card reply-card">
+
+                    <div class="card-title">
+                        <i class="fa-solid fa-headset"></i>
+                        <h2>Support Team Reply</h2>
+                    </div>
+
+                    <% if(ticket.adminReply){ %>
+                        <div class="reply success">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <div>
+                                <p><%= ticket.adminReply %></p>
+                                <small>
+                                    Replied on
+                                    <%= new Date(ticket.repliedAt).toLocaleDateString("en-IN") %>
+                                </small>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="reply waiting">
+                            <i class="fa-regular fa-clock"></i>
+                            <div>
+                                <h4>No reply yet</h4>
+                                <p>Our support team hasn't responded to this ticket yet. You'll be notified once a reply is available.</p>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+
+                <% if(ticket.status==="Pending"){ %>
+                    <form action="/ticket/<%= ticket._id %>?_method=DELETE" method="POST">
+                        <button class="delete-ticket last-card" onclick="return confirm('Delete this support ticket?');">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete Ticket
+                        </button>
+                    </form>
+                <% } %>
+
+            </div>
+
+        </div>
+
+</section>
+
+</body>
+
+</html>

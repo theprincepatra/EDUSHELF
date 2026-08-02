@@ -61,6 +61,7 @@ body {
 }
 .nav-links a:hover {
     color: #f6efef;
+    text-decoration: underline;
 }
 
 .hero {

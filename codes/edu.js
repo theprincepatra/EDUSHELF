@@ -91,9 +91,11 @@ app.post("/admin/login", async (req, res) => {
 app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
     const totalUsers = await userModel.countDocuments();
     const totalResources = await Resource.countDocuments();
+    const supportTickets = await SupportModel.countDocuments();
+    
     const recentRegistrations = await userModel.find().sort({ joinedon: -1 }).limit(10);
 
-    res.render("admin/a-dashboard", {admin:req.admin, totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets:0, premiumPercentage:0, freePercentage:0, recentRegistrations});
+    res.render("admin/a-dashboard", {admin:req.admin, totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets    , premiumPercentage:0, freePercentage:0, recentRegistrations});
 });
 
 // Admin User Page------------------------------------------------------------------------------------
@@ -645,6 +647,22 @@ app.delete("/ticket/:id", isLoggedIn, async (req, res) => {
         }
         await SupportModel.findByIdAndDelete(ticket._id);
         res.redirect("/my-tickets");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong.");
+    }
+});
+// TICKET DETAILS PAGE -------------------------------------------------------
+app.get("/ticket/:id", isLoggedIn, async (req, res) => {
+    try {
+        const ticket = await SupportModel.findById(req.params.id);
+        if (!ticket) {
+            return res.status(404).send("Ticket not found.");
+        }
+        if (!ticket.user.equals(req.user._id)) {
+            return res.status(403).send("Unauthorized access.");
+        }
+        res.render("ticket-details", { user: req.user, ticket });
     } catch (err) {
         console.log(err);
         res.status(500).send("Something went wrong.");
