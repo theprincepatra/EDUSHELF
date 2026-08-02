@@ -8,42 +8,42 @@
 
         <ul>
             <li>
-                <a href="/admin/a-dashboard" class="active">
+                <a href="/admin/a-dashboard" class="<%= navTitle === 'Dashboard' ? 'active' : '' %>">
                     <i class="fa-solid fa-house"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li>
-                <a href="/admin/a-users">
+                <a href="/admin/a-users" class="<%= navTitle === 'Users' ? 'active' : '' %>">
                     <i class="fa-solid fa-users"></i>
                     <span>Users</span>
                 </a>
             </li>
 
             <li>
-                <a href="/admin/a-resources">
+                <a href="/admin/a-resources" class="<%= navTitle === 'Resources' ? 'active' : '' %>">
                     <i class="fa-solid fa-book-open"></i>
                     <span>Resources</span>
                 </a>
             </li>
 
             <li>
-                <a href="/admin/a-support">
+                <a href="/admin/a-support" class="<%= navTitle === 'Support' ? 'active' : '' %>">
                     <i class="fa-solid fa-headset"></i>
                     <span>Support</span>
                 </a>
             </li>
 
             <li>
-                <a href="/admin/a-subscriptions">
+                <a href="/admin/a-subscriptions" class="<%= navTitle === 'Subscriptions' ? 'active' : '' %>">
                     <i class="fa-solid fa-credit-card"></i>
                     <span>Subscriptions</span>
                 </a>
             </li>
 
             <li>
-                <a href="/admin/a-settings">
+                <a href="/admin/a-settings" class="<%= navTitle === 'settings' ? 'active' : '' %>">
                     <i class="fa-solid fa-gear"></i>
                     <span>Settings</span>
                 </a>

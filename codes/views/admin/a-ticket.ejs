@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= ticket.ticketId %> | Admin</title>
+    <link rel="stylesheet" href="/css/admin/a-ticket.css">
+    <link rel="stylesheet" href="/css/admin/a-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="sidebar-overlay"></div>
+    <div class="admin-container">
+        <%- include("partials/sidebar") %>
+        <div class="main-content">
+            <%- include("partials/navbar") %>
+            <main class="content">
+
+                <div class="container">
+                    <div class="top-bar">
+                        <a href="/admin/a-support" class="back-btn">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Back to Tickets
+                        </a>
+                    </div>
+
+                    <div class="ticket-header">
+
+                        <div>
+
+                            <h1><%= ticket.ticketId %></h1>
+
+                            <p><%= ticket.category %></p>
+
+                        </div>
+
+                        <div class="badges">
+
+                            <span class="priority <%= ticket.priority.toLowerCase() %>">
+
+                                <%= ticket.priority %>
+
+                            </span>
+
+                            <span class="status <%= ticket.status.toLowerCase().replace(" ","-") %>">
+
+                                <%= ticket.status %>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="ticket-layout">
+                        <div class="left-column">
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                    <h2>User Information</h2>
+
+                                </div>
+
+                                <div class="info-grid">
+
+                                    <div>
+
+                                        <span>Name</span>
+
+                                        <h4><%= ticket.user.name %></h4>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>Username</span>
+
+                                        <h4>@<%= ticket.user.username %></h4>
+
+                                    </div>
+
+                                    <div>
+
+                                        <span>Email</span>
+
+                                        <h4><%= ticket.user.email %></h4>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-circle-info"></i>
+
+                                    <h2>Issue Details</h2>
+
+                                </div>
+
+                                <h3><%= ticket.subject %></h3>
+
+                                <p class="description">
+
+                                    <%= ticket.description %>
+
+                                </p>
+
+                            </div>
+
+                            <% if(ticket.attachments && ticket.attachments.length>0){ %>
+                                <div class="card">
+
+                                    <div class="card-title">
+
+                                        <i class="fa-solid fa-paperclip"></i>
+
+                                        <h2>Attachments</h2>
+
+                                    </div>
+
+                                    <div class="attachments">
+
+                                        <% ticket.attachments.forEach(file=>{ %>
+
+                                            <a href="<%= file %>" target="_blank">
+
+                                                <img src="<%= file %>" alt="Attachment">
+
+                                            </a>
+
+                                        <% }) %>
+
+                                    </div>
+
+                                </div>
+                            <% } %>
+
+                        </div>
+
+                        <div class="right-column">
+                            <div class="card">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-reply"></i>
+                                    <h2>Reply to User</h2>
+                                </div>
+
+                                <form action="/admin/support/<%= ticket._id %>/reply" method="POST">
+
+                                    <textarea
+                                        name="reply"
+                                        rows="8"
+                                        placeholder="Write your reply here..."
+                                    ><%= ticket.adminReply || "" %></textarea>
+
+                                    <button type="submit" class="reply-btn">
+
+                                        <i class="fa-solid fa-paper-plane"></i>
+
+                                        Send Reply
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            <div class="card">
+
+                                <div class="card-title">
+
+                                    <i class="fa-solid fa-gear"></i>
+
+                                    <h2>Ticket Settings</h2>
+
+                                </div>
+
+                                <form action="/admin/support/<%= ticket._id %>/update" method="POST">
+
+                                    <label>Priority</label>
+
+                                    <select name="priority">
+
+                                        <option value="High" <%= ticket.priority==="High"?"selected":"" %>>High</option>
+
+                                        <option value="Low" <%= ticket.priority==="Low"?"selected":"" %>>Low</option>
+
+                                    </select>
+
+                                    <label>Status</label>
+
+                                    <select name="status">
+
+                                        <option value="Pending" <%= ticket.status==="Pending"?"selected":"" %>>Pending</option>
+
+                                        <option value="In Progress" <%= ticket.status==="In Progress"?"selected":"" %>>In Progress</option>
+
+                                        <option value="Resolved" <%= ticket.status==="Resolved"?"selected":"" %>>Resolved</option>
+
+                                    </select>
+
+                                    <button class="update-btn">
+
+                                        Update Ticket
+
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <%- include("partials/footer") %>
+        </div>
+    </div>
+</body>
+</html>
+

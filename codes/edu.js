@@ -67,46 +67,6 @@ const storage = multer.diskStorage({
 
 
 
-// ADMIN page----------------------------------------------------------------------------------------
-app.get("/admin/login", (req, res) => {
-    if (req.session.adminId) {
-        return res.redirect("/admin/a-dashboard");
-    }
-    res.render("admin/a-login");
-});
-// POST admin login
-app.post("/admin/login", async (req, res) => {
-    const { email, password } = req.body;
-    admin = await adminModel.findOne({email});
-
-    const isMatch = bcrypt.compare(password, admin.password);
-    if (!isMatch) {
-        return res.send("Invalid Password");
-    }
-    req.session.adminId = admin._id;
-    res.redirect("/admin/a-dashboard");
-});
-
-// Admin dashboard page---------------------------------------------------------------------------
-app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
-    const totalUsers = await userModel.countDocuments();
-    const totalResources = await Resource.countDocuments();
-    const supportTickets = await SupportModel.countDocuments();
-    
-    const recentRegistrations = await userModel.find().sort({ joinedon: -1 }).limit(10);
-
-    res.render("admin/a-dashboard", {admin:req.admin, totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets    , premiumPercentage:0, freePercentage:0, recentRegistrations});
-});
-
-// Admin User Page------------------------------------------------------------------------------------
-app.get("/admin/a-users", adminLoggedIn, async (req, res) => {
-    const users = await userModel.find();
-    const totalUsers = await userModel.countDocuments();
-    res.render("admin/a-users", {admin: req.admin, users, totalUsers});
-});
-
-
-
 // GET home page----------------------------------------------------------------------------------------
 app.get("/", async (req, res) => {
     if (req.session.userId) {
@@ -161,7 +121,110 @@ app.get('/count', async (req, res) => {
 });
 
 
+// -----------------------------------------------------------x----------------------------------------------------------
+// ADMIN PAGES
 
+
+// ADMIN page----------------------------------------------------------------------------------------
+app.get("/admin/login", (req, res) => {
+    if (req.session.adminId) {
+        return res.redirect("/admin/a-dashboard");
+    }
+    res.render("admin/a-login");
+});
+// POST admin login
+app.post("/admin/login", async (req, res) => {
+    const { email, password } = req.body;
+    admin = await adminModel.findOne({email});
+
+    const isMatch = bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+        return res.send("Invalid Password");
+    }
+    req.session.adminId = admin._id;
+    res.redirect("/admin/a-dashboard");
+});
+
+
+// Admin dashboard page---------------------------------------------------------------------------
+app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
+    const totalUsers = await userModel.countDocuments();
+    const totalResources = await Resource.countDocuments();
+    const supportTickets = await SupportModel.countDocuments();
+    
+    const recentRegistrations = await userModel.find().sort({ joinedon: -1 }).limit(10);
+
+    res.render("admin/a-dashboard", {admin:req.admin, navTitle:'Dashboard', totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets    , premiumPercentage:0, freePercentage:0, recentRegistrations});
+});
+
+// Admin User Page------------------------------------------------------------------------------------
+app.get("/admin/a-users", adminLoggedIn, async (req, res) => {
+    const users = await userModel.find();
+    const totalUsers = await userModel.countDocuments();
+    res.render("admin/a-users", {admin: req.admin, navTitle:'Users', users, totalUsers, premiumUsers: 0, verifiedUsers: 0, suspendedUsers :0});
+});
+
+// Admin Support Page------------------------------------------------------------------------------------
+app.get("/admin/a-support", adminLoggedIn, async (req, res) => {
+    const {search = "", status = "", priority = "", category = "", sort = "newest" } = req.query;
+
+    let filter = {};
+
+    if (status) {
+        filter.status = status;
+    }
+    if (priority) {
+        filter.priority = priority;
+    }
+    if (category) {
+        filter.category = category;
+    }
+
+    let tickets = await SupportModel.find(filter).populate("user");
+    if (search) {
+        const query = search.trim().toLowerCase();
+        tickets = tickets.filter(ticket => {
+
+            const ticketId = ticket.ticketId?.toLowerCase() || "";
+            const subject = ticket.subject?.toLowerCase() || "";
+            const name = ticket.user?.name?.toLowerCase() || "";
+            const username = ticket.user?.username?.toLowerCase() || "";
+
+            return (
+                ticketId.includes(query) ||
+                subject.includes(query) ||
+                name.includes(query) ||
+                username.includes(query)
+            );
+        });
+    }
+
+    tickets.sort((a, b) => {
+        if (sort === "oldest") {
+            return a.createdAt - b.createdAt;
+        }
+        return b.createdAt - a.createdAt;
+    });
+
+    res.render("admin/a-support", {tickets, filters: req.query, admin: req.admin, navTitle:'Support' });
+});
+
+// Admin Support Ticket Details Page----------------------------------------------------------------------
+app.get("/admin/a-support/:id", adminLoggedIn, async (req, res) => {
+    const ticket = await SupportModel.findById(req.params.id).populate("user");
+    if (!ticket) {
+        return res.redirect("/admin/a-support");
+    }
+    res.render("admin/a-ticket", {ticket, navTitle: 'support ticket', admin: req.admin});
+});
+
+
+
+
+
+
+// -----------------------------------------------------------x----------------------------------------------------------
+// USER PAGES
 
 // LANDING PAGE--------------------------------------------
 // GET Langing page- DECRIPTION button
@@ -595,10 +658,7 @@ app.post("/support", isLoggedIn, supportUpload.array("attachments",5), async(req
             }
 
             let priority="Low";
-            if(
-                req.body.category==="Subscription" ||
-                req.body.category==="Payment"
-            ){
+            if(req.body.category==="Subscription" || req.body.category==="Technical" || req.body.category==="Payment") {
                 priority="High";
             }
 
@@ -668,6 +728,7 @@ app.get("/ticket/:id", isLoggedIn, async (req, res) => {
         res.status(500).send("Something went wrong.");
     }
 });
+
 
 
 

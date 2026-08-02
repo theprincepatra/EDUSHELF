@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Tickets | Admin</title>
+    <link rel="stylesheet" href="/css/admin/a-dashboard.css">
+    <link rel="stylesheet" href="/css/admin/a-support.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+
+        <%- include("partials/sidebar") %>
+        <div class="main-content">
+            <%- include("partials/navbar") %>
+
+            <main class="content">
+                <div class="page-header">
+                    <div>
+                        <h1>Support Tickets</h1>
+                        <p>Manage and respond to support requests from EduShelf users.</p>
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+
+                    <form action="/admin/a-support" method="GET" class="filter-bar">
+
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" name="search" placeholder="Search Ticket ID or User..." value="<%= filters.search || '' %>" >
+                        </div>
+
+                        <div class="filters">
+                            <select name="category">    
+                                <option value="">All Categories</option>
+                                <option value="Technical" <%= filters.category==="Technical"?"selected":"" %>>Technical</option>
+                                <option value="Subscription" <%= filters.category==="Subscription"?"selected":"" %>>Subscription</option>
+                                <option value="Payment" <%= filters.category==="Payment"?"selected":"" %>>Payment</option>
+                                <option value="Account" <%= filters.category==="Account"?"selected":"" %>>Account</option>
+                                <option value="Feature Request" <%= filters.category==="Feature Request"?"selected":"" %>>Feature Request</option>
+                                <option value="Feedback" <%= filters.category==="Feedback"?"selected":"" %>>Feedback</option>
+                                <option value="Other" <%= filters.category==="Other"?"selected":"" %>>Other</option>
+                            </select>
+
+                            <select name="priority">
+                                <option value="">Priority</option>
+                                <option value="High" <%= filters.priority==="High"?"selected":"" %>>
+                                    High
+                                </option>
+                                <option value="Low" <%= filters.priority==="Low"?"selected":"" %>>
+                                    Low
+                                </option>
+                            </select>
+                            
+                            <select name="status">
+                                <option value="">Status</option>
+                                <option value="Pending" <%= filters.status==="Pending"?"selected":"" %>>
+                                    Pending
+                                </option>
+                                <option value="In Progress" <%= filters.status==="In Progress"?"selected":"" %>>
+                                    In Progress
+                                </option>
+                                <option value="Resolved" <%= filters.status==="Resolved"?"selected":"" %>>
+                                    Resolved
+                                </option>
+                            </select>
+    
+                            <select name="sort">
+                                <option value="newest" <%= filters.sort==="newest"?"selected":"" %>>
+                                    Newest
+                                </option>
+                                <option value="oldest" <%= filters.sort==="oldest"?"selected":"" %>>
+                                    Oldest
+                                </option>
+                            </select>
+
+                            <div class="filter-action">
+                                <button type="submit" class="filter-btn">
+                                    <i class="fa-solid fa-filter"></i>
+                                    Apply Filters
+                                </button>
+    
+                                <a href="/admin/a-support" class="reset-btn">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-card">
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>User</th>
+                                <th>Category</th>
+                                <th>Subject</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% tickets.forEach(ticket=>{ %>
+                                <tr>
+                                    <td>
+                                        <div class="ticket-id">
+                                            <strong><%= ticket.ticketId %></strong>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="user-cell">
+                                            <!-- <div class="user-avatar">
+                                                <%= ticket.user.profilepicture %>
+                                            </div> -->
+                                            <img src="<%= ticket.user.profilepicture %>" alt="user DP" class="user-avatar">
+
+                                            <div class="user-info">
+                                                <h4><%= ticket.user.name %></h4>
+                                                <span>@<%= ticket.user.username %></span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td><%= ticket.category %></td>
+
+                                    <td><%= ticket.subject %></td>
+
+                                    <td>
+                                        <span class="priority <%= ticket.priority.toLowerCase() %>">
+                                            <%= ticket.priority %>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="status <%= ticket.status.toLowerCase().replace(" ","-") %>">
+                                            <%= ticket.status %>
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <%= new Date(ticket.createdAt).toLocaleDateString("en-IN") %>
+                                    </td>
+
+                                    <td>
+                                        <a href="/admin/a-support/<%= ticket._id %>" class="view-btn">View</a>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+
+            <%- include("partials/footer") %>
+
+        </div>
+    </div>
+</body>
+</html>
