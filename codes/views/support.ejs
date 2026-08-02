@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support Center</title>
     <link rel="stylesheet" href="/css/support.css">
+    <link rel="stylesheet" href="/css/my-tickets.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/fontawesome/css/all.min.css">
@@ -19,8 +20,7 @@
 
         <div class="nav-links">
             <a href="/dashboard">Dashboard</a>
-            <a href="/profile">Profile</a>
-            <a href="#">Subscription</a>
+            <a href="/my-tickets">My Tickets</a>
         </div>
     </nav>
 
@@ -37,11 +37,12 @@
 
                 <select id="category" name="category" required>
                     <option value="">Select Category</option>
-                    <option>General Inquiry</option>
-                    <option>Account Issue</option>
-                    <option>Payment Issue</option>
-                    <option>Subscription Issue</option>
-                    <option>Technical Issue</option>
+                    <option>General</option>
+                    <option>Account</option>
+                    <option>Subscription</option>
+                    <option>Resources</option>
+                    <option>Technical</option>
+                    <option>Payment</option>
                     <option>Bug Report</option>
                     <option>Feature Request</option>
                     <option>Other</option>
@@ -54,9 +55,12 @@
                 <textarea id="message" name="message" placeholder="Explain your issue in detail..." required></textarea>
 
                 <label>Attach Screenshot (Optional)</label>
-                <input type="file" id="image" name="image" accept="image/*">
+                <input type="file" id="attachments" name="attachments" accept="image/*" multiple><br>
+                <small style="color: #666; font-size: 0.82em; font-style: italic;">
+                    Accepted: PNG, JPG, JPEG, Maximum 5 screenshots
+                </small>
 
-                <button type="submit">Submit Support Request</button>
+                <button type="submit">Submit Request</button>
             </form>
         </div>
 
@@ -66,25 +70,25 @@
     </section>
 
     <section class="quick-help">
-        <div class="card" data-category="General Inquiry">
+        <div class="card" data-category="General">
             <i class="fa-regular fa-comments"></i>
             <h3>General</h3>
             <p>Questions about EduShelf.</p>
         </div>
 
-        <div class="card" data-category="Account Issue">
+        <div class="card" data-category="Account">
             <i class="fa-solid fa-user"></i>
             <h3>Account</h3>
-            <p>Login & profile problems.</p>
+            <p>Login, Profile & Account issues.</p>
         </div>
 
-        <div class="card" data-category="Payment Issue">
+        <div class="card" data-category="Subscription">
             <i class="fa-solid fa-credit-card"></i>
-            <h3>Payment</h3>
-            <p>Payment & refund issues.</p>
+            <h3>Subscription</h3>
+            <p>Plans, renewals & payment issues.</p>
         </div>
 
-        <div class="card" data-category="Technical Issue">
+        <div class="card" data-category="Technical">
             <i class="fa-solid fa-laptop-code"></i>
             <h3>Technical</h3>
             <p>Website bugs & errors.</p>

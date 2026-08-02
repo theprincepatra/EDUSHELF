@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tickets</title>
+    <link rel="stylesheet" href="/css/my-tickets.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="/images/logo_bgremove.png">
+            <h2>EDUSHELF
+                <span>Support Center</span>
+            </h2>
+        </div>
+
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/support">Support</a>
+        </div>
+    </nav>
+
+    <section class="tickets-container">
+        <div class="page-header">
+            <div>
+                <h1>My Support Tickets</h1>
+                <p>Track all your submitted support requests.</p>
+            </div>
+        </div>
+
+        <% if(tickets.length===0){ %>
+            <div class="empty-state">
+                <i class="fa-regular fa-folder-open"></i>
+                <h2>No Tickets Found</h2>
+                <p>You haven't submitted any support ticket yet.<   /p>
+                <a href="/support">Create Ticket</a>
+            </div>
+        <% } else { %>
+            <div class="table-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Ticket ID</th>
+                            <th>Category</th>
+                            <th>Subject</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% tickets.forEach(ticket=>{ %>
+                        <tr>
+                            <td><%= tickets.indexOf(ticket) + 1 %></td>
+
+                            <td>
+                                <strong><%= ticket.ticketId %></strong>
+                            </td>
+
+                            <td><%= ticket.category %></td>
+                            
+                            <td><%= ticket.subject %></td>
+
+                            <td>
+                                <span class="status <%= ticket.status.toLowerCase().replace(' ','-') %>">
+                                    <%= ticket.status %>
+                                </span>
+                            </td>
+
+                            <td>
+                                <%= new Date(ticket.createdAt).toLocaleDateString("en-IN") %>
+                            </td>
+
+                            <td>
+                                <div class="action-buttons">
+
+                                    <a href="/ticket/<%= ticket._id %>" class="view-btn">View</a>
+
+                                    <% if(ticket.status==="Pending"){ %>
+                                        <form action="/ticket/<%= ticket._id %>?_method=DELETE" method="POST">
+                                            <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this ticket?');">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        <% } %>
+    </section>
+
+</body>
+</html>

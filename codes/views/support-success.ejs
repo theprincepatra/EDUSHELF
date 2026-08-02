@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Ticket Submitted</title>
+    <link rel="stylesheet" href="/css/support-success.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+</head>
+<body>
+    <div class="success-box">
+        <i class="fa-solid fa-circle-check"></i>
+        <h1>Support Ticket Submitted</h1>
+        <p>Your support request has been submitted successfully.</p>
+
+        <p class="ticket-label">Ticket ID</p>
+        <h2><%= ticketId %></h2>
+
+        <p>Our support team will review your request and update the ticket status as soon as possible.</p>
+
+        <div class="buttons">
+            <a href="/my-tickets">My Tickets</a>
+            <a href="/support">Back to support page</a>
+        </div>
+    </div>
+</body>
+</html>

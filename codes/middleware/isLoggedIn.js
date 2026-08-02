@@ -1,4 +1,4 @@
-const userModel = require("../models/user");
+const userModel = require("../models/userModel");
 
 async function isLoggedIn(req, res, next) {
     if (!req.session.userId) {

@@ -19,160 +19,94 @@
             <section class="dashboard-content">
 
                 <div class="page-title">
-                    <div>
+
+                    <div class="title-content">
                         <h1>Dashboard</h1>
-                        <p>Welcome back, <%= admin.name %> 👋</p>
+                        <p>Welcome back, <strong><%= admin.name %></strong> 👋</p>
                     </div>
-                    <div class="dashboard-filter">
-                        <select>
-                            <option>This Month</option>
-                            <option>Last 30 Days</option>
-                            <option>This Year</option>
-                            <option>Custom Range</option>
-                        </select>
-                    </div>
+
                 </div>
 
                 <div class="dashboard-wrapper">
-                    <!-- ===================== KPI CARDS ===================== -->
-                    <div class="dashboard-cards">
+                    <!-- ================= KPI ================= -->
+                    <section class="dashboard-cards">
+                        <div class="card users-card">
 
-                        <div class="card">
-                            <div class="card-icon users">
+                            <div class="card-icon">
                                 <i class="fa-solid fa-users"></i>
                             </div>
-
                             <div class="card-info">
-                                <h4>Total Users</h4>
+                                <span>Total Users</span>
                                 <h2><%= totalUsers || 0 %></h2>
-                                <span>Total registered users</span>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-icon register">
-                                <i class="fa-solid fa-user-plus"></i>
-                            </div>
-
-                            <div class="card-info">
-                                <h4>New Registrations</h4>
-                                <h2><%= newRegistrations || 0 %></h2>
-                                <span>This Month</span>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-icon subscription">
+                        <div class="card subscription-card">
+                            <div class="card-icon">
                                 <i class="fa-solid fa-credit-card"></i>
                             </div>
-
                             <div class="card-info">
-                                <h4>Active Subscriptions</h4>
+                                <span>Active Subscriptions</span>
                                 <h2><%= activeSubscriptions || 0 %></h2>
-                                <span>Coming Soon</span>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-icon revenue">
+                        <div class="card revenue-card">                    
+                            <div class="card-icon">
                                 <i class="fa-solid fa-indian-rupee-sign"></i>
                             </div>
 
                             <div class="card-info">
-                                <h4>Total Revenue</h4>
+                                <span>Total Revenue</span>
                                 <h2>₹<%= totalRevenue || 0 %></h2>
-                                <span>Coming Soon</span>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-icon resources">
+                        <div class="card resource-card">
+                            <div class="card-icon">
                                 <i class="fa-solid fa-book"></i>
                             </div>
-
                             <div class="card-info">
-                                <h4>Total Resources</h4>
+                                <span>Total Resources</span>
                                 <h2><%= totalResources || 0 %></h2>
-                                <span>Available Resources</span>
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-icon support">
+                        <div class="card support-card">
+                            <div class="card-icon">
                                 <i class="fa-solid fa-headset"></i>
                             </div>
-
                             <div class="card-info">
-                                <h4>Support Tickets</h4>
-                                <h2><%= suportTickets || 0 %></h2>
-                                <span>Awaiting Response</span>
+                                <span>Support Tickets</span>
+                                <h2><%= supportTickets || 0 %></h2>
                             </div>
                         </div>
+                    </section>
 
-                    </div>
-
-                    <!-- ===================== ANALYTICS ===================== -->
-                    <div class="analytics-grid">
-                        <!-- Registration Chart -->
-                        <div class="analytics-card registration-chart">
-
-                            <div class="card-header">
+                    <!-- ================= REGISTRATION ANALYTICS ================= -->
+                    <section class="analytics-section">
+                        <div class="analytics-card">
+                            <div class="analytics-header">
                                 <div>
                                     <h2>User Registration Analytics</h2>
-                                    <p>Monitor registration growth</p>
+                                    <p>Track user registrations over time.</p>
                                 </div>
                                 <select>
                                     <option>Last 7 Days</option>
                                     <option selected>This Month</option>
                                     <option>This Year</option>
-                                    <option>Custom Range</option>
                                 </select>
                             </div>
-                            <div class="chart-placeholder">
+
+                            <div class="analytics-body">
                                 <canvas id="registrationChart"></canvas>
                             </div>
                         </div>
+                    </section>
 
-                        <!-- Subscription Chart -->
-                        <div class="analytics-card subscription-chart">
-                            <div class="card-header">
-                                <div>
-                                    <h2>Subscription Analytics</h2>
-                                    <p>Free vs Premium Users</p>
-                                </div>
-                            </div>
-
-                            <div class="pie-chart-container">
-                                <canvas id="subscriptionChart"></canvas>
-                            </div>
-
-                            <div class="subscription-summary">
-                                <div class="summary-item">
-                                    <span class="dot premium"></span>
-                                    <div>
-                                        <h4>Premium</h4>
-                                        <p><%= premiumUsers || 0 %> Users</p>
-                                    </div>
-                                    <strong><%= premiumPercentage || 0 %>%</strong>
-                                </div>
-
-                                <div class="summary-item">
-                                    <span class="dot free"></span>
-                                    <div>
-                                        <h4>Free</h4>
-                                        <p><%= freeUsers || totalUsers || 0 %> Users</p>
-                                    </div>
-                                    <strong><%= freePercentage || 100 %>%</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ===================== BOTTOM SECTION ===================== -->
-                    <div class="dashboard-bottom">
-                        <!-- RECENT REGISTRATIONS -->
+                    <!-- ================= RECENT REGISTRATIONS ================= -->
+                    <section class="dashboard-bottom">
                         <div class="dashboard-table-card">
-
                             <div class="table-header">
                                 <div>
                                     <h2>Recent Registrations</h2>
@@ -193,34 +127,36 @@
                                     </thead>
 
                                     <tbody>
-                                        <% if(recentRegistrations && recentRegistrations.length){ %>
+                                        <% if (recentRegistrations && recentRegistrations.length) { %>
                                             <% recentRegistrations.forEach(user => { %>
                                                 <tr>
                                                     <td>
                                                         <div class="user-cell">
-                                                            <img src="<%= user.profilepicture || '/images/default-avatar.png' %>" alt="Profile">
-                                                            <div>
+                                                            <img src="<%= user.profilepicture || '/images/dashboard/default-profile.png' %>" alt="<%= user.name %>">
+                                                            <div class="user-details">
                                                                 <h4><%= user.name %></h4>
                                                                 <span>@<%= user.username %></span>
                                                             </div>
                                                         </div>
                                                     </td>
 
-                                                    <td><%= user.email %></td>
-
                                                     <td>
-                                                        <%= new Date(user.createdAt).toLocaleDateString("en-IN") %>
+                                                        <%= user.email %>
                                                     </td>
 
                                                     <td>
-                                                        <span class="status completed">Registered</span>
+                                                        <%= new Date(user.joinedon).toLocaleDateString("en-IN") %>
+                                                    </td>
+
+                                                    <td>
+                                                        <span class="status free">Free</span>
                                                     </td>
                                                 </tr>
                                             <% }) %>
                                         <% } else { %>
                                             <tr>
                                                 <td colspan="4" class="empty-state">
-                                                    No registrations yet.
+                                                    No users registered yet.
                                                 </td>
                                             </tr>
                                         <% } %>
@@ -228,33 +164,29 @@
                                 </table>
                             </div>
                         </div>
-
-                        <!-- RECENT SUBSCRIPTIONS -->
-                        <div class="dashboard-table-card">
-                            <div class="table-header">
-
-                                <div>
-                                    <h2>Recent Subscriptions</h2>
-                                    <p>Latest subscription purchases</p>
-                                </div>
-                            </div>
-
-                            <div class="subscription-empty">
-                                <i class="fa-solid fa-credit-card"></i>
-                                <h3>No subscriptions yet</h3>
-                                <p>Subscription purchases will appear here after the subscription system is implemented.</p>
-                            </div>
-
-                        </div>
-                    </div>
+                    </section>
                 </div>
             </section>
-
             <%- include("partials/footer") %>
         </div>
     </div>
 
     <script src="/js/admin/sidebar.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById("registrationChart");
+        if (ctx) {
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: [],
+                    datasets: [{label: "Registrations", data: [], tension: .4, fill: true }]
+                },
+                options: { responsive: true,maintainAspectRatio: false}
+            });
+        }
+    </script>
 </body>
 </html>

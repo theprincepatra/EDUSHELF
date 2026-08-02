@@ -6,16 +6,20 @@ const path = require('path');
 const fs = require('fs');
 const mongoose = require("mongoose");
 const session = require("express-session");
-const MongoStore = require("connect-mongo").default;
 
+const MongoStore = require("connect-mongo").default;
 require('dotenv').config();
 mongoose.connect("mongodb://127.0.0.1:27017/siginupDB")
     .then(() => console.log("✅ MongoDB Connected"))
     .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
+// const resource = require("./models/resource");
+const Resource = require("./models/resourceModel");
 const subjectsData = require("./subjectsData");
-const userModel = require('./models/user');
+const userModel = require('./models/userModel');
 const adminModel = require("./models/adminModel");
+const subcriptionModel = require("./models/subscriptionModel");
+const SupportModel = require("./models/support-ticketModel");
 
 const isLoggedIn = require("./middleware/isLoggedIn");
 const adminLoggedIn = require("./middleware/adminLoggedIn");
@@ -61,6 +65,8 @@ const storage = multer.diskStorage({
     }
 });
 
+
+
 // ADMIN page----------------------------------------------------------------------------------------
 app.get("/admin/login", (req, res) => {
     if (req.session.adminId) {
@@ -68,7 +74,7 @@ app.get("/admin/login", (req, res) => {
     }
     res.render("admin/a-login");
 });
-// POST admin page
+// POST admin login
 app.post("/admin/login", async (req, res) => {
     const { email, password } = req.body;
     admin = await adminModel.findOne({email});
@@ -80,9 +86,14 @@ app.post("/admin/login", async (req, res) => {
     req.session.adminId = admin._id;
     res.redirect("/admin/a-dashboard");
 });
-app.get("/admin/a-dashboard", adminLoggedIn, (req, res) => {
-    res.render("admin/a-dashboard", {admin:req.admin});
-    // (totalUsers, newRegistrations, totalResources, activeSubscriptions, totalRevenue, supportTickets, premiumUsers, freeUsers, premiumPercentage, freePercentage, recentRegistrations)
+
+// Admin dashboard page---------------------------------------------------------------------------
+app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
+    const totalUsers = await userModel.countDocuments();
+    const totalResources = await Resource.countDocuments();
+    const recentRegistrations = await userModel.find().sort({ joinedon: -1 }).limit(10);
+
+    res.render("admin/a-dashboard", {admin:req.admin, totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets:0, premiumPercentage:0, freePercentage:0, recentRegistrations});
 });
 
 // Admin User Page------------------------------------------------------------------------------------
@@ -550,23 +561,96 @@ app.get('/support', isLoggedIn, function (req, res) {
 });
 // MULTER for support-page file upload
 const supportStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "public/uploads/support");
+    destination:(req,file,cb)=>{
+        cb(null,"public/uploads/support");
     },
-    filename: (req, file, cb) => {
-        const uniqueName = Date.now() + path.extname(file.originalname);
-        cb(null, uniqueName);
+    filename:(req,file,cb)=>{
+        const uniqueName=Date.now()+"-"+Math.round(Math.random()*1E9)+path.extname(file.originalname);
+        cb(null,uniqueName);
     }
 });
-const supportUpload = multer({
-    storage: supportStorage
+
+const supportUpload=multer({
+    storage:supportStorage, limits:{files:5,fileSize:5*1024*1024},
+    fileFilter:(req,file,cb)=>{
+        if(file.mimetype.startsWith("image/")){
+            cb(null,true);
+        }else{
+            cb(new Error("Only image files are allowed."));
+        }
+    }
 });
 // POST  support page
-app.post("/support", supportUpload.single("image"), (req, res) => {
-    console.log(req.body);
-    console.log(req.file);
-    res.send("Support request received");
+app.post("/support", isLoggedIn, supportUpload.array("attachments",5), async(req,res)=>{
+        try{
+            const lastTicket = await SupportModel.findOne().sort({ createdAt: -1 });
+            let ticketId = "EDS-1001";
+            if (lastTicket && lastTicket.ticketId) {
+                const lastNumber = Number( lastTicket.ticketId.replace("EDS-", "") );
+                if (!isNaN(lastNumber)) {
+                    ticketId = `EDS-${lastNumber + 1}`;
+                }
+            }
+
+            let priority="Low";
+            if(
+                req.body.category==="Subscription" ||
+                req.body.category==="Payment"
+            ){
+                priority="High";
+            }
+
+            const attachments=req.files ? req.files.map(file=>"/uploads/support/"+file.filename) : [];
+
+            await SupportModel.create({ user:req.user._id, ticketId, category:req.body.category, subject:req.body.subject, message:req.body.message, attachments, priority });
+
+            res.render("support-success",{ user:req.user, ticketId});
+        }
+        catch(err){
+            console.log(err);
+            res.status(500).send("Something went wrong.");
+        }
+    }
+);
+
+// GET my-tickets page--------------------------------------------
+app.get("/my-tickets", isLoggedIn, async (req, res) => {
+    const tickets = await SupportModel.find({ user: req.user._id }).sort({ createdAt: -1 });
+    res.render("my-tickets", {user: req.user,tickets});
 });
+// DELETE ticket if status is Pending
+app.delete("/ticket/:id", isLoggedIn, async (req, res) => {
+    try {
+        const ticket = await SupportModel.findById(req.params.id);
+        if (!ticket) {
+            return res.status(404).send("Ticket not found.");
+        }
+        // User can delete only their own ticket
+        if (!ticket.user.equals(req.user._id)) {
+            return res.status(403).send("Unauthorized.");
+        }
+        // Only Pending tickets can be deleted
+        if (ticket.status !== "Pending") {
+            return res.status(403).send("This ticket can no longer be deleted.");
+        }
+        // Delete uploaded screenshots
+        if (ticket.attachments && ticket.attachments.length > 0) {
+            const fs = require("fs");
+            ticket.attachments.forEach(file => {
+                const filePath = path.join(__dirname, "public", file);
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
+            });
+        }
+        await SupportModel.findByIdAndDelete(ticket._id);
+        res.redirect("/my-tickets");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong.");
+    }
+});
+
 
 
 
@@ -642,6 +726,7 @@ app.get("/edushelf/:branch/:semester/:subject/:type/:file", isLoggedIn,(req,res)
 });
 
 
+
 // Logout
 app.get("/logout", (req, res) => {
     req.session.destroy((err) => {
@@ -660,4 +745,14 @@ app.get("/logout", (req, res) => {
 // local host 3000 port------------------------------------------------------------------------------
 app.listen(3000, function () {
     console.log('Server is running on http://localhost:3000');
+});
+
+
+
+
+const syncResources = require("./utils/syncResources");
+
+app.get("/admin/sync-resources", async (req, res) => {
+    await syncResources();
+    res.send("Resources Synced");
 });
