@@ -385,7 +385,6 @@ button:hover {
     }
 
     .quick-help {
-        grid-template-columns: 1fr;
         padding: 0 15px 30px;
         gap: 18px;
     }

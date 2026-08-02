@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top right,#10B98120,transparent 30%),
+    radial-gradient(circle at bottom left,#2563EB20,transparent 35%),
+    #0B1120;
+
+    padding:20px;
+
+}
+
+.success-box{
+
+    width:100%;
+    max-width:600px;
+
+    background:#172033;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:50px 45px;
+
+    text-align:center;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.35);
+
+}
+
+.success-box i{
+
+    font-size:5rem;
+
+    color:#10B981;
+
+    margin-bottom:25px;
+
+}
+
+.success-box h1{
+
+    font-size:2rem;
+
+    color:#F8FAFC;
+
+    margin-bottom:15px;
+
+}
+
+.success-box p{
+
+    color:#94A3B8;
+
+    font-size:1rem;
+
+    line-height:1.7;
+
+}
+
+.success-box h2{
+
+    margin:35px 0;
+
+    display:inline-block;
+
+    padding:14px 30px;
+
+    background:#10B981;
+
+    color:#fff;
+
+    border-radius:14px;
+
+    font-size:2rem;
+
+    letter-spacing:2px;
+
+}
+
+.buttons{
+
+    margin-top:40px;
+
+    display:flex;
+    justify-content:center;
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.buttons a{
+
+    min-width:200px;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.buttons a:first-child{
+
+    background:#10B981;
+
+    color:#fff;
+
+}
+
+.buttons a:first-child:hover{
+
+    background:#34D399;
+
+    transform:translateY(-3px);
+
+}
+
+.buttons a:last-child{
+
+    background:#23304A;
+
+    color:#F8FAFC;
+
+}
+
+.buttons a:last-child:hover{
+
+    background:#2E3D5A;
+
+    transform:translateY(-3px);
+
+}
+
+@media(max-width:600px){
+
+    .success-box{
+
+        padding:35px 25px;
+
+    }
+
+    .success-box h1{
+
+        font-size:1.6rem;
+
+    }
+
+    .success-box h2{
+
+        font-size:1.5rem;
+
+    }
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+    .buttons a{
+
+        width:100%;
+
+    }
+
+}
