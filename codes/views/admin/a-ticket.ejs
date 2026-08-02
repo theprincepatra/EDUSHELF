@@ -1,199 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= ticket.ticketId %> | Admin</title>
-    <link rel="stylesheet" href="/css/admin/a-ticket.css">
     <link rel="stylesheet" href="/css/admin/a-dashboard.css">
+    <link rel="stylesheet" href="/css/admin/a-ticket.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
     <div class="sidebar-overlay"></div>
+
     <div class="admin-container">
         <%- include("partials/sidebar") %>
         <div class="main-content">
             <%- include("partials/navbar") %>
             <main class="content">
-
-                <div class="container">
-                    <div class="top-bar">
-                        <a href="/admin/a-support" class="back-btn">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            Back to Tickets
-                        </a>
-                    </div>
-
+                <div class="ticket-page">
                     <div class="ticket-header">
-
                         <div>
+                            <div class="flex1">
+                                <h1><%= ticket.ticketId %></h1>
+    
+                                <div class="flex2">
+                                    <span class="priority <%= ticket.priority.toLowerCase() %>">
+                                        <%= ticket.priority %>
+                                    </span>
+                                    <span class="status <%= ticket.status.toLowerCase().replace(" ","-") %>">
+                                        <%= ticket.status %>
+                                    </span>
+                                </div>
+                            </div>
 
-                            <h1><%= ticket.ticketId %></h1>
+                            <div class="ticket-meta">
+                                <span>Category: <%= ticket.category %></span>
+                                <span>
+                                    Created At:<%= new Date(ticket.createdAt).toLocaleDateString("en-IN") %>
+                                </span>
 
-                            <p><%= ticket.category %></p>
+                            </div>
 
                         </div>
 
-                        <div class="badges">
-
-                            <span class="priority <%= ticket.priority.toLowerCase() %>">
-
-                                <%= ticket.priority %>
-
-                            </span>
-
-                            <span class="status <%= ticket.status.toLowerCase().replace(" ","-") %>">
-
-                                <%= ticket.status %>
-
-                            </span>
-
+                        <div class="back-btn">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <a href="/admin/a-support">Back to Support</a>
                         </div>
 
                     </div>
 
-                    <div class="ticket-layout">
-                        <div class="left-column">
-                            <div class="card">
+                    <div class="ticket-grid">
 
-                                <div class="card-title">
+                        <div class="ticket-panel">
 
-                                    <i class="fa-solid fa-user"></i>
+                            <section class="panel">
 
-                                    <h2>User Information</h2>
+                                <h2>User Information</h2>
 
-                                </div>
+                                <div class="info-item">
 
-                                <div class="info-grid">
+                                    <label>Name</label>
 
-                                    <div>
-
-                                        <span>Name</span>
-
-                                        <h4><%= ticket.user.name %></h4>
-
-                                    </div>
-
-                                    <div>
-
-                                        <span>Username</span>
-
-                                        <h4>@<%= ticket.user.username %></h4>
-
-                                    </div>
-
-                                    <div>
-
-                                        <span>Email</span>
-
-                                        <h4><%= ticket.user.email %></h4>
-
-                                    </div>
+                                    <p><%= ticket.user.name %></p>
 
                                 </div>
 
-                            </div>
+                                <div class="info-item">
 
-                            <div class="card">
+                                    <label>Username</label>
 
-                                <div class="card-title">
-
-                                    <i class="fa-solid fa-circle-info"></i>
-
-                                    <h2>Issue Details</h2>
+                                    <p>@<%= ticket.user.username %></p>
 
                                 </div>
 
-                                <h3><%= ticket.subject %></h3>
+                                <div class="info-item">
 
-                                <p class="description">
+                                    <label>Email</label>
 
-                                    <%= ticket.description %>
-
-                                </p>
-
-                            </div>
-
-                            <% if(ticket.attachments && ticket.attachments.length>0){ %>
-                                <div class="card">
-
-                                    <div class="card-title">
-
-                                        <i class="fa-solid fa-paperclip"></i>
-
-                                        <h2>Attachments</h2>
-
-                                    </div>
-
-                                    <div class="attachments">
-
-                                        <% ticket.attachments.forEach(file=>{ %>
-
-                                            <a href="<%= file %>" target="_blank">
-
-                                                <img src="<%= file %>" alt="Attachment">
-
-                                            </a>
-
-                                        <% }) %>
-
-                                    </div>
+                                    <p><%= ticket.user.email %></p>
 
                                 </div>
+
+                            </section>
+
+                            <section class="panel">
+
+                                <h2>Issue Description</h2>
+
+                                <div class="issue-box">
+
+                                    <%= ticket.message %>
+
+                                </div>
+
+                            </section>
+
+                            <% if(ticket.attachments.length){ %>
+
+                            <section class="panel">
+
+                                <h2>Attachments</h2>
+
+                                <div class="attachments">
+
+                                    <% ticket.attachments.forEach(file=>{ %>
+
+                                        <a href="<%= file %>" target="_blank">
+
+                                            <img src="<%= file %>">
+
+                                        </a>
+
+                                    <% }) %>
+
+                                </div>
+
+                            </section>
+
                             <% } %>
 
                         </div>
 
-                        <div class="right-column">
-                            <div class="card">
-                                <div class="card-title">
-                                    <i class="fa-solid fa-reply"></i>
-                                    <h2>Reply to User</h2>
-                                </div>
+                        <div class="ticket-panel">
 
-                                <form action="/admin/support/<%= ticket._id %>/reply" method="POST">
+                            <section class="panel">
 
-                                    <textarea
-                                        name="reply"
-                                        rows="8"
-                                        placeholder="Write your reply here..."
-                                    ><%= ticket.adminReply || "" %></textarea>
-
-                                    <button type="submit" class="reply-btn">
-
-                                        <i class="fa-solid fa-paper-plane"></i>
-
-                                        Send Reply
-
-                                    </button>
-
-                                </form>
-
-                            </div>
-
-                            <div class="card">
-
-                                <div class="card-title">
-
-                                    <i class="fa-solid fa-gear"></i>
-
-                                    <h2>Ticket Settings</h2>
-
-                                </div>
+                                <h2>Ticket Settings</h2>
 
                                 <form action="/admin/support/<%= ticket._id %>/update" method="POST">
-
-                                    <label>Priority</label>
-
-                                    <select name="priority">
-
-                                        <option value="High" <%= ticket.priority==="High"?"selected":"" %>>High</option>
-
-                                        <option value="Low" <%= ticket.priority==="Low"?"selected":"" %>>Low</option>
-
-                                    </select>
 
                                     <label>Status</label>
 
@@ -207,23 +141,64 @@
 
                                     </select>
 
-                                    <button class="update-btn">
+                                    <label>Priority</label>
 
-                                        Update Ticket
+                                    <select name="priority">
+
+                                        <option value="High" <%= ticket.priority==="High"?"selected":"" %>>High</option>
+
+                                        <option value="Low" <%= ticket.priority==="Low"?"selected":"" %>>Low</option>
+
+                                    </select>
+
+                                    <button class="save-btn">
+
+                                        <i class="fa-solid fa-floppy-disk"></i>
+
+                                        Save Changes
 
                                     </button>
+
                                 </form>
 
-                            </div>
+                            </section>
+
+                            <section class="panel panel-grow">
+
+                                <h2>Admin Response</h2>
+
+                                <form action="/admin/support/<%= ticket._id %>/reply" method="POST">
+
+                                    <textarea
+                                        name="reply"
+                                        placeholder="Write your response..."
+                                    ><%= ticket.adminReply || "" %></textarea>
+
+                                    <button class="reply-btn">
+
+                                        <i class="fa-solid fa-paper-plane"></i>
+
+                                        Send Response
+
+                                    </button>
+
+                                </form>
+
+                            </section>
 
                         </div>
+
                     </div>
+
                 </div>
 
             </main>
+
             <%- include("partials/footer") %>
+
         </div>
+
     </div>
+
 </body>
 </html>
-

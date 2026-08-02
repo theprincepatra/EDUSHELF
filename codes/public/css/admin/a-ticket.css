@@ -1,23 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 :root{
 
-    --bg:#0F172A;
-    --surface:#182338;
-    --surface-light:#202E49;
-    --border:#2B3B55;
+    --bg:#0B1220;
+
+    --surface:#111827;
+
+    --surface-light:#1A2436;
+
+    --border:rgba(255,255,255,.06);
 
     --text:#F8FAFC;
+
     --muted:#94A3B8;
 
     --primary:#2563EB;
+
     --primary-hover:#1D4ED8;
 
     --success:#16A34A;
+
     --warning:#EAB308;
+
     --danger:#DC2626;
 
-    --radius:18px;
+    --radius:22px;
 
-    --shadow:0 12px 35px rgba(0,0,0,.25);
+    --shadow:0 18px 45px rgba(0,0,0,.25);
 
 }
 
@@ -29,49 +38,29 @@
 
     box-sizing:border-box;
 
-    font-family:"Poppins",sans-serif;
+    font-family:"Manrope",sans-serif;
 
 }
 
-body{
+.ticket-page{
 
-    background:var(--bg);
-
-    color:var(--text);
-
-}
-
-
-.container{
-
-    max-width:1450px;
-
-    margin:auto;
-
-    padding:40px;
-
-}
-
-.top-bar{
-
-    margin-bottom:30px;
-
+    width:100%;
+    padding: 30px 25px;
 }
 
 .back-btn{
 
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    text-decoration:none;
-
-    color:#CBD5E1;
-
-    font-weight:600;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    transition: .25s;
+    background: #006aff4a;
+    padding: 1px 10px;
+    border-radius: 30px;
 }
 
 .back-btn:hover{
@@ -80,50 +69,93 @@ body{
 
 }
 
+.flex1, .flex2{
+    display: flex;
+}
+.flex2{
+    margin-left: 30px;
+    gap: 5px;
+}
+
 .ticket-header{
-
     display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
+    justify-content: space-between;
+    gap:25px;
     margin-bottom:35px;
-
 }
 
 .ticket-header h1{
 
-    font-size:2rem;
+    font-size:2.2rem;
 
-    margin-bottom:8px;
+    font-weight:800;
+
+    color:var(--text);
+
+    margin-bottom:12px;
+
+    line-height:1.2;
 
 }
 
-.ticket-header p{
+.ticket-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.ticket-meta span{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
 
     color:var(--muted);
 
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
 }
 
-.badges{
+.ticket-badges{
 
     display:flex;
 
     gap:12px;
+
+    flex-wrap:wrap;
 
 }
 
 .priority,
 .status{
 
-    padding:8px 18px;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:110px;
+
+    height:42px;
 
     border-radius:999px;
 
-    font-size:.85rem;
+    font-size:.86rem;
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
@@ -131,7 +163,7 @@ body{
 
     background:rgba(220,38,38,.15);
 
-    color:var(--danger);
+    color:#FF7B7B;
 
 }
 
@@ -139,7 +171,7 @@ body{
 
     background:rgba(22,163,74,.15);
 
-    color:var(--success);
+    color:#4ADE80;
 
 }
 
@@ -147,7 +179,7 @@ body{
 
     background:rgba(234,179,8,.15);
 
-    color:var(--warning);
+    color:#FACC15;
 
 }
 
@@ -155,7 +187,7 @@ body{
 
     background:rgba(37,99,235,.15);
 
-    color:var(--primary);
+    color:#60A5FA;
 
 }
 
@@ -163,105 +195,185 @@ body{
 
     background:rgba(22,163,74,.15);
 
-    color:var(--success);
+    color:#4ADE80;
 
 }
 
-.ticket-layout{
+.ticket-grid{
 
     display:grid;
 
-    grid-template-columns:2fr 1fr;
+    grid-template-columns:1fr 1fr;
 
-    gap:30px;
+    gap:28px;
+
+    align-items:stretch;
 
 }
 
-.card{
+.ticket-panel{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+/* ===========================================================
+   PANELS
+=========================================================== */
+
+.panel{
 
     background:var(--surface);
 
     border:1px solid var(--border);
 
-    border-radius:18px;
+    border-radius:var(--radius);
 
     padding:28px;
 
-    margin-bottom:28px;
-
     box-shadow:var(--shadow);
-
-}
-
-.card-title{
 
     display:flex;
 
-    align-items:center;
-
-    gap:12px;
+    flex-direction:column;
 
 }
 
-.card-title i{
+.panel-grow{
 
-    color:#A78BFA;
+    flex:1;
 
 }
 
-.card-title h2{
+.panel h2{
 
     font-size:1.15rem;
 
+    font-weight:700;
+
+    color:var(--text);
+
+    margin-bottom:24px;
+
+    padding-bottom:14px;
+
+    border-bottom:1px solid var(--border);
+
 }
 
-.info-grid{
+/* ===========================================================
+   USER INFORMATION
+=========================================================== */
 
-    display:grid;
+.info-item{
 
-    grid-template-columns:repeat(3,1fr);
+    display:flex;
 
-    gap:22px;
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    padding:18px 0;
+
+    border-bottom:1px solid var(--border);
 
 }
 
-.info-grid span{
+.info-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.info-item label{
 
     color:var(--muted);
 
-    font-size:.85rem;
+    font-size:.9rem;
 
-    display:block;
-
-    margin-bottom:8px;
+    font-weight:600;
 
 }
 
-.info-grid h4{
+.info-item p{
 
-    font-size:1rem;
+    color:var(--text);
+
+    font-size:.96rem;
+
+    font-weight:700;
+
+    text-align:right;
+
+    word-break:break-word;
 
 }
 
-.description{
+/* ===========================================================
+   ISSUE DESCRIPTION
+=========================================================== */
 
-    margin-top:15px;
+.issue-box{
+
+    background:var(--surface-light);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:22px;
+
+    color:#CBD5E1;
 
     line-height:1.9;
 
     white-space:pre-wrap;
 
-    color:#CBD5E1;
+    word-break:break-word;
+
+    min-height:180px;
 
 }
+
+/* ===========================================================
+   ATTACHMENTS
+=========================================================== */
 
 .attachments{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
 
     gap:18px;
+
+}
+
+.attachments a{
+
+    display:block;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+
+    transition:.25s;
+
+}
+
+.attachments a:hover{
+
+    border-color:var(--primary);
+
+    transform:translateY(-4px);
 
 }
 
@@ -269,129 +381,238 @@ body{
 
     width:100%;
 
-    height:170px;
+    height:190px;
 
     object-fit:cover;
 
-    border-radius:12px;
+    display:block;
 
-    transition:.3s;
+    transition:.25s;
+
+}
+
+.attachments a:hover img{
+
+    transform:scale(1.05);
 
 }
 
-.attachments img:hover{
+/* ===========================================================
+   FORM ELEMENTS
+=========================================================== */
 
-    transform:scale(1.04);
+.panel form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
 
 }
+
+.panel label{
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    color:var(--muted);
+
+    margin-bottom:6px;
+
+}
+
+.panel select{
+
+    width:100%;
+
+    height:52px;
+
+    padding:0 18px;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    background:var(--surface-light);
+
+    color:var(--text);
+
+    font-size:.95rem;
+
+    outline:none;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.panel select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/* ===========================================================
+   TEXTAREA
+=========================================================== */
 
 textarea{
 
     width:100%;
 
-    min-height:220px;
+    min-height:260px;
 
-    resize:vertical;
+    border:1px solid var(--border);
 
-    border:none;
-
-    outline:none;
+    border-radius:16px;
 
     background:var(--surface-light);
 
-    color:#fff;
+    color:var(--text);
 
     padding:18px;
 
-    border-radius:14px;
-
-    margin-bottom:20px;
-
-    font-size:.95rem;
-
-}
-
-select{
-
-    width:100%;
-
-    height:48px;
-
-    margin-top:10px;
-
-    margin-bottom:20px;
-
-    padding:0 15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:var(--surface-light);
-
-    color:#fff;
+    resize:vertical;
 
     outline:none;
 
+    font-size:.95rem;
+
+    line-height:1.8;
+
+    transition:.25s;
+
 }
 
-label{
-
-    display:block;
-
-    margin-bottom:8px;
+textarea::placeholder{
 
     color:var(--muted);
 
-    font-size:.9rem;
+}
+
+textarea:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
 
 }
 
-.reply-btn,
-.update-btn{
+/* ===========================================================
+   BUTTONS
+=========================================================== */
+
+.save-btn,
+.reply-btn{
 
     width:100%;
 
-    height:50px;
+    height:52px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    background:var(--primary);
+    background:linear-gradient(135deg,var(--primary),#3B82F6);
 
     color:#fff;
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
     font-size:.95rem;
 
-    font-weight:600;
+    font-weight:700;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.25s;
 
 }
 
-.reply-btn:hover,
-.update-btn:hover{
+.save-btn:hover,
+.reply-btn:hover{
 
-    background:var(--primary-hover);
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 24px rgba(37,99,235,.35);
 
 }
 
-@media(max-width:1000px){
+.save-btn:active,
+.reply-btn:active{
 
-    .ticket-layout{
+    transform:scale(.98);
+
+}
+
+/* ===========================================================
+   SETTINGS PANEL
+=========================================================== */
+
+.ticket-panel .panel:first-child{
+
+    min-height:320px;
+
+}
+
+/* ===========================================================
+   RESPONSE PANEL
+=========================================================== */
+
+.panel-grow{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.panel-grow form{
+
+    flex:1;
+
+}
+
+.panel-grow textarea{
+
+    flex:1;
+
+}
+
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media(max-width:1300px){
+
+    .ticket-grid{
 
         grid-template-columns:1fr;
 
     }
 
-    .info-grid{
+    .ticket-panel{
 
-        grid-template-columns:1fr;
+        width:100%;
 
     }
+
+}
+
+@media(max-width:992px){
 
     .ticket-header{
 
@@ -399,8 +620,192 @@ label{
 
         align-items:flex-start;
 
-        gap:20px;
+    }
+
+    .ticket-badges{
+
+        width:100%;
 
     }
+
+    .ticket-meta{
+
+        margin-top:12px;
+
+    }
+
+    .panel{
+
+        padding:22px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .content{
+
+        padding:20px;
+
+    }
+
+    .ticket-header h1{
+
+        font-size:1.7rem;
+
+    }
+
+    .info-item{
+
+        flex-direction:column;
+
+        gap:8px;
+
+    }
+
+    .info-item p{
+
+        text-align:left;
+
+    }
+
+    .attachments{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    textarea{
+
+        min-height:220px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .attachments{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .ticket-meta{
+
+        gap:8px;
+
+    }
+
+    .ticket-meta span{
+
+        font-size:.75rem;
+
+    }
+
+    .priority,
+    .status{
+
+        min-width:90px;
+
+        font-size:.78rem;
+
+    }
+
+    .save-btn,
+    .reply-btn{
+
+        height:48px;
+
+        font-size:.9rem;
+
+    }
+
+}
+
+/* ===========================================================
+   SCROLLBAR
+=========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0B1220;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:100px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#475569;
+
+}
+
+/* ===========================================================
+   SMALL ANIMATIONS
+=========================================================== */
+
+.panel{
+
+    transition:.3s ease;
+
+}
+
+.panel:hover{
+
+    transform:translateY(-3px);
+
+    border-color:rgba(255,255,255,.08);
+
+}
+
+.attachments img{
+
+    transition:.3s ease;
+
+}
+
+.attachments a:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.back-btn i{
+
+    transition:.3s ease;
+
+}
+
+.back-btn:hover i{
+
+    transform:translateX(-5px);
+
+}
+
+/* ===========================================================
+   NICE SELECTION
+=========================================================== */
+
+::selection{
+
+    background:rgba(37,99,235,.35);
+
+    color:#fff;
 
 }
