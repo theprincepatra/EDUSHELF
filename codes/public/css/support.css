@@ -15,6 +15,9 @@ body {
 }
 
 .navbar {
+    background: rgba(13, 19, 34, 0.88);
+    backdrop-filter: blur(15px);
+    /* 002b7f2e */
     width: 100%;
     padding: 20px 60px;
     display: flex;
@@ -401,5 +404,45 @@ button:hover {
     .card p {
         font-size: 14px;
     }
+
+}
+
+.upload-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+    color:#fff;
+    transition:.08s;
+}
+.upload-btn:hover{
+    color:#8b5cf6;
+}
+
+.file-item{
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 16px;
+    background:#202B43;
+    border:1px solid var(--border);
+}
+
+.remove-file{
+
+    cursor:pointer;
+
+    color:#EF4444;
+
+    font-size:1rem;
+
+}
+
+.remove-file:hover{
+
+    color:#DC2626;
 
 }
