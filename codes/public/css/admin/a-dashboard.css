@@ -72,7 +72,7 @@ button,input,select{
 
 .logo{
     text-align:center;
-    margin-bottom:45px;
+    margin-bottom:35px;
 }
 .logo img{
     width:72px;
@@ -95,7 +95,7 @@ button,input,select{
     list-style:none;
 }
 .sidebar ul li{
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 .sidebar ul li a{
     display:flex;

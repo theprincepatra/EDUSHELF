@@ -146,7 +146,7 @@ app.post("/admin/login", async (req, res) => {
 });
 
 
-// Admin dashboard page---------------------------------------------------------------------------
+// Admin dashboard page-----------------------------------------------------------------------------
 app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
     const totalUsers = await userModel.countDocuments();
     const totalResources = await Resource.countDocuments();

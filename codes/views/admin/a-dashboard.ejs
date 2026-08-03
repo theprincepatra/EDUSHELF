@@ -30,57 +30,66 @@
                 <div class="dashboard-wrapper">
                     <!-- ================= KPI ================= -->
                     <section class="dashboard-cards">
-                        <div class="card users-card">
+                        <a href="/admin/a-users">
+                            <div class="card users-card">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span>Total Users</span>
+                                    <h2><%= totalUsers || 0 %></h2>
+                                </div>
+                            </div>
+                        </a>
 
-                            <div class="card-icon">
-                                <i class="fa-solid fa-users"></i>
+                        <a href="#">
+                            <div class="card subscription-card">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span>Active Subscriptions</span>
+                                    <h2><%= activeSubscriptions || 0 %></h2>
+                                </div>
                             </div>
-                            <div class="card-info">
-                                <span>Total Users</span>
-                                <h2><%= totalUsers || 0 %></h2>
-                            </div>
-                        </div>
+                        </a>
 
-                        <div class="card subscription-card">
-                            <div class="card-icon">
-                                <i class="fa-solid fa-credit-card"></i>
-                            </div>
-                            <div class="card-info">
-                                <span>Active Subscriptions</span>
-                                <h2><%= activeSubscriptions || 0 %></h2>
-                            </div>
-                        </div>
+                        <a href="#">
+                            <div class="card revenue-card">                    
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                                </div>
 
-                        <div class="card revenue-card">                    
-                            <div class="card-icon">
-                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                                <div class="card-info">
+                                    <span>Total Revenue</span>
+                                    <h2>₹<%= totalRevenue || 0 %></h2>
+                                </div>
                             </div>
+                        </a>
 
-                            <div class="card-info">
-                                <span>Total Revenue</span>
-                                <h2>₹<%= totalRevenue || 0 %></h2>
+                        <a href="#">
+                            <div class="card resource-card">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span>Total Resources</span>
+                                    <h2><%= totalResources || 0 %></h2>
+                                </div>
                             </div>
-                        </div>
+                        </a>
 
-                        <div class="card resource-card">
-                            <div class="card-icon">
-                                <i class="fa-solid fa-book"></i>
+                        <a href="/admin/a-support">
+                            <div class="card support-card">
+                                <div class="card-icon">
+                                    <i class="fa-solid fa-headset"></i>
+                                </div>
+                                <div class="card-info">
+                                    <span>Support Tickets</span>
+                                    <h2><%= supportTickets || 0 %></h2>
+                                </div>
                             </div>
-                            <div class="card-info">
-                                <span>Total Resources</span>
-                                <h2><%= totalResources || 0 %></h2>
-                            </div>
-                        </div>
-
-                        <div class="card support-card">
-                            <div class="card-icon">
-                                <i class="fa-solid fa-headset"></i>
-                            </div>
-                            <div class="card-info">
-                                <span>Support Tickets</span>
-                                <h2><%= supportTickets || 0 %></h2>
-                            </div>
-                        </div>
+                        </a>
                     </section>
 
                     <!-- ================= REGISTRATION ANALYTICS ================= -->

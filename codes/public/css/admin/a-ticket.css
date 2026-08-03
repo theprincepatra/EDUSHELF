@@ -4,11 +4,11 @@
 
     --bg:#0B1220;
 
-    --surface:#111827;
+    --surface:#121C2D;
 
-    --surface-light:#1A2436;
+    --surface2:#1A2438;
 
-    --border:rgba(255,255,255,.06);
+    --border:#263247;
 
     --text:#F8FAFC;
 
@@ -16,17 +16,17 @@
 
     --primary:#2563EB;
 
-    --primary-hover:#1D4ED8;
+    --primaryHover:#1D4ED8;
 
     --success:#16A34A;
 
-    --warning:#EAB308;
+    --warning:#F59E0B;
 
     --danger:#DC2626;
 
-    --radius:22px;
+    --radius:20px;
 
-    --shadow:0 18px 45px rgba(0,0,0,.25);
+    --shadow:0 20px 45px rgba(0,0,0,.28);
 
 }
 
@@ -42,89 +42,70 @@
 
 }
 
+.content{
+
+    padding:35px;
+}
+
 .ticket-page{
 
     width:100%;
-    padding: 30px 25px;
-}
 
-.back-btn{
+    max-width:1600px;
 
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 32px;
-    transition: .25s;
-    background: #006aff4a;
-    padding: 1px 10px;
-    border-radius: 30px;
-}
-
-.back-btn:hover{
-
-    color:#fff;
+    margin:0 auto;
 
 }
 
-.flex1, .flex2{
-    display: flex;
-}
-.flex2{
-    margin-left: 30px;
-    gap: 5px;
-}
+/*==================================================
+
+HEADER
+
+==================================================*/
 
 .ticket-header{
+
     display:flex;
-    justify-content: space-between;
-    gap:25px;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:30px;
+
     margin-bottom:35px;
+
 }
 
-.ticket-header h1{
+.header-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.ticket-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.ticket-top h1{
 
     font-size:2.2rem;
 
     font-weight:800;
 
     color:var(--text);
-
-    margin-bottom:12px;
-
-    line-height:1.2;
-
-}
-
-.ticket-meta{
-
-    display:flex;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-}
-
-.ticket-meta span{
-
-    background:var(--surface);
-
-    border:1px solid var(--border);
-
-    color:var(--muted);
-
-    padding:8px 14px;
-
-    border-radius:999px;
-
-    font-size:.82rem;
-
-    font-weight:600;
 
 }
 
@@ -133,8 +114,6 @@
     display:flex;
 
     gap:12px;
-
-    flex-wrap:wrap;
 
 }
 
@@ -147,13 +126,13 @@
 
     justify-content:center;
 
-    min-width:110px;
+    min-width:105px;
 
-    height:42px;
+    height:40px;
 
     border-radius:999px;
 
-    font-size:.86rem;
+    font-size:.85rem;
 
     font-weight:700;
 
@@ -163,7 +142,7 @@
 
     background:rgba(220,38,38,.15);
 
-    color:#FF7B7B;
+    color:#FF6B6B;
 
 }
 
@@ -177,7 +156,7 @@
 
 .status.pending{
 
-    background:rgba(234,179,8,.15);
+    background:rgba(245,158,11,.15);
 
     color:#FACC15;
 
@@ -199,31 +178,78 @@
 
 }
 
+.created-date{
+
+    color:var(--muted);
+
+    font-size:.95rem;
+
+}
+
+.back-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.back-btn a{
+
+    color:#CBD5E1;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.back-btn i{
+
+    color:#CBD5E1;
+
+}
+
+.back-btn:hover a,
+.back-btn:hover i{
+
+    color:#fff;
+
+}
+
+/*==================================================
+
+MAIN GRID
+
+==================================================*/
+
 .ticket-grid{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1.1fr 1fr;
 
-    gap:28px;
+    gap:30px;
 
     align-items:stretch;
+    width: 100%;
 
 }
 
-.ticket-panel{
+.left-panel,
+.right-panel{
 
     display:flex;
 
     flex-direction:column;
 
-    gap:24px;
+    gap:25px;
 
 }
-
-/* ===========================================================
-   PANELS
-=========================================================== */
 
 .panel{
 
@@ -233,13 +259,9 @@
 
     border-radius:var(--radius);
 
-    padding:28px;
-
     box-shadow:var(--shadow);
 
-    display:flex;
-
-    flex-direction:column;
+    padding:22px;
 
 }
 
@@ -251,57 +273,77 @@
 
 .panel h2{
 
-    font-size:1.15rem;
+    display:flex;
 
-    font-weight:700;
+    align-items:center;
+
+    gap:10px;
+
+    font-size:1.2rem;
 
     color:var(--text);
 
-    margin-bottom:24px;
+    margin-bottom:20px;
 
-    padding-bottom:14px;
+    padding-bottom:11px;
 
     border-bottom:1px solid var(--border);
 
 }
 
-/* ===========================================================
-   USER INFORMATION
-=========================================================== */
+.panel h2 i{
 
-.info-item{
+    color:var(--primary);
+
+}
+
+/*==================================================
+
+USER INFORMATION
+
+==================================================*/
+
+.info-table{
 
     display:flex;
 
-    justify-content:space-between;
+    flex-direction:column;
 
-    align-items:flex-start;
-
-    gap:25px;
-
-    padding:18px 0;
-
-    border-bottom:1px solid var(--border);
+    gap:18px;
 
 }
 
-.info-item:last-child{
+.info-row{
+
+    display:grid;
+
+    grid-template-columns:140px 1fr;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+}
+
+.info-row:last-child{
 
     border-bottom:none;
 
 }
 
-.info-item label{
+.info-row span{
 
     color:var(--muted);
 
-    font-size:.9rem;
+    font-size:.92rem;
 
     font-weight:600;
 
 }
 
-.info-item p{
+.info-row strong{
 
     color:var(--text);
 
@@ -309,47 +351,90 @@
 
     font-weight:700;
 
-    text-align:right;
-
     word-break:break-word;
 
 }
 
-/* ===========================================================
-   ISSUE DESCRIPTION
-=========================================================== */
+/*==================================================
 
-.issue-box{
+ISSUE
 
-    background:var(--surface-light);
+==================================================*/
 
-    border:1px solid var(--border);
+.issue-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.issue-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.issue-item span{
+
+    color:var(--muted);
+
+    font-size:.88rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+}
+
+.issue-item h3{
+
+    color:var(--text);
+
+    font-weight:700;
+
+    line-height:1.4;
+
+}
+
+.issue-item p{
+    font-size:16px;
+
+    letter-spacing: 0.61px;
+
+    font-weight: 600;
+
+    word-break:break-word;
+
+    background:var(--surface2);
+
+    border:1px solid rgba(255,255,255,.05);
 
     border-radius:16px;
 
-    padding:22px;
-
-    color:#CBD5E1;
-
-    line-height:1.9;
-
-    white-space:pre-wrap;
-
-    word-break:break-word;
-
-    min-height:180px;
+    padding:24px;
 
 }
 
-/* ===========================================================
-   ATTACHMENTS
-=========================================================== */
+/*==================================================
+
+ATTACHMENTS
+
+==================================================*/
 
 .attachments{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
 
     gap:18px;
 
@@ -359,21 +444,23 @@
 
     display:block;
 
-    border-radius:16px;
-
     overflow:hidden;
+
+    border-radius:16px;
 
     border:1px solid var(--border);
 
-    transition:.25s;
+    transition:.3s;
+
+    background:var(--surface2);
 
 }
 
 .attachments a:hover{
 
-    border-color:var(--primary);
-
     transform:translateY(-4px);
+
+    border-color:var(--primary);
 
 }
 
@@ -381,13 +468,13 @@
 
     width:100%;
 
-    height:190px;
+    height:100px;
 
     object-fit:cover;
 
     display:block;
 
-    transition:.25s;
+    transition:.35s;
 
 }
 
@@ -397,9 +484,57 @@
 
 }
 
-/* ===========================================================
-   FORM ELEMENTS
-=========================================================== */
+/*==================================================
+
+NO ATTACHMENTS
+
+==================================================*/
+
+.no-attachments{
+
+    min-height:180px;
+
+    border:2px dashed rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:14px;
+
+    color:var(--muted);
+
+    background:rgba(255,255,255,.015);
+
+}
+
+.no-attachments i{
+
+    font-size:2.5rem;
+
+    opacity:.55;
+
+}
+
+.no-attachments p{
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+}
+
+/*==================================================
+
+TICKET SETTINGS
+
+==================================================*/
 
 .panel form{
 
@@ -413,7 +548,7 @@
 
 .panel label{
 
-    font-size:.9rem;
+    font-size:.92rem;
 
     font-weight:700;
 
@@ -427,19 +562,21 @@
 
     width:100%;
 
-    height:52px;
+    height:54px;
 
     padding:0 18px;
 
     border:1px solid var(--border);
 
-    border-radius:14px;
+    border-radius:16px;
 
-    background:var(--surface-light);
+    background:var(--surface2);
 
     color:var(--text);
 
     font-size:.95rem;
+
+    font-weight:600;
 
     outline:none;
 
@@ -453,39 +590,72 @@
 
     border-color:var(--primary);
 
-    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+    box-shadow:0 0 0 3px rgba(37,99,235,.18);
 
 }
 
-/* ===========================================================
-   TEXTAREA
-=========================================================== */
+.ticket-below{
+    margin-top: 10px;
+}
+.ticket-category{
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/*==================================================
+
+TEXTAREA
+
+==================================================*/
+
+.panel-grow{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.panel-grow form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+}
 
 textarea{
 
-    width:100%;
-
-    min-height:260px;
-
-    border:1px solid var(--border);
-
-    border-radius:16px;
-
-    background:var(--surface-light);
-
-    color:var(--text);
-
-    padding:18px;
+    flex:1;
 
     resize:vertical;
 
+    border:none;
+
     outline:none;
 
-    font-size:.95rem;
+    padding:22px;
+
+    border-radius:18px;
+
+    background:var(--surface2);
+
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+    font-size:1.1rem;
+
+    word-spacing: 2px;
 
     line-height:1.8;
 
     transition:.25s;
+
+    margin-bottom:20px;
 
 }
 
@@ -499,26 +669,28 @@ textarea:focus{
 
     border-color:var(--primary);
 
-    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+    box-shadow:0 0 0 3px rgba(37,99,235,.18);
 
 }
 
-/* ===========================================================
-   BUTTONS
-=========================================================== */
+/*==================================================
+
+BUTTONS
+
+==================================================*/
 
 .save-btn,
 .reply-btn{
 
     width:100%;
 
-    height:52px;
+    height:56px;
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    background:linear-gradient(135deg,var(--primary),#3B82F6);
+    background:linear-gradient(135deg,#2563EB,#3B82F6);
 
     color:#fff;
 
@@ -528,9 +700,9 @@ textarea:focus{
 
     justify-content:center;
 
-    gap:10px;
+    gap:12px;
 
-    font-size:.95rem;
+    font-size:.96rem;
 
     font-weight:700;
 
@@ -545,7 +717,7 @@ textarea:focus{
 
     transform:translateY(-2px);
 
-    box-shadow:0 12px 24px rgba(37,99,235,.35);
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
 
 }
 
@@ -556,47 +728,51 @@ textarea:focus{
 
 }
 
-/* ===========================================================
-   SETTINGS PANEL
-=========================================================== */
+/*==================================================
 
-.ticket-panel .panel:first-child{
+RIGHT PANEL SPACING
 
-    min-height:320px;
+==================================================*/
 
-}
-
-/* ===========================================================
-   RESPONSE PANEL
-=========================================================== */
-
-.panel-grow{
-
-    flex:1;
+.right-panel{
 
     display:flex;
 
     flex-direction:column;
 
+    gap:25px;
+
 }
 
-.panel-grow form{
+.right-panel .panel:first-child{
+
+    flex:0;
+
+}
+
+.right-panel .panel:last-child{
 
     flex:1;
 
 }
 
-.panel-grow textarea{
+/*==================================================
 
-    flex:1;
+RESPONSIVE
+
+==================================================*/
+
+@media(max-width:1400px){
+
+    .ticket-grid{
+
+        grid-template-columns:60% 40%;
+
+    }
 
 }
 
-/* ===========================================================
-   RESPONSIVE
-=========================================================== */
-
-@media(max-width:1300px){
+@media(max-width:1200px){
 
     .ticket-grid{
 
@@ -604,9 +780,21 @@ textarea:focus{
 
     }
 
-    .ticket-panel{
+    .right-panel{
 
-        width:100%;
+        order:2;
+
+    }
+
+    .left-panel{
+
+        order:1;
+
+    }
+
+    .panel-grow{
+
+        flex:none;
 
     }
 
@@ -614,29 +802,31 @@ textarea:focus{
 
 @media(max-width:992px){
 
+    .content{
+
+        padding:25px;
+
+    }
+
     .ticket-header{
 
         flex-direction:column;
 
         align-items:flex-start;
 
+        gap:20px;
+
     }
 
-    .ticket-badges{
+    .header-right{
 
         width:100%;
 
     }
 
-    .ticket-meta{
+    .back-btn{
 
-        margin-top:12px;
-
-    }
-
-    .panel{
-
-        padding:22px;
+        justify-content:flex-start;
 
     }
 
@@ -646,27 +836,43 @@ textarea:focus{
 
     .content{
 
-        padding:20px;
+        padding:18px;
 
     }
 
-    .ticket-header h1{
+    .ticket-top{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .ticket-top h1{
 
         font-size:1.7rem;
 
     }
 
-    .info-item{
+    .ticket-badges{
 
-        flex-direction:column;
-
-        gap:8px;
+        flex-wrap:wrap;
 
     }
 
-    .info-item p{
+    .panel{
 
-        text-align:left;
+        padding:22px;
+
+    }
+
+    .info-row{
+
+        grid-template-columns:1fr;
+
+        gap:8px;
 
     }
 
@@ -694,13 +900,15 @@ textarea:focus{
 
     .ticket-meta{
 
-        gap:8px;
+        flex-direction:column;
+
+        align-items:flex-start;
 
     }
 
     .ticket-meta span{
 
-        font-size:.75rem;
+        width:100%;
 
     }
 
@@ -709,7 +917,9 @@ textarea:focus{
 
         min-width:90px;
 
-        font-size:.78rem;
+        height:36px;
+
+        font-size:.75rem;
 
     }
 
@@ -722,11 +932,63 @@ textarea:focus{
 
     }
 
+    textarea{
+
+        min-height:180px;
+
+    }
+
 }
 
-/* ===========================================================
-   SCROLLBAR
-=========================================================== */
+/*==================================================
+
+SMOOTH HOVER
+
+==================================================*/
+
+.panel{
+
+    transition:.3s ease;
+
+}
+
+.panel:hover{
+
+    transform:translateY(-3px);
+
+    border-color:rgba(255,255,255,.08);
+
+}
+
+.attachments img{
+
+    transition:.3s;
+
+}
+
+.attachments a:hover img{
+
+    transform:scale(1.06);
+
+}
+
+.back-btn{
+
+    transition:.25s;
+
+}
+
+.back-btn:hover{
+
+    transform:translateX(-4px);
+
+}
+
+/*==================================================
+
+SCROLLBAR
+
+==================================================*/
 
 ::-webkit-scrollbar{
 
@@ -756,51 +1018,11 @@ textarea:focus{
 
 }
 
-/* ===========================================================
-   SMALL ANIMATIONS
-=========================================================== */
+/*==================================================
 
-.panel{
+TEXT SELECTION
 
-    transition:.3s ease;
-
-}
-
-.panel:hover{
-
-    transform:translateY(-3px);
-
-    border-color:rgba(255,255,255,.08);
-
-}
-
-.attachments img{
-
-    transition:.3s ease;
-
-}
-
-.attachments a:hover img{
-
-    transform:scale(1.06);
-
-}
-
-.back-btn i{
-
-    transition:.3s ease;
-
-}
-
-.back-btn:hover i{
-
-    transform:translateX(-5px);
-
-}
-
-/* ===========================================================
-   NICE SELECTION
-=========================================================== */
+==================================================*/
 
 ::selection{
 
@@ -808,4 +1030,4 @@ textarea:focus{
 
     color:#fff;
 
-}
+}   
