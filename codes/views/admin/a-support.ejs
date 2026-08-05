@@ -16,10 +16,52 @@
             <%- include("partials/navbar") %>
 
             <main class="content">
-                <div class="page-header">
-                    <div>
+                <div class="page-top">
+                    <div class="page-heading">
                         <h1>Support Tickets</h1>
                         <p>Manage and respond to support requests from EduShelf users.</p>
+                    </div>
+
+                    <div class="support-stats">
+                        <div class="stat-card total">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-ticket"></i>
+                            </div>
+                            <div>
+                                <span>Tickets</span>
+                                <h2><%= totalTickets %></h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card pending">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-hourglass-half"></i>
+                            </div>
+                            <div>
+                                <span>Pending</span>
+                                <h2><%= pendingTickets %></h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card progress">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-spinner"></i>
+                            </div>
+                            <div>
+                                <span>In Progress</span>
+                                <h2><%= inProgressTickets %></h2>
+                            </div>
+                        </div>
+
+                        <div class="stat-card resolved">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+                            <div>
+                                <span>Resolved</span>
+                                <h2><%= resolvedTickets %></h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

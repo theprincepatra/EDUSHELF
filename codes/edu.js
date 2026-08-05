@@ -135,11 +135,14 @@ app.get("/admin/login", (req, res) => {
 // POST admin login
 app.post("/admin/login", async (req, res) => {
     const { email, password } = req.body;
-    admin = await adminModel.findOne({email});
 
+    admin = await adminModel.findOne({email});
     const isMatch = bcrypt.compare(password, admin.password);
     if (!isMatch) {
         return res.send("Invalid Password");
+    }
+    if (!admin) {
+        return res.send("No email found");
     }
     req.session.adminId = admin._id;
     res.redirect("/admin/a-dashboard");
@@ -167,7 +170,6 @@ app.get("/admin/a-users", adminLoggedIn, async (req, res) => {
 // Admin Support Page------------------------------------------------------------------------------------
 app.get("/admin/a-support", adminLoggedIn, async (req, res) => {
     const {search = "", status = "", priority = "", category = "", sort = "newest" } = req.query;
-
     let filter = {};
 
     if (status) {
@@ -184,18 +186,12 @@ app.get("/admin/a-support", adminLoggedIn, async (req, res) => {
     if (search) {
         const query = search.trim().toLowerCase();
         tickets = tickets.filter(ticket => {
-
             const ticketId = ticket.ticketId?.toLowerCase() || "";
             const subject = ticket.subject?.toLowerCase() || "";
             const name = ticket.user?.name?.toLowerCase() || "";
             const username = ticket.user?.username?.toLowerCase() || "";
 
-            return (
-                ticketId.includes(query) ||
-                subject.includes(query) ||
-                name.includes(query) ||
-                username.includes(query)
-            );
+            return ( ticketId.includes(query) || subject.includes(query) || name.includes(query) || username.includes(query) );
         });
     }
 
@@ -206,7 +202,13 @@ app.get("/admin/a-support", adminLoggedIn, async (req, res) => {
         return b.createdAt - a.createdAt;
     });
 
-    res.render("admin/a-support", {tickets, filters: req.query, admin: req.admin, navTitle:'Support' });
+    const totalTickets = await SupportModel.countDocuments();
+    const pendingTickets = await SupportModel.countDocuments({status: "Pending"});
+    const inProgressTickets = await SupportModel.countDocuments({status: "In Progress"});
+    const resolvedTickets = await SupportModel.countDocuments({status: "Resolved"});
+
+    res.render("admin/a-support", {tickets, filters: req.query, admin: req.admin, navTitle:'Support', totalTickets,
+    pendingTickets, inProgressTickets, resolvedTickets });
 });
 
 // Admin Support Ticket Details Page----------------------------------------------------------------------
@@ -216,6 +218,25 @@ app.get("/admin/a-support/:id", adminLoggedIn, async (req, res) => {
         return res.redirect("/admin/a-support");
     }
     res.render("admin/a-ticket", {ticket, navTitle: 'support ticket', admin: req.admin});
+});
+// POST - Update Ticket Status & Priority
+app.post("/admin/a-support/:id/update", adminLoggedIn, async (req, res) => {
+    const { status, priority } = req.body;
+
+    await SupportModel.findByIdAndUpdate(req.params.id, {status, priority});
+    res.redirect("/admin/a-support/" + req.params.id);
+});
+// POST - Reply to Ticket
+app.post("/admin/a-support/:id/reply", adminLoggedIn, async (req, res) => {
+    const ticket = await SupportModel.findById(req.params.id);
+    ticket.adminReply = req.body.reply;
+    ticket.repliedAt = new Date();
+
+    if (ticket.status === "Pending") {
+        ticket.status = "In Progress";
+    }
+    await ticket.save();
+    res.redirect("/admin/a-support/" + req.params.id);
 });
 
 
@@ -806,7 +827,7 @@ app.get("/edushelf/:branch/:semester/:subject/:type/:file", isLoggedIn,(req,res)
 
 
 
-// Logout
+// Logout-
 app.get("/logout", (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -815,6 +836,17 @@ app.get("/logout", (req, res) => {
         }
         res.clearCookie("connect.sid");
         res.redirect("/");
+    });
+});
+// Admin Logout
+app.get("/admin/a-logout", (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Unable to logout");
+        }
+        res.clearCookie("connect.sid");
+        res.redirect("/admin/login");
     });
 });
 

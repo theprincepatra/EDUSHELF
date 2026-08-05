@@ -360,68 +360,55 @@ USER INFORMATION
 ISSUE
 
 ==================================================*/
-
 .issue-content{
-
     display:flex;
-
     flex-direction:column;
-
     gap:25px;
-
 }
 
 .issue-item{
-
     display:flex;
-
     flex-direction:column;
-
     gap:14px;
-
 }
-
 .issue-item span{
-
     color:var(--muted);
-
     font-size:.88rem;
-
     font-weight:700;
-
     text-transform:uppercase;
-
     letter-spacing:.8px;
-
 }
-
 .issue-item h3{
-
     color:var(--text);
-
     font-weight:700;
-
     line-height:1.4;
-
+}
+.issue-item p{
+    margin-top:10px;
+    max-height:350px;
+    overflow-y:auto;
+    padding:20px;
+    background:var(--surface2);
+    border:1px solid var(--border);
+    border-radius:16px;
+    color:#CBD5E1;
+    line-height:1.8;
+    word-break:break-word;
 }
 
-.issue-item p{
-    font-size:16px;
-
-    letter-spacing: 0.61px;
-
-    font-weight: 600;
-
-    word-break:break-word;
-
-    background:var(--surface2);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:16px;
-
-    padding:24px;
-
+/* issue description scollbar */
+.issue-item p::-webkit-scrollbar{
+    width:8px;
+}
+.issue-item p::-webkit-scrollbar-track{
+    background:transparent;
+}
+.issue-item p::-webkit-scrollbar-thumb{
+    background:#475569;
+    border-radius:100px;
+}
+.issue-item p::-webkit-scrollbar-thumb:hover{
+    background:#64748B;
 }
 
 /*==================================================
@@ -484,14 +471,8 @@ ATTACHMENTS
 
 }
 
-/*==================================================
-
-NO ATTACHMENTS
-
-==================================================*/
-
+/* NO ATTACHMENTS */
 .no-attachments{
-
     min-height:180px;
 
     border:2px dashed rgba(255,255,255,.08);

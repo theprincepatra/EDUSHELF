@@ -102,6 +102,199 @@ a{
 
 }
 
+
+/*==================================================
+
+PAGE TOP
+
+==================================================*/
+
+.page-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:30px;
+
+    margin-bottom:35px;
+
+}
+
+.page-heading h1{
+
+    font-size:2.3rem;
+
+    font-weight:800;
+
+    color:var(--text);
+
+    margin-bottom:10px;
+
+}
+
+.page-heading p{
+
+    color:var(--muted);
+
+    font-size:1rem;
+
+}
+
+/*==================================================
+
+SUPPORT STATS
+
+==================================================*/
+
+.support-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,130px);
+
+    gap:5px;
+
+}
+
+.stat-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.stat-icon{
+
+    width:40px;
+    height:40px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.stat-card span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:.82rem;
+
+}
+
+.stat-card h2{
+
+    color:var(--text);
+
+    font-size:1.5rem;
+
+    font-weight:800;
+
+}
+
+/*==================================================
+
+CARD COLORS
+
+==================================================*/
+
+.stat-card.total .stat-icon{
+
+    background:rgba(59,130,246,.15);
+
+    color:#60A5FA;
+
+}
+
+.stat-card.pending .stat-icon{
+
+    background:rgba(245,158,11,.15);
+
+    color:#FBBF24;
+
+}
+
+.stat-card.progress .stat-icon{
+
+    background:rgba(37,99,235,.15);
+
+    color:#3B82F6;
+
+}
+
+.stat-card.resolved .stat-icon{
+
+    background:rgba(22,163,74,.15);
+
+    color:#22C55E;
+
+}
+
+/*==================================================
+
+RESPONSIVE
+
+==================================================*/
+
+@media(max-width:1450px){
+
+    .page-top{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .support-stats{
+
+        width:100%;
+
+        grid-template-columns:repeat(4,1fr);
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .support-stats{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .support-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stat-card{
+
+        width:100%;
+
+    }
+
+
+}
+
+
+
 .page-header{
 
     display:flex;
@@ -384,13 +577,13 @@ tbody td{
 
     align-items:center;
 
-    gap:14px;
+    gap:5px;
 
 }
 
 .user-cell img{
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     flex-shrink:0;
     margin-left: -5px;
 }
@@ -447,8 +640,7 @@ tbody td{
    BADGES & BUTTONS
 =========================================================== */
 
-.priority,
-.status{
+.priority, .status{
 
     display:inline-flex;
 
@@ -456,7 +648,7 @@ tbody td{
 
     justify-content:center;
 
-    min-width:95px;
+    min-width:108px;
 
     padding:8px 18px;
 
@@ -754,8 +946,7 @@ tbody td{
 
     }
 
-    .priority,
-    .status{
+    .priority,.status{
 
         min-width:80px;
 
