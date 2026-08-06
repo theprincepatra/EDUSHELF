@@ -65,7 +65,15 @@
 
                             <td><%= ticket.category %></td>
                             
-                            <td><%= ticket.subject %></td>
+                            <td>
+                                <div class="subject-tooltip">
+                                    <span class="subject-preview"> <%= ticket.subject %> </span>
+                                    <div class="tooltip-box">
+                                        <strong>Subject</strong>
+                                        <p><%= ticket.subject %></p>
+                                    </div>
+                                </div>
+                            </td>
 
                             <td>
                                 <span class="status <%= ticket.status.toLowerCase().replace(' ','-') %>">
