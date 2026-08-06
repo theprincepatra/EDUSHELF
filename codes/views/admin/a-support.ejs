@@ -173,7 +173,14 @@
 
                                     <td><%= ticket.category %></td>
 
-                                    <td><%= ticket.subject %></td>
+                                    <td>
+                                        <div class="subject-tooltip">
+                                            <span class="subject-preview"> <%= ticket.subject %> </span>
+                                            <div class="tooltip-box">
+                                                <%= ticket.subject %>
+                                            </div>
+                                        </div>
+                                    </td>
 
                                     <td>
                                         <span class="priority <%= ticket.priority.toLowerCase() %>">
