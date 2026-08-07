@@ -478,7 +478,7 @@ RESPONSIVE
 
     box-shadow:var(--shadow);
 
-    overflow:hidden;
+    /* overflow:hidden; */
 
 }
 

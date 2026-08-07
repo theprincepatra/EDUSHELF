@@ -112,6 +112,12 @@ app.post('/edited/:id', async (req, res) => {
         res.send("Error updating user");
     }
 });
+// Delete ID
+app.post("/delete/:id", async (req, res) => {
+    await userModel.findByIdAndDelete(req.params.id);
+    res.redirect("/users");
+
+});
 // GET Total users count
 app.get('/count', async (req, res) => {
     const count = await userModel.countDocuments();
@@ -160,11 +166,142 @@ app.get("/admin/a-dashboard", adminLoggedIn, async (req, res) => {
     res.render("admin/a-dashboard", {admin:req.admin, navTitle:'Dashboard', totalUsers, totalResources, totalRevenue:0, premiumUsers:0, newRegistrations:0, activeSubscriptions:0, freeUsers:0, supportTickets    , premiumPercentage:0, freePercentage:0, recentRegistrations});
 });
 
+// Chart - Admin Dashboard
+app.get("/admin/a-dashboard/registration-data", adminLoggedIn, async (req, res) => {
+    try {
+        const range = req.query.range || "month";
+        const now = new Date();
+        let startDate;
+        let groupFormat;
+
+        if (range === "7days") {
+            startDate = new Date(now);
+            startDate.setDate(startDate.getDate() - 6);
+            startDate.setHours(0, 0, 0, 0);
+            groupFormat = "%Y-%m-%d";
+        } 
+        else if (range === "year") {
+            startDate = new Date(now.getFullYear(), 0, 1);
+            groupFormat = "%Y-%m";
+        } 
+        else {
+            startDate = new Date(now.getFullYear(), now.getMonth(), 1);
+            groupFormat = "%Y-%m-%d";
+        }
+
+        const registrations = await userModel.aggregate([
+            {
+                $match: {
+                    joinedon: {
+                        $gte: startDate,
+                        $lte: now
+                    }
+                }
+            },
+            {
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: groupFormat,
+                            date: "$joinedon",
+                            timezone: "Asia/Kolkata"
+                        }
+                    },
+                    count: {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $sort: {
+                    _id: 1
+                }
+            }
+        ]);
+
+        console.log("Range:", range);
+        console.log("Start Date:", startDate);
+        console.log("Now:", now);
+        console.log("Registrations:", registrations);
+
+        res.json(registrations);
+
+    } catch (err) {
+        console.error("Registration analytics error:", err);
+        res.status(500).json({
+            message: "Failed to load registration analytics"
+        });
+    }
+});
+
+
 // Admin User Page------------------------------------------------------------------------------------
 app.get("/admin/a-users", adminLoggedIn, async (req, res) => {
-    const users = await userModel.find();
-    const totalUsers = await userModel.countDocuments();
-    res.render("admin/a-users", {admin: req.admin, navTitle:'Users', users, totalUsers, premiumUsers: 0, verifiedUsers: 0, suspendedUsers :0});
+    try {
+        let { filterType, date, month } = req.query;
+
+        filterType = filterType || "Normal";
+
+        let query = {};
+
+        if (filterType === "date" && date) {
+            const startDate = new Date(date);
+            startDate.setHours(0, 0, 0, 0);
+
+            const endDate = new Date(startDate);
+            endDate.setDate(endDate.getDate() + 1);
+
+            query.joinedon = {
+                $gte: startDate,
+                $lt: endDate
+            };
+        }
+
+        if (filterType === "month" && month) {
+            const [year, monthNumber] = month.split("-");
+
+            const startDate = new Date(
+                Number(year),
+                Number(monthNumber) - 1,
+                1
+            );
+
+            const endDate = new Date(
+                Number(year),
+                Number(monthNumber),
+                1
+            );
+
+            query.joinedon = {
+                $gte: startDate,
+                $lt: endDate
+            };
+        }
+
+        const users = await userModel
+            .find(query)
+            .sort({ joinedon: -1 });
+
+        const totalUsers = await userModel.countDocuments();
+
+        res.render("admin/a-users", {
+            admin: req.admin,
+            navTitle: "Users",
+            users,
+            totalUsers,
+            filterType,
+            date: date || "",
+            month: month || "",
+            premiumUsers: 0,
+            freeUsers: 0,
+            suspendedUsers: 0,
+            verifiedUsers: 0
+        });
+
+    } catch (err) {
+        console.error("Users page error:", err);
+        res.status(500).send("Server Error");
+    }
 });
 
 // Admin Support Page------------------------------------------------------------------------------------
@@ -213,7 +350,7 @@ app.get("/admin/a-support", adminLoggedIn, async (req, res) => {
 
 // Admin Support Ticket Details Page----------------------------------------------------------------------
 app.get("/admin/a-support/:id", adminLoggedIn, async (req, res) => {
-    const ticket = await SupportModel.findById(req.params.id).populate("user");
+    const ticket = await SupportModel.findById(req.params.id).populate("user").populate("repliedBy");
     if (!ticket) {
         return res.redirect("/admin/a-support");
     }
@@ -230,11 +367,17 @@ app.post("/admin/a-support/:id/update", adminLoggedIn, async (req, res) => {
 app.post("/admin/a-support/:id/reply", adminLoggedIn, async (req, res) => {
     const ticket = await SupportModel.findById(req.params.id);
     ticket.adminReply = req.body.reply;
-    ticket.repliedAt = new Date();
 
+    if (!ticket.repliedAt) {
+        ticket.repliedAt = new Date();
+        ticket.repliedBy = req.admin._id;
+    } else {
+        ticket.editedAt = new Date();
+    }
     if (ticket.status === "Pending") {
         ticket.status = "In Progress";
     }
+
     await ticket.save();
     res.redirect("/admin/a-support/" + req.params.id);
 });

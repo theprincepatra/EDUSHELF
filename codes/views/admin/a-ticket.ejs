@@ -248,24 +248,55 @@
                                     Admin Response
     
                                 </h2>
-    
                                 <form action="/admin/a-support/<%= ticket._id %>/reply" method="POST">
     
-                                    <textarea
-                                        name="reply"
-                                        placeholder="Write your response to the user..."
-                                    ><%= ticket.adminReply || "" %></textarea>
-    
-                                    <button type="submit" class="reply-btn">
-    
-                                        <i class="fa-solid fa-paper-plane"></i>
-    
-                                        Send Response
-    
-                                    </button>
-    
+                                    <textarea name="reply" <%= ticket.status === "Resolved" ? "readonly" : "" %> ><%= ticket.adminReply || "" %></textarea>
+
+                                    <% if(ticket.status !== "Resolved"){ %>
+                                        <button class="reply-btn">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            <%= ticket.adminReply ? "Update Response" : "Send Response" %>
+                                        </button>
+                                    <% } else { %>
+                                        <button class="reply-btn" disabled>
+                                            <i class="fa-solid fa-lock"></i>
+                                            Ticket Resolved
+                                        </button>
+                                    <% } %>
+
+                                    <% if(ticket.adminReply){ %>
+                                        <div class="reply-meta">
+                                            <div>
+                                                <i class="fa-solid fa-user"></i>
+                                                <span>
+                                                    Replied By :
+                                                    <strong>
+                                                        <%= ticket.repliedBy ? ticket.repliedBy.name : "Unknown Admin" %>
+                                                    </strong>
+                                                </span>
+                                            </div>
+
+                                            <div>
+                                                <i class="fa-solid fa-clock"></i>
+                                                <span>
+                                                    <%= new Date(ticket.repliedAt).toLocaleString("en-IN") %>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <% if(ticket.editedAt){ %>
+                                            <div>
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                <span>
+                                                    Last Edited :
+                                                    <strong>
+                                                        <%= new Date(ticket.editedAt).toLocaleString("en-IN") %>
+                                                    </strong>
+                                                </span>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
                                 </form>
-    
                             </section>
                         </div>
                     </div>

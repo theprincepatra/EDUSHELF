@@ -100,10 +100,11 @@
                                     <h2>User Registration Analytics</h2>
                                     <p>Track user registrations over time.</p>
                                 </div>
-                                <select>
-                                    <option>Last 7 Days</option>
-                                    <option selected>This Month</option>
-                                    <option>This Year</option>
+
+                                <select id="registrationRange">
+                                    <option value="7days">Last 7 Days</option>
+                                    <option value="month" selected>This Month</option>
+                                    <option value="year">This Year</option>
                                 </select>
                             </div>
 
@@ -121,7 +122,7 @@
                                     <h2>Recent Registrations</h2>
                                     <p>Latest users who joined EduShelf</p>
                                 </div>
-                                <a href="/admin/users" class="view-all-btn">View All</a>
+                                <a href="/admin/a-users" class="view-all-btn">View All</a>
                             </div>
 
                             <div class="table-responsive">
@@ -180,22 +181,99 @@
         </div>
     </div>
 
-    <script src="/js/admin/sidebar.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        const ctx = document.getElementById("registrationChart");
-        if (ctx) {
-            new Chart(ctx, {
-                type: "line",
-                data: {
-                    labels: [],
-                    datasets: [{label: "Registrations", data: [], tension: .4, fill: true }]
-                },
-                options: { responsive: true,maintainAspectRatio: false}
-            });
+        const chartCanvas = document.getElementById("registrationChart");
+        const rangeSelect = document.getElementById("registrationRange");
+        let registrationChart;
+
+        async function loadRegistrationChart(range = "month") {
+            try {
+                const response = await fetch(`/admin/a-dashboard/registration-data?range=${range}`);
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch registration data");
+                }
+
+                const data = await response.json();
+                let labels = [];
+                let values = [];
+
+                if (range === "7days") {
+                    const today = new Date();
+                    for (let i = 6; i >= 0; i--) {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() - i);
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, "0");
+                        const day = String(date.getDate()).padStart(2, "0");
+
+                        const key = `${year}-${month}-${day}`;
+                        labels.push(
+                            date.toLocaleDateString("en-IN", {day: "numeric", month: "short" })
+                        );
+
+                        const found = data.find(item => item._id === key);
+                        values.push(found ? found.count : 0);
+                    }
+                }else if (range === "month") {
+                    const today = new Date();
+                    const year = today.getFullYear();
+                    const month = today.getMonth();
+
+                    const daysInMonth = new Date(year, month + 1, 0 ).getDate();
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        const key = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                        labels.push(day.toString());
+                        const found = data.find(item => item._id === key);
+                        values.push(found ? found.count : 0);
+                    }
+                }else if (range === "year") {
+                    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    const year = new Date().getFullYear();
+
+                    for (let month = 1; month <= 12; month++) {
+                        const key = `${year}-${String(month).padStart(2, "0")}`;
+                        labels.push(months[month - 1]);
+                        const found = data.find(item => item._id === key);
+                        values.push(found ? found.count : 0);
+                    }
+                }
+
+                if (registrationChart) {
+                    registrationChart.destroy();
+                }
+                registrationChart = new Chart(chartCanvas, {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [{label: "Registrations", data: values, borderWidth: 2, tension: 0.4, fill: true }]
+                    },
+
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {intersect: false, mode: "index" },
+                        plugins: { legend:{ display: true }},
+                        scales: {
+                            y: {beginAtZero: true, ticks: {precision: 0}},
+                            x: {ticks: { autoSkip: true, maxTicksLimit: 12 }}
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Chart error:", error);
+            }
         }
+        rangeSelect.addEventListener("change", function () {
+            loadRegistrationChart(this.value);
+        });
+        loadRegistrationChart("month");
     </script>
+
+    <script src="/js/admin/sidebar.js"></script>
+
+
 </body>
 </html>

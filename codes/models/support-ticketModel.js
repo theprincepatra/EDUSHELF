@@ -16,7 +16,9 @@ const supportTicketSchema = new mongoose.Schema({
 
     adminReply: { type:String, default: "" }, 
     repliedAt: { type:Date, default: null }, 
-    createdAt: { type:Date, default: Date.now } 
+    createdAt: { type:Date, default: Date.now },
+    editedAt: { type: Date, default: null },
+    repliedBy: {type: mongoose.Schema.Types.ObjectId, ref: "Admin", default: null}
 });
 
 supportTicketSchema.index({ status: 1 });

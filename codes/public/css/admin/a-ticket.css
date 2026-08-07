@@ -636,8 +636,6 @@ textarea{
 
     transition:.25s;
 
-    margin-bottom:20px;
-
 }
 
 textarea::placeholder{
@@ -654,6 +652,47 @@ textarea:focus{
 
 }
 
+.reply-meta{
+
+    margin-top:22px;
+
+    padding-top:18px;
+
+    border-top:1px solid var(--border);
+
+    display:flex;
+
+    gap:22px;
+
+}
+
+.reply-meta div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+}
+
+.reply-meta i{
+
+    color:var(--primary);
+
+    width:18px;
+
+}
+
+.reply-meta strong{
+
+    color:var(--text);
+
+}
 /*==================================================
 
 BUTTONS

@@ -112,7 +112,7 @@ button,input,select{
     font-size:1.05rem;
 }
 .sidebar ul li a:hover{
-    background:rgba(16,185,129,.12);
+    background: rgb(20 81 61 / 12%);
     color:var(--white);
 }
 .sidebar ul li a.active{
@@ -410,14 +410,30 @@ button,input,select{
 }
 
 .analytics-body{
-    height:380px;
     position:relative;
+    width:100%;
+    height:420px;
+}
+#registrationChart{
+    width:100% !important;
+    height:100% !important;
 }
 .analytics-body canvas{
     width:100%!important;
     height:100%!important;
 }
 
+@media(max-width:768px){
+    .analytics-body{
+        height:320px;
+    }
+}
+
+@media(max-width:480px){
+    .analytics-body{
+        height:260px;
+    }
+}
 
 /* RECENT REGISTRATIONS --------------------------------------------------------------------------*/
 .dashboard-bottom{
